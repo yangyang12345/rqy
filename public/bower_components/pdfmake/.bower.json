@@ -1,0 +1,50 @@
+{
+  "name": "pdfmake",
+  "homepage": "https://bpampuch.github.io/pdfmake",
+  "authors": [
+    "Bartek Pampuch <bartosz.pampuch@gmail.com>"
+  ],
+  "description": "Client/server side PDF printing in pure JavaScript",
+  "main": [
+    "build/pdfmake.js",
+    "build/vfs_fonts.js"
+  ],
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "pdf",
+    "javascript",
+    "printing",
+    "layout"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "dev-playground",
+    "gulpfile.js",
+    "webpack.config.js",
+    "README.md",
+    "bower.json",
+    "CONTRIBUTING.md",
+    "examples",
+    "node_modules",
+    "package.json",
+    "src",
+    "tests",
+    "yarn.lock",
+    "composer.json",
+    ".travis.yml"
+  ],
+  "version": "0.1.40",
+  "_release": "0.1.40",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.40",
+    "commit": "fa9f3a5d4fb83f47e64ba57e76dc5f796abdee17"
+  },
+  "_source": "https://github.com/bpampuch/pdfmake.git",
+  "_target": "^0.1.40",
+  "_originalSource": "pdfmake",
+  "_direct": true
+}
