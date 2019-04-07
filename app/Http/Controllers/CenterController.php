@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 
-class StatisticsController extends Controller{
+class CenterController extends Controller{
     function index(){
-        return view('admin/statistics');
+        return view('admin/center');
     }
 }

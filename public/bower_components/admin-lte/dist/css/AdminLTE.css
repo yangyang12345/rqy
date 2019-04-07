@@ -1451,7 +1451,7 @@ a:focus {
  * --------------------
  */
 .small-box {
-  border-radius: 2px;
+  border-radius: 10px;
   position: relative;
   display: block;
   margin-bottom: 20px;
