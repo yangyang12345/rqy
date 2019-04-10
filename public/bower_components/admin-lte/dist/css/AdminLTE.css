@@ -2969,7 +2969,7 @@ table.text-center th {
   background: rgba(0, 0, 0, 0.3);
 }
 .modal-content {
-  border-radius: 0;
+  border-radius: 10px;
   -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.125);
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.125);
   border: 0;

@@ -22,9 +22,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- <link rel="stylesheet" href="dist/css/AdminLTE.min.css"> -->
     <link rel="stylesheet" type="text/css" href="{{ asset("/bower_components/admin-lte/dist/css/AdminLTE.min.css")}}">
 
+    <link rel="stylesheet" type="text/css" href="{{ asset("/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css")}}">
 
     <link rel="stylesheet" type="text/css" href="{{ asset("/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css")}}">
-    {{--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">--}}
 
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
@@ -105,6 +105,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- dialog 获取数据插件 -->
 <script src="{{ asset("/js/ajax.js") }}"></script>
+
+<script src="{{ asset("/js/model.js") }}"></script>
 
 {{--<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>--}}
 

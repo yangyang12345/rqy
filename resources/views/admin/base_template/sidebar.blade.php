@@ -45,8 +45,8 @@
                     <li><a href="#">浏览任务管理</a></li>
                 </ul>
             </li>
-            <li <?php if(strpos(Request::path(),'demand')) echo 'class="active"'?>><a href="{{ url('/admin/funds') }}"><i class="fa fa-credit-card"></i> <span>资金明细</span></a></li>
-            <li <?php if(strpos(Request::path(),'activity')) echo 'class="active"'?>><a href="{{ url('/admin/activity') }}"><i class="fa fa-link"></i> <span>绑定店铺</span></a></li>
+            <li <?php if(strpos(Request::path(),'funds')) echo 'class="active"'?>><a href="{{ url('/admin/funds') }}"><i class="fa fa-credit-card"></i> <span>资金明细</span></a></li>
+            <li <?php if(strpos(Request::path(),'bind')) echo 'class="active"'?>><a href="{{ url('/admin/bind') }}"><i class="fa fa-link"></i> <span>绑定店铺</span></a></li>
             <li <?php if(strpos(Request::path(),'user')) echo 'class="active"'?>><a href="{{ url('/admin/user') }}"><i class="fa fa-exclamation-circle"></i> <span>申述中心</span></a></li>
             <li <?php if(strpos(Request::path(),'user')) echo 'class="active"'?>><a href="{{ url('/admin/user') }}"><i class="fa  fa-dollar"></i> <span>推广赚奖金</span></a></li>
             <li <?php if(strpos(Request::path(),'user')) echo 'class="active"'?>><a href="{{ url('/admin/user') }}"><i class="fa fa-minus-circle"></i> <span>黑名单</span></a></li>

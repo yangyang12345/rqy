@@ -23,8 +23,8 @@ Route::prefix('admin')->group(function () {
     Route::get('user', 'UserController@index')->middleware('auth');
 
     Route::get('funds', 'FundsController@index')->middleware('auth');
-    Route::get('demand/{id}', 'DemandController@detail')->middleware('auth');
-    Route::get('demand/check/{id}', 'DemandController@check')->middleware('auth');
+
+    Route::get('bind', 'BindController@index')->middleware('auth');
 
     Route::get('activity', 'ActivityController@index')->middleware('auth');
 
