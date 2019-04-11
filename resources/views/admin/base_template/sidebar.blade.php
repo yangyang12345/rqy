@@ -32,7 +32,7 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">后台管理模块</li>
             <!-- Optionally, you can add icons to the links -->
-            <li <?php if(strpos(Request::path(),'center')) echo 'class="active"'?>><a href="{{ url('/admin/center') }}"><i class="fa fa-home"></i> <span>商家中心</span></a></li>
+            <li <?php if(strpos(Request::path(),'center')) echo 'class="active"'?>><a href="{{ url('/user/center') }}"><i class="fa fa-home"></i> <span>商家中心</span></a></li>
             <li class="treeview">
                 <a href="#"><i class="fa fa-cloud-upload"></i> <span>发布/管理</span>
                     <span class="pull-right-container">
@@ -45,12 +45,12 @@
                     <li><a href="#">浏览任务管理</a></li>
                 </ul>
             </li>
-            <li <?php if(strpos(Request::path(),'funds')) echo 'class="active"'?>><a href="{{ url('/admin/funds') }}"><i class="fa fa-credit-card"></i> <span>资金明细</span></a></li>
-            <li <?php if(strpos(Request::path(),'bind')) echo 'class="active"'?>><a href="{{ url('/admin/bind') }}"><i class="fa fa-link"></i> <span>绑定店铺</span></a></li>
-            <li <?php if(strpos(Request::path(),'user')) echo 'class="active"'?>><a href="{{ url('/admin/user') }}"><i class="fa fa-exclamation-circle"></i> <span>申述中心</span></a></li>
-            <li <?php if(strpos(Request::path(),'user')) echo 'class="active"'?>><a href="{{ url('/admin/user') }}"><i class="fa  fa-dollar"></i> <span>推广赚奖金</span></a></li>
-            <li <?php if(strpos(Request::path(),'user')) echo 'class="active"'?>><a href="{{ url('/admin/user') }}"><i class="fa fa-minus-circle"></i> <span>黑名单</span></a></li>
-            <li <?php if(strpos(Request::path(),'api_doc')) echo 'class="active"'?>><a href="{{ url('/admin/api_doc') }}"><i class="fa fa-book"></i> <span>接口文档</span></a></li>
+            <li <?php if(strpos(Request::path(),'funds')) echo 'class="active"'?>><a href="{{ url('/user/funds') }}"><i class="fa fa-credit-card"></i> <span>资金明细</span></a></li>
+            <li <?php if(strpos(Request::path(),'bind')) echo 'class="active"'?>><a href="{{ url('/user/bind') }}"><i class="fa fa-link"></i> <span>绑定店铺</span></a></li>
+            <li <?php if(strpos(Request::path(),'explain')) echo 'class="active"'?>><a href="{{ url('/user/explain') }}"><i class="fa fa-exclamation-circle"></i> <span>申述中心</span></a></li>
+            <li <?php if(strpos(Request::path(),'user')) echo 'class="active"'?>><a href="{{ url('/user/user') }}"><i class="fa  fa-dollar"></i> <span>推广赚奖金</span></a></li>
+            <li <?php if(strpos(Request::path(),'user')) echo 'class="active"'?>><a href="{{ url('/user/user') }}"><i class="fa fa-minus-circle"></i> <span>黑名单</span></a></li>
+            <li <?php if(strpos(Request::path(),'api_doc')) echo 'class="active"'?>><a href="{{ url('/user/api_doc') }}"><i class="fa fa-book"></i> <span>接口文档</span></a></li>
         </ul>
         <!-- /.sidebar-menu -->
     </section>

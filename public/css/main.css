@@ -1,0 +1,15 @@
+.margin-r-20{
+    margin-right: 20px;
+}
+
+.hr-line-dashed{
+    border-top: 1px dashed #e7eaec;
+    color: #ffffff;
+    background-color: #ffffff;
+    height: 1px;
+    margin: 20px 0;
+}
+
+.font-s-12{
+    font-size: 12px;
+}

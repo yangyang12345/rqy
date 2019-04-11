@@ -11,9 +11,9 @@
 |
 */
 
-Route::redirect('/', '/admin/statistics', 301);
+Route::redirect('/', '/user/center', 301);
 
-Route::prefix('admin')->group(function () {
+Route::prefix('user')->group(function () {
     Route::get('users', function () {
         // 匹配包含 "/admin/users" 的 URL
     });
@@ -25,6 +25,8 @@ Route::prefix('admin')->group(function () {
     Route::get('funds', 'FundsController@index')->middleware('auth');
 
     Route::get('bind', 'BindController@index')->middleware('auth');
+
+    Route::get('explain', 'ExplainController@index')->middleware('auth');
 
     Route::get('activity', 'ActivityController@index')->middleware('auth');
 

@@ -4,8 +4,8 @@
         <div class="col-xs-12">
             <div class="box box-primary">
                 <div class="box-header">
-                    <h3 class="box-title">绑定店铺</h3>
-                    <button class="btn btn-info btn-xs pull-right" id="bind-shop">添加店铺</button>
+                    <h3 class="box-title">申述中心</h3>
+                    <button class="btn btn-info btn-xs pull-right" id="bind-shop">发起申述</button>
                 </div>
                 <div class="box-body">
                     <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -158,102 +158,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-backdrop="false" data-keyboard="false" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel" style="display: inline-block">
-                        添加店铺
-                    </h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="box box-default">
-                        <div class="box-header">
-                            <h3 class="box-title">店铺信息</h3>
-                        </div>
-                        <div class="box-body">
-                            <div class="row">
-                                <div class="col-sm-3"><h5>选择平台</h5></div>
-                                <div class="col-sm-8">
-                                    <div class="form-group form-inline">
-                                        <div class="radio margin-r-20">
-                                            <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-                                                淘宝
-                                            </label>
-                                        </div>
-                                        <div class="radio margin-r-20">
-                                            <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                                                京东
-                                            </label>
-                                        </div>
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
-                                                拼多多
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="hr-line-dashed"></div>
-                            <div class="row">
-                                <div class="form-group">
-                                    <label class="col-sm-4 control-label">店铺名称</label>
-                                    <div class="col-sm-8">
-                                        <input name="store_name" type="text" class="form-control" required="">
-                                        <span class="help-block font-s-12">务必跟手机端宝贝页显示的店铺名一致</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="hr-line-dashed"></div>
-                            <div class="row">
-                                <div class="form-group">
-                                    <label class="col-sm-4 control-label">店铺聊天帐号</label>
-                                    <div class="col-sm-8"> <input id="wangwang" name="wangwang" type="text" class="form-control" required="">
-                                        <span class="help-block font-s-12">绑定后无法修改</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="hr-line-dashed"></div>
-                            <div class="row">
-                                <div class="form-group">
-                                    <label class="col-sm-4 control-label">刷手接单间隔设置(天)</label>
-                                    <div class="col-sm-8">
-                                        <input name="gap_day" type="number" class="form-control" onkeyup="value=value.replace(/[^\d]/,'')" min="20" required="" value="20">
-                                        <span class="help-block font-s-12">买手购过同一个店铺默认不低于20天后才可复购</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="hr-line-dashed"></div>
-                            <div class="row">
-                                <div class="form-group">
-                                    <label class="col-sm-4 control-label">店铺首页网址</label>
-                                    <div class="col-sm-8">
-                                        <input name="store_url" type="text" class="form-control store_url" required="">
-                                        <span class="help-block font-s-12">绑定后无法修改</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box-footer">
-                            Many more skins available. <a href="http://fronteed.com/iCheck/">Documentation</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary">提交</button>
                 </div>
             </div>
         </div>
