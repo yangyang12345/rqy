@@ -20,6 +20,8 @@ Route::prefix('user')->group(function () {
 
     Route::get('center', 'CenterController@index')->middleware('auth');
 
+    Route::get('release_task', 'ManagementController@task')->middleware('auth');
+
     Route::get('user', 'UserController@index')->middleware('auth');
 
     Route::get('funds', 'FundsController@index')->middleware('auth');
@@ -28,7 +30,11 @@ Route::prefix('user')->group(function () {
 
     Route::get('explain', 'ExplainController@index')->middleware('auth');
 
-    Route::get('activity', 'ActivityController@index')->middleware('auth');
+    Route::get('explain/push', 'ExplainController@push')->middleware('auth');
+
+    Route::get('plan', 'PlanController@index')->middleware('auth');
+
+    Route::get('ban', 'BanController@index')->middleware('auth');
 
     Route::get('api_doc', 'UserController@doc')->middleware('auth');
 

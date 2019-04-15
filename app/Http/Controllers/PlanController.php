@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 
-class ActivityController extends Controller{
+class PlanController extends Controller{
     function index(){
-        return view('admin/activity');
+        return view('admin/plan');
     }
 }

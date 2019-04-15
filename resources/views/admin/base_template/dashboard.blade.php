@@ -110,6 +110,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <script src="{{ asset("/js/model.js") }}"></script>
 
+<!-- 省市三级联动 顺序并不能乱-->
+<script src="{{ asset("/js/distpicker.data.min.js") }}"></script>
+<script src="{{ asset("/js/distpicker.min.js") }}"></script>
+<script src="{{ asset("/js/provice.js") }}"></script>
+
+
 {{--<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>--}}
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.

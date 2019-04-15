@@ -182,7 +182,7 @@
                         </div>
                         <div class="box-body">
                             <div class="row">
-                                <div class="col-sm-3"><h5>选择平台</h5></div>
+                                <div class="col-sm-4"><h5>选择平台</h5></div>
                                 <div class="col-sm-8">
                                     <div class="form-group form-inline">
                                         <div class="radio margin-r-20">
@@ -245,9 +245,65 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="row">
+                                <label class="col-sm-4 control-label">发件地址</label>
+                                <div data-toggle="distpicker" class="col-sm-8">
+                                    <div class="row">
+                                        <div class="form-group col-sm-4">
+                                            <label class="sr-only" for="province">Province</label>
+                                            <select class="form-control" id="province"></select>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label class="sr-only" for="city">City</label>
+                                            <select class="form-control" id="city"></select>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label class="sr-only" for="district">District</label>
+                                            <select class="form-control" id="district"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">街道地址</label>
+                                    <div class="col-sm-8">
+                                        <input name="addr" type="text" class="form-control" required="">
+                                        <span class="help-block m-b-none text-danger">发空包时，发货地址与电话必须无误。</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">发货电话</label>
+                                    <div class="col-sm-8">
+                                        <input name="tel" type="text" class="form-control" required="">
+                                        <span class="help-block m-b-none text-danger">发空包时，发货地址与电话必须无误。</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">店铺图片</label>
+                                    <div class="col-sm-8">
+                                        <div class="camera-area" data-id="1">
+                                            <input type="hidden" id="store_pic" name="store_pic" class="save"><br>
+                                            <input type="file" class="fileToUpload " accept="image/*"><br>
+                                            <span><p class="thumb_template"></p></span>
+                                            <p><a href="/images/1.jpg" target="_blank">查看示例</a></p>
+                                            <span class="upload_progress"></span>
+                                        </div>
+                                        <span class="help-block m-b-none">为避免恶意绑定他人店铺必须上传店铺的后台登录截图</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="box-footer">
-                            Many more skins available. <a href="http://fronteed.com/iCheck/">Documentation</a>
+                            请认真仔细填写相关资料
                         </div>
                     </div>
                 </div>

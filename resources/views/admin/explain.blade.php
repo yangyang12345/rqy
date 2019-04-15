@@ -5,7 +5,7 @@
             <div class="box box-primary">
                 <div class="box-header">
                     <h3 class="box-title">申述中心</h3>
-                    <button class="btn btn-info btn-xs pull-right" id="bind-shop">发起申述</button>
+                    <a href="{{ url('/user/explain/push') }}" class="btn btn-info btn-xs pull-right" id="bind-shop">发起申述</a>
                 </div>
                 <div class="box-body">
                     <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">

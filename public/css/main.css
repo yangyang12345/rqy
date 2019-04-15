@@ -2,6 +2,10 @@
     margin-right: 20px;
 }
 
+.padding_l_20{
+    padding-left: 20px;
+}
+
 .hr-line-dashed{
     border-top: 1px dashed #e7eaec;
     color: #ffffff;
@@ -12,4 +16,51 @@
 
 .font-s-12{
     font-size: 12px;
+}
+
+.camera-area {
+    position: relative;
+}
+
+.camera-area .thumb_template {
+    display: inline-block;
+    width: 108px;
+    height: 108px;
+    background: url(../images/no.png) no-repeat center;
+    margin: 0;
+}
+
+
+/*dialog滚动条*/
+
+.modal-dialog {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.modal-content {
+    /*overflow-y: scroll; */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.modal-body {
+    overflow-y: scroll;
+    position: absolute;
+    top: 55px;
+    bottom: 65px;
+    width: 100%;
+}
+
+.modal-header .close {margin-right: 15px;}
+
+.modal-footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
 }
