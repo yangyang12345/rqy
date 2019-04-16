@@ -6,6 +6,6 @@
  */
 
 return [
-    'title'=>'Finance platform',
-    'title_short'=>'FR'
+    'title'=>'Qi La Plantform',
+    'title_short'=>'QL'
 ];

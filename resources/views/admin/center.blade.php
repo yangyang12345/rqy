@@ -11,7 +11,7 @@
                 <div class="box-body">
                     <h2>5.00</h2>
                     <small>人民币</small>
-                    <a href="#" onclick="">
+                    <a href="{{ asset('/user/funds') }}" onclick="">
                         <div class="pull-right font-bold text-primary">明细 <i class="fa fa-level-up"></i></div>
                     </a>
                 </div>
@@ -28,10 +28,10 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <h2>5.00
-                        <a href=""><span class="label label-danger pull-right" style="font-size: 16px">充值</span></a>
+                        <a href="{{ asset('/charge') }}"><span class="label label-danger pull-right" style="font-size: 16px">充值</span></a>
                     </h2>
                     <small>人民币</small>
-                    <a href="#" onclick="">
+                    <a href="{{ asset('/user/funds') }}" onclick="">
                         <div class="pull-right font-bold text-info">明细 <i class="fa fa-level-up"></i></div>
                     </a>
                 </div>
@@ -39,7 +39,7 @@
         </div>
     </div>
     <div class="row">
-        <a href="">
+        <a href="{{ asset('/user/release_task') }}">
             <div class="col-sm-2">
                 <div class="small-box bg-aqua">
                     <div class="inner">
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </a>
-        <a href="">
+        <a href="{{ asset('/user/advance_duty') }}">
             <div class="col-sm-2">
                 <div class="small-box bg-light-blue">
                     <div class="inner">
@@ -65,7 +65,7 @@
                 </div>
             </div>
         </a>
-        <a href="">
+        <a href="{{ asset('/user/browse_task') }}">
             <div class="col-sm-2">
                 <div class="small-box bg-green">
                     <div class="inner">
@@ -78,7 +78,7 @@
                 </div>
             </div>
         </a>
-        <a href="">
+        <a href="{{ asset('/user/funds') }}">
             <div class="col-sm-2">
                 <div class="small-box bg-red">
                     <div class="inner">
@@ -91,7 +91,7 @@
                 </div>
             </div>
         </a>
-        <a href="">
+        <a href="{{ asset('/user/bind') }}">
             <div class="col-sm-2">
                 <div class="small-box bg-yellow">
                     <div class="inner">
@@ -171,8 +171,7 @@
         <div class="col-xs-12">
             <div class="box box-info">
                 <div class="box-header">
-                    <h3 class="box-title">Simple Full Width Table</h3>
-
+                    <h3 class="box-title">商家公告</h3>
                     <div class="box-tools">
                         <ul class="pagination pagination-sm no-margin pull-right">
                             <li><a href="#">«</a></li>
@@ -186,14 +185,13 @@
                 <!-- /.box-header -->
                 <div class="box-body no-padding">
                     <table class="table">
-                        <tbody><tr>
-                            <th style="width: 10px">#</th>
-                            <th>Task</th>
-                            <th>Progress</th>
-                            <th style="width: 40px">Label</th>
+                        <tbody>
+                        <tr>
+                            <th>标题</th>
+                            <th>发布时间</th>
+                            <th></th>
                         </tr>
                         <tr>
-                            <td>1.</td>
                             <td>Update software</td>
                             <td>
                                 <div class="progress progress-xs">
@@ -202,107 +200,8 @@
                             </td>
                             <td><span class="badge bg-red">55%</span></td>
                         </tr>
-                        <tr>
-                            <td>2.</td>
-                            <td>Clean database</td>
-                            <td>
-                                <div class="progress progress-xs">
-                                    <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-yellow">70%</span></td>
-                        </tr>
-                        <tr>
-                            <td>3.</td>
-                            <td>Cron job running</td>
-                            <td>
-                                <div class="progress progress-xs progress-striped active">
-                                    <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-light-blue">30%</span></td>
-                        </tr>
-                        <tr>
-                            <td>4.</td>
-                            <td>Fix and squish bugs</td>
-                            <td>
-                                <div class="progress progress-xs progress-striped active">
-                                    <div class="progress-bar progress-bar-success" style="width: 90%"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-green">90%</span></td>
-                        </tr>
-                        <tr>
-                            <td>4.</td>
-                            <td>Fix and squish bugs</td>
-                            <td>
-                                <div class="progress progress-xs progress-striped active">
-                                    <div class="progress-bar progress-bar-success" style="width: 90%"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-green">90%</span></td>
-                        </tr>
-                        <tr>
-                            <td>4.</td>
-                            <td>Fix and squish bugs</td>
-                            <td>
-                                <div class="progress progress-xs progress-striped active">
-                                    <div class="progress-bar progress-bar-success" style="width: 90%"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-green">90%</span></td>
-                        </tr>
-                        <tr>
-                            <td>4.</td>
-                            <td>Fix and squish bugs</td>
-                            <td>
-                                <div class="progress progress-xs progress-striped active">
-                                    <div class="progress-bar progress-bar-success" style="width: 90%"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-green">90%</span></td>
-                        </tr>
-                        <tr>
-                            <td>4.</td>
-                            <td>Fix and squish bugs</td>
-                            <td>
-                                <div class="progress progress-xs progress-striped active">
-                                    <div class="progress-bar progress-bar-success" style="width: 90%"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-green">90%</span></td>
-                        </tr>
-                        <tr>
-                            <td>4.</td>
-                            <td>Fix and squish bugs</td>
-                            <td>
-                                <div class="progress progress-xs progress-striped active">
-                                    <div class="progress-bar progress-bar-success" style="width: 90%"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-green">90%</span></td>
-                        </tr>
-                        <tr>
-                            <td>4.</td>
-                            <td>Fix and squish bugs</td>
-                            <td>
-                                <div class="progress progress-xs progress-striped active">
-                                    <div class="progress-bar progress-bar-success" style="width: 90%"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-green">90%</span></td>
-                        </tr>
-                        <tr>
-                            <td>4.</td>
-                            <td>Fix and squish bugs</td>
-                            <td>
-                                <div class="progress progress-xs progress-striped active">
-                                    <div class="progress-bar progress-bar-success" style="width: 90%"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-green">90%</span></td>
-                        </tr>
-                        </tbody></table>
+                        </tbody>
+                    </table>
                 </div>
                 <!-- /.box-body -->
             </div>

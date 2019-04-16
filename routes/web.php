@@ -22,6 +22,10 @@ Route::prefix('user')->group(function () {
 
     Route::get('release_task', 'ManagementController@task')->middleware('auth');
 
+    Route::get('advance_duty', 'ManagementController@advance')->middleware('auth');
+
+    Route::get('browse_task', 'ManagementController@browse')->middleware('auth');
+
     Route::get('user', 'UserController@index')->middleware('auth');
 
     Route::get('funds', 'FundsController@index')->middleware('auth');
@@ -39,6 +43,9 @@ Route::prefix('user')->group(function () {
     Route::get('api_doc', 'UserController@doc')->middleware('auth');
 
 });
+
+Route::get('charge','ChargeController@index')->middleware('auth');
+Route::post('charge','ChargeController@charge')->middleware('auth');
 
 Auth::routes();
 
