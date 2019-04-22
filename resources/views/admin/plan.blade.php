@@ -81,7 +81,7 @@
                     <div class="row">
                         <div class="col-sm-3 text-center">
                             <div style="margin:10 auto;" id="ad_qcode">
-                                <canvas width="120" height="120"></canvas>
+                            {!! QrCode::size(200)->generate('https://www.51rqy.com/user/reg.html?recommend=46166'); !!}
                             </div>
                         </div>
                         <div class="col-sm-9"><p class="font-90 text-muted m-b-1">将商家注册链接发送给朋友注册,您可获得推广佣金</p> <input
@@ -102,7 +102,7 @@
                     <div class="row">
                         <div class="col-sm-3 text-center">
                             <div style="margin:10 auto;" id="ad_qcode1">
-                                <canvas width="120" height="120"></canvas>
+                            {!! QrCode::size(200)->generate('hello world'); !!}
                             </div>
                         </div>
                         <div class="col-sm-9"><p class="font-90 text-muted m-b-1">将买家注册链接发送给朋友注册,您可获得推广佣金</p> <input
