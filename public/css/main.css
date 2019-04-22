@@ -64,3 +64,7 @@
     width: 100%;
     bottom: 0;
 }
+
+.timeline-body p{
+    color: #999;
+}

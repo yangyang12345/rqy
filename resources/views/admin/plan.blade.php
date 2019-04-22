@@ -101,7 +101,7 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-sm-3 text-center">
-                            <div style="margin:10 auto;" id="ad_qcode1">
+                            <div style="margin:10px auto;" id="ad_qcode1">
                                 <canvas width="120" height="120"></canvas>
                             </div>
                         </div>

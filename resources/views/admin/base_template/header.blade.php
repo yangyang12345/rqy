@@ -1,6 +1,6 @@
 <header class="main-header">
 
-    <a href="{{ url("/admin/user") }}" class="logo">
+    <a href="{{ url("/user/center") }}" class="logo">
         <span class="logo-mini"><b>{{ config('global.title_short') }}</b></span>
         <span class="logo-lg"><b>{{ config('global.title') }}</b></span>
     </a>
