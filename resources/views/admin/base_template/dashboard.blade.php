@@ -26,6 +26,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <link rel="stylesheet" type="text/css" href="{{ asset("/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css")}}">
 
+    <link rel="stylesheet" type="text/css" href="{{ asset("/bower_components/ckeditor/skins/moono-lisa/editor.css")}}">
+
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect. -->
@@ -105,10 +107,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- SlimScroll -->
 <script src="{{ asset("/bower_components/jquery-slimscroll/jquery.slimscroll.min.js") }}"></script>
 
+<!-- ckeditor -->
+<script src="{{ asset("/bower_components/ckeditor/ckeditor.js") }}"></script>
+<script src="{{ asset("/bower_components/ckeditor/config.js") }}"></script>
+<script src="{{ asset("/bower_components/ckeditor/styles.js") }}"></script>
+<script src="{{ asset("/bower_components/ckeditor/lang/zh-cn.js") }}"></script>
+
+
+
 <!-- dialog 获取数据插件 -->
 <script src="{{ asset("/js/ajax.js") }}"></script>
 
 <script src="{{ asset("/js/model.js") }}"></script>
+
+
 
 <!-- 省市三级联动 顺序并不能乱-->
 <script src="{{ asset("/js/distpicker.data.min.js") }}"></script>
