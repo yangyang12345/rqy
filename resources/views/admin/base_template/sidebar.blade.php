@@ -33,16 +33,16 @@
             <li class="header">后台管理模块</li>
             <!-- Optionally, you can add icons to the links -->
             <li <?php if(strpos(Request::path(),'center')) echo 'class="active"'?>><a href="{{ url('/user/center') }}"><i class="fa fa-home"></i> <span>商家中心</span></a></li>
-            <li class="treeview">
+            <li class="treeview active">
                 <a href="#"><i class="fa fa-cloud-upload"></i> <span>发布/管理</span>
                     <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="padding_l_20"><a href="#"><i class="fa fa-circle-o"></i>发布推广任务</a></li>
-                    <li class="padding_l_20"><a href="#"><i class="fa fa-circle-o"></i>垫付任务管理</a></li>
-                    <li class="padding_l_20"><a href="#"><i class="fa fa-circle-o"></i>浏览任务管理</a></li>
+                    <li class="padding_l_20"><a href="{{ url('/user/release_task') }}"><i class="fa fa-circle-o"></i>发布推广任务</a></li>
+                    <li class="padding_l_20"><a href="{{ url('/user/advance_duty') }}"><i class="fa fa-circle-o"></i>垫付任务管理</a></li>
+                    <li class="padding_l_20"><a href="{{ url('/user/browse_task') }}"><i class="fa fa-circle-o"></i>浏览任务管理</a></li>
                 </ul>
             </li>
             <li <?php if(strpos(Request::path(),'funds')) echo 'class="active"'?>><a href="{{ url('/user/funds') }}"><i class="fa fa-credit-card"></i> <span>资金明细</span></a></li>

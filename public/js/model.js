@@ -1,7 +1,16 @@
 (function ($) {
     $("#bind-shop").on('click',function () {
-        $('#myModal').modal('toggle');//手动打开模态框。
+        $('#Modal_shop').modal('toggle');//手动打开模态框。
     })
+
+    $("#model_card").on('click',function () {
+        $('#Modal_card').modal('toggle');//手动打开模态框。
+    })
+
+    $("#model_online").on('click',function () {
+        $('#Modal_online').modal('toggle');//手动打开模态框。
+    })
+
     $('#myModal').on('show.bs.modal', function () {
             // alert('aaaa在调用 show 方法后触发。');
         });

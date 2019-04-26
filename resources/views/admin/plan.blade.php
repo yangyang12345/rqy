@@ -80,7 +80,7 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-sm-3 text-center">
-                            <div style="margin:10 auto;" id="ad_qcode">
+                            <div style="margin:10px auto;" id="ad_qcode">
                             {!! QrCode::size(200)->generate('https://www.51rqy.com/user/reg.html?recommend=46166'); !!}
                             </div>
                         </div>
@@ -101,7 +101,7 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-sm-3 text-center">
-                            <div style="margin:10 auto;" id="ad_qcode1">
+                            <div style="margin:10px auto;" id="ad_qcode1">
                             {!! QrCode::size(200)->generate('hello world'); !!}
                             </div>
                         </div>
