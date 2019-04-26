@@ -50,6 +50,7 @@
             <li <?php if(strpos(Request::path(),'explain')) echo 'class="active"'?>><a href="{{ url('/user/explain') }}"><i class="fa fa-exclamation-circle"></i> <span>申述中心</span></a></li>
             <li <?php if(strpos(Request::path(),'plan')) echo 'class="active"'?>><a href="{{ url('/user/plan') }}"><i class="fa  fa-dollar"></i> <span>推广赚奖金</span></a></li>
             <li <?php if(strpos(Request::path(),'ban')) echo 'class="active"'?>><a href="{{ url('/user/ban') }}"><i class="fa fa-minus-circle"></i> <span>黑名单</span></a></li>
+            <li <?php if(strpos(Request::path(),'notice')) echo 'class="active"'?>><a href="{{ url('/admin/notice') }}"><i class="fa fa-bullhorn"></i> <span>发布公告</span></a></li>
             <li <?php if(strpos(Request::path(),'api_doc')) echo 'class="active"'?>><a href="{{ url('/user/api_doc') }}"><i class="fa fa-book"></i> <span>接口文档</span></a></li>
         </ul>
         <!-- /.sidebar-menu -->

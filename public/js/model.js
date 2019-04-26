@@ -19,4 +19,7 @@
     function jsOpenModal2() {
         $('#myModal2').modal('toggle');//手动切换模态框。   还有一个modal('hide')	手动隐藏模态框。
     }
+
+    CKEDITOR.replace('editor');
+
 })(jQuery);
