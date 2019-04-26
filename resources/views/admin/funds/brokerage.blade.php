@@ -5,8 +5,8 @@
 
             <div class="box box-primary">
                 <div class="box-header">
-                    <h3 class="box-title">本金账户明细</h3>
-                    <button class="btn btn-info btn-xs pull-right" onclick="j.toMoney(500);">佣金转本金</button>
+                    <h3 class="box-title">佣金账户明细</h3>
+                    <button class="btn btn-info btn-xs pull-right">佣金转本金</button>
                 </div>
                 <div class="box-body">
                     <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -20,7 +20,7 @@
                                             {{--<option value="50">50</option>--}}
                                             {{--<option value="100">100</option>--}}
                                         {{--</select> entries</label></div>--}}
-                                <h4>本金账户：￥0.00元 　<a href="user/money_log.html">明细</a>　　佣金账户：￥5.00元 　<a href="user/money_log.html?type=1">明细</a></h4>
+                                <h4>本金账户：￥0.00元 　<a href="{{ url('/user/funds/capital') }}">明细</a>　　佣金账户：￥5.00元 　<a href="{{ url('/user/funds/brokerage') }}">明细</a></h4>
                             </div>
                             <div class="col-sm-12"><hr></div>
                         </div>

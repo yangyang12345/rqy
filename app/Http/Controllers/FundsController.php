@@ -8,12 +8,20 @@ use Illuminate\Support\Facades\DB;
 
 class FundsController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
+        $type=$request->type;
+        switch ($type){
+            case 'capital':
+                $capital = DB::table('capital')->paginate('15');
+                return view('admin/funds/capital',['capital'=>$capital]);
+                break;
+            case 'brokerage':
+                return view('admin/funds/brokerage');
+                break;
+        }
 
-//        $demands = DB::table('demand')
-//            ->leftJoin('token','demand.token_id','=','token.id')
-//            ->select('demand.id','token.nickname','demand.type','demand.title','demand.status','demand.company_address','demand.contact')
-//            ->paginate('15',['*'], 'demands');
+
+
 //
 //        $demands_no_check = DB::table('demand')
 //            ->leftJoin('token','demand.token_id','=','token.id')
@@ -27,7 +35,6 @@ class FundsController extends Controller
 //            ->select('demand.id','token.nickname','demand.title','demand.created_at','demand.company_address','demand.contact')
 //            ->paginate(2,['*'], 'demands_check_fail');
 //        return view('admin/demand',['demands'=>$demands,'demands_no_check'=>$demands_no_check,'demands_check_fail'=>$demands_check_fail]);
-        return view('admin/funds');
     }
 
     public function detail($id){

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDemandTable extends Migration
+class CreatefundsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateDemandTable extends Migration
      */
     public function up()
     {
-        Schema::create('demand', function (Blueprint $table) {
+        Schema::create('funds', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('token_id');  //用户id
             $table->integer('type');  //类型 0.找资金 1.找资产 2.其他合作
-            $table->string('title');  //需求标题
+            $table->string('content');  //内容
             $table->integer('asset_type');  //资产类型 0.房抵，1.车低，2.供应链，3.场景分期，4.现金分期，5其他
             $table->integer('fund_type');  //资产类型 0.银行，1.消金，2.小贷，3.P2P，4.信托，5.保理 6.其他
             $table->integer('fund_start');  //资金成本要求
@@ -42,6 +42,6 @@ class CreateDemandTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('demand');
+        Schema::dropIfExists('funds');
     }
 }

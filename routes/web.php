@@ -28,7 +28,7 @@ Route::prefix('user')->group(function () {
 
     Route::get('user', 'UserController@index')->middleware('auth');
 
-    Route::get('funds', 'FundsController@index')->middleware('auth');
+    Route::get('funds/{type}', 'FundsController@index')->middleware('auth');
 
     Route::get('bind', 'BindController@index')->middleware('auth');
 

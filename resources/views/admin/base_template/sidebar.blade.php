@@ -45,7 +45,7 @@
                     <li class="padding_l_20"><a href="{{ url('/user/browse_task') }}"><i class="fa fa-circle-o"></i>浏览任务管理</a></li>
                 </ul>
             </li>
-            <li <?php if(strpos(Request::path(),'funds')) echo 'class="active"'?>><a href="{{ url('/user/funds') }}"><i class="fa fa-credit-card"></i> <span>资金明细</span></a></li>
+            <li <?php if(strpos(Request::path(),'funds')) echo 'class="active"'?>><a href="{{ url('/user/funds/capital') }}"><i class="fa fa-credit-card"></i> <span>资金明细</span></a></li>
             <li <?php if(strpos(Request::path(),'bind')) echo 'class="active"'?>><a href="{{ url('/user/bind') }}"><i class="fa fa-link"></i> <span>绑定店铺</span></a></li>
             <li <?php if(strpos(Request::path(),'explain')) echo 'class="active"'?>><a href="{{ url('/user/explain') }}"><i class="fa fa-exclamation-circle"></i> <span>申述中心</span></a></li>
             <li <?php if(strpos(Request::path(),'plan')) echo 'class="active"'?>><a href="{{ url('/user/plan') }}"><i class="fa  fa-dollar"></i> <span>推广赚奖金</span></a></li>
