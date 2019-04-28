@@ -49,6 +49,7 @@ Route::prefix('user')->group(function () {
 Route::prefix('admin')->group(function(){
     Route::get('notice','NoticeController@index')->middleware('auth');
     Route::post('notice','NoticeController@store')->middleware('auth');
+    Route::post('uploadImage','NoticeController@upload')->middleware('auth');
 });
 
 Route::get('charge','ChargeController@index')->middleware('auth');

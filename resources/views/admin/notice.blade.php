@@ -114,11 +114,12 @@
         <script src="{{ asset("/bower_components/ckeditor/config.js") }}"></script>
         <script src="{{ asset("/bower_components/ckeditor/styles.js") }}"></script>
         <script src="{{ asset("/bower_components/ckeditor/lang/zh-cn.js") }}"></script>
+        <script src="{{ asset("/bower_components/ckeditor/plugins/colorbutton/plugin.js") }}"></script>
         <script>
             $(document).ready(function(){
                 CKEDITOR.replace('editor',{
                     height: 600,
-
+                    filebrowserUploadUrl: '{{url('admin/uploadImage')}}?_token={{csrf_token()}}',
                 });
             });
         </script>
