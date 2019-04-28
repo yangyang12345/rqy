@@ -36,6 +36,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <link rel="stylesheet" type="text/css" href="{{ asset("/css/main.css")}}">
 
+    @stack('step-css')
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -107,25 +109,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- SlimScroll -->
 <script src="{{ asset("/bower_components/jquery-slimscroll/jquery.slimscroll.min.js") }}"></script>
 
-<!-- ckeditor -->
-<script src="{{ asset("/bower_components/ckeditor/ckeditor.js") }}"></script>
-<script src="{{ asset("/bower_components/ckeditor/config.js") }}"></script>
-<script src="{{ asset("/bower_components/ckeditor/styles.js") }}"></script>
-<script src="{{ asset("/bower_components/ckeditor/lang/zh-cn.js") }}"></script>
-
-
+@stack('notice-js')
 
 <!-- dialog 获取数据插件 -->
-<script src="{{ asset("/js/ajax.js") }}"></script>
+{{--<script src="{{ asset("/js/ajax.js") }}"></script>--}}
 
-<script src="{{ asset("/js/model.js") }}"></script>
-
-
+@stack('step-js')
 
 <!-- 省市三级联动 顺序并不能乱-->
 <script src="{{ asset("/js/distpicker.data.min.js") }}"></script>
 <script src="{{ asset("/js/distpicker.min.js") }}"></script>
 <script src="{{ asset("/js/provice.js") }}"></script>
+
+<script src="{{ asset("/js/normal.js") }}"></script>
 
 
 {{--<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>--}}

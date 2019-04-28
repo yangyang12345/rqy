@@ -68,3 +68,16 @@
 .timeline-body p{
     color: #999;
 }
+
+/* 对alert颜色补充 */
+
+.alert-success-self{
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+.tasktype-list{
+    list-style: none;
+    line-height: 30px;
+}

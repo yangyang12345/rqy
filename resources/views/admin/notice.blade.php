@@ -27,4 +27,16 @@
             </div>
         </div>
     </div>
+    @push('notice-js')
+        <!-- ckeditor -->
+        <script src="{{ asset("/bower_components/ckeditor/ckeditor.js") }}"></script>
+        <script src="{{ asset("/bower_components/ckeditor/config.js") }}"></script>
+        <script src="{{ asset("/bower_components/ckeditor/styles.js") }}"></script>
+        <script src="{{ asset("/bower_components/ckeditor/lang/zh-cn.js") }}"></script>
+        <script>
+            $(document).ready(function(){
+                CKEDITOR.replace('editor');
+            });
+        </script>
+    @endpush
 @endsection
