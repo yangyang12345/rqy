@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 class ManagementController extends Controller{
     function task(){
-        return view('admin/task');
+        return view('consumer/task');
     }
 
     function advance(){
-        return view('admin/advance');
+        return view('consumer/advance');
     }
 
     function browse(){
-        return view('admin/browse');
+        return view('consumer/browse');
     }
 }

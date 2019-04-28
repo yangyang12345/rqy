@@ -3,10 +3,10 @@ namespace App\Http\Controllers;
 
 class ExplainController extends Controller{
     function index(){
-        return view('admin/explain');
+        return view('consumer/explain');
     }
 
     function push(){
-        return view('admin/explain_push');
+        return view('consumer/explain_push');
     }
 }

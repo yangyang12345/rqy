@@ -13,10 +13,10 @@ class FundsController extends Controller
         switch ($type){
             case 'capital':
                 $capital = DB::table('capital')->paginate('15');
-                return view('admin/funds/capital',['capital'=>$capital]);
+                return view('consumer/funds/capital',['capital'=>$capital]);
                 break;
             case 'brokerage':
-                return view('admin/funds/brokerage');
+                return view('consumer/funds/brokerage');
                 break;
         }
 

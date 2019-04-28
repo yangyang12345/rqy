@@ -9,6 +9,6 @@ use Illuminate\View\View;
 
 class CenterController extends Controller{
     function index(){
-        return view('admin/center');
+        return view('consumer/center');
     }
 }

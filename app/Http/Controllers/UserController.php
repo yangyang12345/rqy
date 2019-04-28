@@ -31,7 +31,7 @@ class UserController extends Controller
             'count_active' => $count_active[0]->count_active,
         );
 
-        return view('admin/user',['tokens'=>$tokens,'count'=>$count]);
+        return view('consumer/user',['tokens'=>$tokens,'count'=>$count]);
     }
 
     public function doc(){

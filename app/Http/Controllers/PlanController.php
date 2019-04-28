@@ -9,6 +9,6 @@ use Illuminate\View\View;
 
 class PlanController extends Controller{
     function index(){
-        return view('admin/plan');
+        return view('consumer/plan');
     }
 }
