@@ -14,6 +14,10 @@
     margin: 20px 0;
 }
 
+.intervel{
+    height: 20px;
+}
+
 .font-s-12{
     font-size: 12px;
 }
@@ -80,4 +84,9 @@
 .tasktype-list{
     list-style: none;
     line-height: 30px;
+}
+
+.article-title{
+    text-align: center;
+    margin: 60px 0 40px 0;
 }
