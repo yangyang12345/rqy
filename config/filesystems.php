@@ -62,7 +62,7 @@ return [
 
             // 文件将上传到storage/app/uploads目录
 //            'root' => storage_path('app/uploads'),
-
+            'url' => env('APP_URL').'/public',
             // 文件将上传到public/uploads目录 如果需要浏览器直接访问 请设置成这个
             'root' => public_path('uploads'),
         ],

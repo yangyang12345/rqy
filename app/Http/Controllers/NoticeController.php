@@ -58,7 +58,7 @@ class NoticeController extends Controller{
     }
 
     public function show(){
-        $notice = DB::select('select * from notice where id = :id', ['id' => 6]);
+        $notice = DB::select('select * from notice where id = :id', ['id' => 5]);
 
         return view('consumer/notice',['notice'=>$notice]);
     }
@@ -69,7 +69,6 @@ class NoticeController extends Controller{
         if ($request->isMethod('post')) {
 
             $file = $request->file('upload');
-            $callback = $request->get('CKEditorFuncNum');
 
             // 文件是否上传成功
             if ($file->isValid()) {
@@ -93,13 +92,17 @@ class NoticeController extends Controller{
                 //这里的uploads是配置文件的名称
                 $bool = Storage::disk('uploads')->put($filename, file_get_contents($realPath));
 
-                $previewname = '/public/uploads/'.$filename;//就是很简单的一个步骤
+                $previewname = '/uploads/'.$filename;//就是很简单的一个步骤
+
+                Log::info('previename:',['path'=>$previewname]);
 
 //                $callback = $_REQUEST["CKEditorFuncNum"];
+                $callback = $request->CKEditorFuncNum;
 
-                Log::info('file:',['bool'=>$callback]);
-                echo "<script type='text/javascript'>alert('上传成功')</script>";
-                echo "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($callback,$previewname,'上传成功');</script>";
+                echo "<script>window.parent.CKEDITOR.tools.callFunction($callback, '$previewname', '');</script>";
+//                echo "<script>alert('aaa');</script>";
+                exit;
+//                echo "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($callback,$previewname,'上传成功');</script>";
 
             }
 
