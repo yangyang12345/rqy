@@ -7,6 +7,7 @@ use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class NoticeController extends Controller{
     public function index(){
@@ -62,31 +63,46 @@ class NoticeController extends Controller{
         return view('consumer/notice',['notice'=>$notice]);
     }
 
-    public function upload(){
-        $extensions = array("jpg","bmp","gif","png");
-        $uploadFilename = $_FILES['upload']['name'];
+    public function upload(Request $request){
+//        $request_all = $request->all();
 
-        $uploadFilesize = $_FILES['upload']['size'];
-        if($uploadFilesize  > 1024*2*1000){
-            echo "<font color=\"red\"size=\"2\">*图片大小不能超过2M</font>";
-            exit;
-        }
+        if ($request->isMethod('post')) {
 
-        $extension = pathInfo($uploadFilename,PATHINFO_EXTENSION);
-        Log::info('User failed to login.', ['id' => $extension]);
+            $file = $request->file('upload');
+            $callback = $request->get('CKEditorFuncNum');
 
-        if(in_array($extension,$extensions)){
-            $uploadPath ="./uploadfile/";
-            $uuid = str_replace('.','',uniqid("",TRUE)).".".$extension;
+            // 文件是否上传成功
+            if ($file->isValid()) {
 
-            $desname = $uploadPath.$uuid;
+                // 获取文件相关信息
+                $originalName = $file->getClientOriginalName(); // 文件原名
+                $ext = $file->getClientOriginalExtension();     // 扩展名
+                $realPath = $file->getRealPath();   //临时文件的绝对路径
+                $type = $file->getClientMimeType();     // image/jpeg
 
-            $previewname = './uploadfile/'.$uuid;
-            $tag = move_uploaded_file($_FILES['upload']['tmp_name'],$desname);
-            $callback = $_REQUEST["CKEditorFuncNum"];
-            echo "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($callback,'".$previewname."','');</script>";
-        }else{
-            echo "<font color=\"red\"size=\"2\">*文件格式不正确（必须为.jpg/.gif/.bmp/.png文件）</font>";
+//                if($uploadFilesize  > 1024*2*1000){
+//                    echo "<font color=\"red\"size=\"2\">*图片大小不能超过2M</font>";
+//                    exit;
+//                }
+
+//                Log::info('file:',$type);
+
+                // 上传文件
+                $filename = date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
+                // 使用我们新建的uploads本地存储空间（目录）
+                //这里的uploads是配置文件的名称
+                $bool = Storage::disk('uploads')->put($filename, file_get_contents($realPath));
+
+                $previewname = '/public/uploads/'.$filename;//就是很简单的一个步骤
+
+//                $callback = $_REQUEST["CKEditorFuncNum"];
+
+                Log::info('file:',['bool'=>$callback]);
+                echo "<script type='text/javascript'>alert('上传成功')</script>";
+                echo "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($callback,$previewname,'上传成功');</script>";
+
+            }
+
         }
     }
 
