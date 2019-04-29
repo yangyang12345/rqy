@@ -42,7 +42,7 @@ Route::prefix('user')->group(function () {
 
     Route::get('api_doc', 'UserController@doc')->middleware('auth');
 
-    Route::get('notice','NoticeController@show')->middleware('auth');
+    Route::get('notice','NoticeController@show')->name('notice')->middleware('auth');
 
 });
 

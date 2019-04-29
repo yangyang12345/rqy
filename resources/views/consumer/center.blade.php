@@ -173,13 +173,14 @@
                 <div class="box-header">
                     <h3 class="box-title">商家公告</h3>
                     <div class="box-tools">
-                        <ul class="pagination pagination-sm no-margin pull-right">
-                            <li><a href="#">«</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">»</a></li>
-                        </ul>
+                        {{ $notice->links() }}
+                        {{--<ul class="pagination pagination-sm no-margin pull-right">--}}
+                            {{--<li><a href="#">«</a></li>--}}
+                            {{--<li><a href="#">1</a></li>--}}
+                            {{--<li><a href="#">2</a></li>--}}
+                            {{--<li><a href="#">3</a></li>--}}
+                            {{--<li><a href="#">»</a></li>--}}
+                        {{--</ul>--}}
                     </div>
                 </div>
                 <!-- /.box-header -->
@@ -191,15 +192,17 @@
                             <th>发布时间</th>
                             <th></th>
                         </tr>
-                        <tr>
-                            <td>Update software</td>
-                            <td>
-                                <div class="progress progress-xs">
-                                    <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-red">55%</span></td>
-                        </tr>
+                        @foreach($notice as $n)
+                            <tr>
+                                <td><a href="{{route('notice',array('id'=>$n->id))}}" target="_self">{{ $n->title }}</a></td>
+                                <td>{{ $n->time }}</td>
+                                <td>
+                                    @include('consumer/notice/type')
+                                </td>
+                                {{--<td><span class="badge bg-red">55%</span></td>--}}
+                            </tr>
+                        @endforeach
+
                         </tbody>
                     </table>
                 </div>

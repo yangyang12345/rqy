@@ -1,5 +1,10 @@
 @extends('admin/base_template/dashboard')
 @section('content')
+    @if(!empty(session('success')))
+        　　<div class="alert alert-success" role="alert">
+            　　　　{{session('success')}}
+            </div>
+    @endif
     <div class="row">
         <div class="col-md-12">
             <div class="box box-default">
