@@ -30,7 +30,7 @@
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">后台管理模块</li>
+            <li class="header">用户使用</li>
             <!-- Optionally, you can add icons to the links -->
             <li class="{{ active_class(if_route('user.center')) }}"><a href="{{ url('/user/center') }}"><i class="fa fa-home"></i> <span>商家中心</span></a></li>
             <li class="treeview">
@@ -50,7 +50,9 @@
             <li class="{{ active_class(if_route('user.explain')) }}"><a href="{{ url('/user/explain') }}"><i class="fa fa-exclamation-circle"></i> <span>申述中心</span></a></li>
             <li class="{{ active_class(if_route('user.plan')) }}"><a href="{{ url('/user/plan') }}"><i class="fa  fa-dollar"></i> <span>推广赚奖金</span></a></li>
             <li class="{{ active_class(if_route('user.ban')) }}"><a href="{{ url('/user/ban') }}"><i class="fa fa-minus-circle"></i> <span>黑名单</span></a></li>
+            <li class="header">管理模块</li>
             <li class="{{ active_class(if_route('admin.notice')) }}"><a href="{{ url('/admin/notice') }}"><i class="fa fa-bullhorn"></i> <span>发布公告</span></a></li>
+            <li class="{{ active_class(if_route('admin.check')) }}"><a href="{{ url('/admin/check') }}"><i class="fa fa-leanpub"></i> <span>充值审批</span></a></li>
             <li class="{{ active_class(if_route('user.api_doc')) }}"><a href="{{ url('/user/api_doc') }}"><i class="fa fa-book"></i> <span>接口文档</span></a></li>
         </ul>
         <!-- /.sidebar-menu -->

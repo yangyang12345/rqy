@@ -71,6 +71,10 @@ Route::prefix('admin')->group(function(){
     })->name('admin.notice')->middleware('auth');
     Route::post('notice','NoticeController@store')->middleware('auth');
     Route::post('uploadImage','NoticeController@upload')->middleware('auth');
+
+    Route::get('check','CheckController@index',function(){
+        echo active_class(if_route('admin.check'), 'active', '');
+    })->name('admin.check')->middleware('auth');
 });
 
 Route::get('charge','ChargeController@index')->middleware('auth');
