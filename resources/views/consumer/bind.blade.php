@@ -4,7 +4,7 @@
         <div class="col-xs-12">
             <div class="box box-primary">
                 <div class="box-header">
-                    <h3 class="box-title">绑定店铺</h3>
+                    <h3 class="box-title">店铺管理</h3>
                     <button class="btn btn-info btn-xs pull-right" id="bind-shop">添加店铺</button>
                 </div>
                 <div class="box-body">
