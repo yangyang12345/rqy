@@ -64,7 +64,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <section class="content-header">
             <h1>
                 <title>{{ config('global.title') }}</title>
-                <small>分享，为了更加专业！</small>
+                <small>欢迎来到启拉！因为专业所以信赖</small>
             </h1>
 
             <!-- You can dynamically generate breadcrumbs here -->

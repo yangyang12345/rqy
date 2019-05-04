@@ -53,6 +53,7 @@
             <li class="header">管理模块</li>
             <li class="{{ active_class(if_route('admin.notice')) }}"><a href="{{ url('/admin/notice') }}"><i class="fa fa-bullhorn"></i> <span>发布公告</span></a></li>
             <li class="{{ active_class(if_route('admin.check')) }}"><a href="{{ url('/admin/check') }}"><i class="fa fa-leanpub"></i> <span>充值审批</span></a></li>
+            <li class="{{ active_class(if_uri_pattern('permissions')) }}"><a href="{{ url('/permissions') }}"><i class="fa fa-key"></i> <span>权限管理</span></a></li>
             <li class="{{ active_class(if_route('user.api_doc')) }}"><a href="{{ url('/user/api_doc') }}"><i class="fa fa-book"></i> <span>接口文档</span></a></li>
         </ul>
         <!-- /.sidebar-menu -->
