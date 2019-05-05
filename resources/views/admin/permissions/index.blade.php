@@ -12,7 +12,7 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    <div class="col-lg-4 col-lg-offset-4">
+                    <div class="col-lg-10 col-lg-offset-1">
                         <h1><i class="fa fa-key"></i>Available Permissions
 
                             <a href="{{ route('users.index') }}" class="btn btn-default pull-right">Users</a>
@@ -32,15 +32,11 @@
                                     <tr>
                                         <td>{{ $permission->name }}</td>
                                         <td>
-                                            <a href="{{ URL::to('permissions/'.$permission->id.'/edit') }}" class="btn btn-info pull-left" style="margin-right: 3px;">Edit</a>
+                                            <a href="{{ URL::to('permissions/'.$permission->id.'/edit') }}" class="btn btn-info pull-left" style="margin-right: 3px;">编辑</a>
 
-                                            <form method="DELETE" action="{{ route('permissions.destroy',$permission->id) }}">
-                                                <button type="submit" name="Delete" class="btn btn-danger">删除</button>
-                                            </form>
-
-                                            {{--{!! Form::open(['method' => 'DELETE', 'route' => ['permissions.destroy', $permission->id] ]) !!}--}}
-                                            {{--{!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}--}}
-                                            {{--{!! Form::close() !!}--}}
+                                            {!! Form::open(['method' => 'DELETE', 'route' => ['permissions.destroy', $permission->id] ]) !!}
+                                            {!! Form::submit('删除', ['class' => 'btn btn-danger']) !!}
+                                            {!! Form::close() !!}
 
                                         </td>
                                     </tr>
@@ -49,7 +45,8 @@
                             </table>
                         </div>
 
-                        <a href="{{ URL::to('permissions/create') }}" class="btn btn-success">Add Permission</a>
+                        <a href="{{ URL::to('permissions/create') }}" class="btn btn-success">添加权限</a>
+
                     </div>
                 </div>
             </div>

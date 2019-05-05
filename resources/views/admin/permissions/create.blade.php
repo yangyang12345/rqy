@@ -14,25 +14,28 @@
                 <div class="box-body">
                     <div class='col-lg-4 col-lg-offset-4'>
 
-                        <h1><i class='fa fa-key'></i> Add Permission</h1>
+                        <h1><i class='fa fa-key'></i> 添加权限</h1>
                         <br>
 
-                        <form action="{{ route('permissions.create') }}"></form>
+                        {{ Form::open(array('url' => 'permissions')) }}
 
                         <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" name="name">
+                            {{ Form::label('name', 'Name') }}
+                            {{ Form::text('name', '', array('class' => 'form-control')) }}
                         </div><br>
                         @if(!$roles->isEmpty()) //If no roles exist yet
                         <h4>Assign Permission to Roles</h4>
 
                         @foreach ($roles as $role)
-                            <input type="checkbox" name="roles[]" value="{{ $role->id }}" />
-                            <label for="{{ $role->name }}">{{ ucfirst($role->name) }}</label><br>
+                            {{ Form::checkbox('roles[]',  $role->id ) }}
+                            {{ Form::label($role->name, ucfirst($role->name)) }}<br>
+
                         @endforeach
                         @endif
                         <br>
-                        <button class="btn btn-primary" type="submit" name="add">添加权限</button>
+                        {{ Form::submit('添加', array('class' => 'btn btn-primary')) }}
+
+                        {{ Form::close() }}
 
                     </div>
                 </div>

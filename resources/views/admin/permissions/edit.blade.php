@@ -14,18 +14,19 @@
                 <div class="box-body">
                     <div class='col-lg-4 col-lg-offset-4'>
 
-                        <h1><i class='fa fa-key'></i> Edit {{$permission->name}}</h1>
+                        <h1><i class='fa fa-key'></i> 编辑 {{$permission->name}}</h1>
                         <br>
-                        <form method="PUT" action="{{ route('permissions.update',$permission->id) }}"></form>
-{{--                        {{ Form::model($permission, array('route' => array('permissions.update', $permission->id), 'method' => 'PUT')) }}{{-- Form model binding to automatically populate our fields with permission data --}}--}}
+                        {{ Form::model($permission, array('route' => array('permissions.update', $permission->id), 'method' => 'PUT')) }}{{-- Form model binding to automatically populate our fields with permission data --}}
 
                         <div class="form-group">
-                            <label for="name">权限名称</label>
-                            <input name="name" class="form-control">
                             {{ Form::label('name', 'Permission Name') }}
+                            {{ Form::text('name', null, array('class' => 'form-control')) }}
                         </div>
                         <br>
-                        <button type="submit" name="Edit" class="btn btn-primary"></button>
+                        {{ Form::submit('编辑', array('class' => 'btn btn-primary')) }}
+
+                        {{ Form::close() }}
+
                     </div>
                 </div>
             </div>

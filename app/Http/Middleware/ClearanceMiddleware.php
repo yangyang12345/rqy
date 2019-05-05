@@ -19,36 +19,21 @@ class ClearanceMiddleware {
             return $next($request);  // 管理员具备所有权限
         }
 
-        if ($request->is('posts/create')) // 文章发布权限
-        {
-            if (!Auth::user()->hasPermissionTo('Create Post'))
-            {
-                abort('401');
-            }
-            else {
-                return $next($request);
-            }
-        }
+        /*
+         * 具体权限细化，目前暂时不需要，以下是demo
+         */
 
-        if ($request->is('posts/*/edit')) // 文章编辑权限
-        {
-            if (!Auth::user()->hasPermissionTo('Edit Post')) {
-                abort('401');
-            } else {
-                return $next($request);
-            }
-        }
+//        if ($request->is('posts/create')) // 文章发布权限
+//        {
+//            if (!Auth::user()->hasPermissionTo('Create Post'))
+//            {
+//                abort('401');
+//            }
+//            else {
+//                return $next($request);
+//            }
+//        }
 
-        if ($request->isMethod('Delete')) // 文章删除权限
-        {
-            if (!Auth::user()->hasPermissionTo('Delete Post')) {
-                abort('401');
-            }
-            else
-            {
-                return $next($request);
-            }
-        }
 
         return $next($request);
     }
