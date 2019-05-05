@@ -1,10 +1,7 @@
-<!-- Left side column. contains the logo and sidebar -->
 <aside class="main-sidebar">
 
-    <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
 
-        <!-- Sidebar user panel (optional) -->
         <div class="user-panel">
             <div class="pull-left image">
                 <img src="{{ asset("/bower_components/admin-lte/dist/img/user2-160x160.jpg")}}" class="img-circle" alt="User Image">
@@ -16,22 +13,20 @@
             </div>
         </div>
 
-        <!-- search form (Optional) -->
-        <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search...">
-                <span class="input-group-btn">
-              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-              </button>
-            </span>
-            </div>
-        </form>
-        <!-- /.search form -->
+        {{--<!-- search form (Optional) -->--}}
+        {{--<form action="#" method="get" class="sidebar-form">--}}
+            {{--<div class="input-group">--}}
+                {{--<input type="text" name="q" class="form-control" placeholder="Search...">--}}
+                {{--<span class="input-group-btn">--}}
+              {{--<button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>--}}
+              {{--</button>--}}
+            {{--</span>--}}
+            {{--</div>--}}
+        {{--</form>--}}
+        {{--<!-- /.search form -->--}}
 
-        <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">用户使用</li>
-            <!-- Optionally, you can add icons to the links -->
             <li class="{{ active_class(if_route('user.center')) }}"><a href="{{ url('/user/center') }}"><i class="fa fa-home"></i> <span>商家中心</span></a></li>
             <li class="treeview">
                 <a href="#"><i class="fa fa-cloud-upload"></i> <span>发布/管理</span>
@@ -54,13 +49,12 @@
             <li class="header">管理模块</li>
             <li class="{{ active_class(if_uri_pattern('users')) }}"><a href="{{ url('/users') }}"><i class="fa fa-user"></i> <span>成员管理</span></a></li>
             <li class="{{ active_class(if_route('admin.notice')) }}"><a href="{{ url('/admin/notice') }}"><i class="fa fa-bullhorn"></i> <span>发布公告</span></a></li>
-            <li class="{{ active_class(if_route('admin.check')) }}"><a href="{{ url('/admin/check') }}"><i class="fa fa-leanpub"></i> <span>充值审批</span></a></li>
-            <li class="{{ active_class(if_uri_pattern('roles')) }}"><a href="{{ url('/roles') }}"><i class="fa fa-key"></i> <span>角色管理</span></a></li>
+            <li class="{{ active_class(if_route('admin.fund')) }}"><a href="{{ url('/admin/fund') }}"><i class="fa fa-leanpub"></i> <span>充值审批</span></a></li>
+            <li class="{{ active_class(if_route('admin.shop')) }}"><a href="{{ url('/admin/shop') }}"><i class="fa fa-check-square-o"></i> <span>店铺审批</span></a></li>
+            <li class="{{ active_class(if_uri_pattern('roles')) }}"><a href="{{ url('/roles') }}"><i class="fa fa-edit<i class="fa fa-search"></i>"></i> <span>角色管理</span></a></li>
             <li class="{{ active_class(if_uri_pattern('permissions')) }}"><a href="{{ url('/permissions') }}"><i class="fa fa-key"></i> <span>权限管理</span></a></li>
             <li class="{{ active_class(if_route('user.api_doc')) }}"><a href="{{ url('/user/api_doc') }}"><i class="fa fa-book"></i> <span>接口文档</span></a></li>
             @endrole
         </ul>
-        <!-- /.sidebar-menu -->
     </section>
-    <!-- /.sidebar -->
 </aside>

@@ -72,7 +72,9 @@ Route::prefix('admin')->group(function(){
     Route::post('notice','NoticeController@store')->middleware('auth');
     Route::post('uploadImage','NoticeController@upload')->middleware('auth');
 
-    Route::get('check','CheckController@index')->name('admin.check')->middleware('auth');
+    Route::get('fund','CheckController@fund')->name('admin.fund')->middleware('auth');
+
+    Route::get('shop','CheckController@shop')->name('admin.shop')->middleware('auth');
 });
 
 Route::resource('users', 'UserController');
