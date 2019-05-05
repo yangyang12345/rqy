@@ -8,4 +8,4 @@
     @case(3)
     <span><small class="label bg-green">其他</small></span>
     @break
-@endswitch<?php
+@endswitch

@@ -1,37 +1,33 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
+
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{{ config('global.title') }}</title>
-    <!-- Tell the browser to be responsive to screen width -->
+
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"> -->
+
     <link rel="stylesheet" type="text/css" href="{{ asset("/bower_components/bootstrap/dist/css/bootstrap.min.css")}}">
-    <!-- Font Awesome -->
-    <!-- <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css"> -->
+
     <link rel="stylesheet" type="text/css" href="{{ asset("/bower_components/font-awesome/css/font-awesome.min.css")}}">
-    <!-- Ionicons -->
-    <!-- <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css"> -->
+
     <link rel="stylesheet" type="text/css" href="{{ asset("/bower_components/Ionicons/css/ionicons.min.css")}}">
-    <!-- Theme style -->
-    <!-- <link rel="stylesheet" href="dist/css/AdminLTE.min.css"> -->
+
     <link rel="stylesheet" type="text/css" href="{{ asset("/bower_components/admin-lte/dist/css/AdminLTE.min.css")}}">
 
     <link rel="stylesheet" type="text/css" href="{{ asset("/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css")}}">
 
-    <link rel="stylesheet" type="text/css" href="{{ asset("/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css")}}">
+    <!-- Datatables -->
+    {{--<link href="/vendor/yajra/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">--}}
+    {{--<link href="/vendor/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">--}}
+    {{--<link href="/vendor/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">--}}
+    {{--<link href="/vendor/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">--}}
+    {{--<link href="/vendor/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">--}}
 
     <link rel="stylesheet" type="text/css" href="{{ asset("/bower_components/ckeditor/skins/moono-lisa/editor.css")}}">
 
-    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-          page. However, you can choose any other skin. Make sure you
-          apply the skin class to the body tag so the changes take effect. -->
-    <!-- <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css"> -->
+
     <link rel="stylesheet" type="text/css" href="{{ asset("/bower_components/admin-lte/dist/css/skins/skin-blue.min.css")}}">
 
     <link rel="stylesheet" type="text/css" href="{{ asset("/css/main.css")}}">
@@ -67,14 +63,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <small>欢迎来到启拉！因为专业所以信赖</small>
             </h1>
 
-            <!-- You can dynamically generate breadcrumbs here -->
             @include('admin/base_template/breadcrumbs')
 
         </section>
 
         <!-- Main content -->
         <section class="content">
-            <!-- Your Page Content Here -->
             @yield('content')
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
@@ -111,6 +105,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 @stack('notice-js')
 
+@stack('datatable-js')
+
 <!-- dialog 获取数据插件 -->
 {{--<script src="{{ asset("/js/ajax.js") }}"></script>--}}
 
@@ -122,9 +118,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset("/js/provice.js") }}"></script>
 
 <script src="{{ asset("/js/normal.js") }}"></script>
-
-
-{{--<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>--}}
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

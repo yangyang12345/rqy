@@ -1,5 +1,10 @@
 @extends('admin/base_template/dashboard')
 @section('content')
+    @if(!empty(session('success')))
+        　　<div class="alert alert-success" role="alert">
+            　　　　{{session('success')}}
+        </div>
+    @endif
     <div class="row">
         <div class="col-sm-12">
             <div class="box box-info">
@@ -159,64 +164,32 @@
             <div class="box box-info">
                 <div class="box-header">
                     <h3 class="box-title">最近5条充值记录</h3>
-                </div>
-                <div class="box-body">
-                    <div class="dataTables_wrapper form-inline dt-bootstrap">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table id="example1" class="table table-bordered table-striped dataTable" role="grid"
-                                       aria-describedby="example1_info">
-                                    <thead>
-                                    <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
-                                            colspan="1" aria-sort="ascending"
-                                            aria-label="Rendering engine: activate to sort column descending"
-                                            style="width: 208px;">提交时间
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                            colspan="1" aria-label="Browser: activate to sort column ascending"
-                                            style="width: 255px;">转账银行/类型
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                            colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                                            style="width: 227px;">开户名/账号
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                            colspan="1" aria-label="Engine version: activate to sort column ascending"
-                                            style="width: 179px;">金额
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                            colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                            style="width: 131px;">审核状态
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                            colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                            style="width: 131px;">审核时间
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Firefox 1.0</td>
-                                        <td>Win 98+ / OSX.2+</td>
-                                        <td>1.7</td>
-                                        <td>A</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Firefox 1.5</td>
-                                        <td>Win 98+ / OSX.2+</td>
-                                        <td>1.8</td>
-                                        <td>A</td>
-                                        <td>A</td>
-                                    </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
+                    <div class="box-tools">
                     </div>
+                </div>
+                <div class="box-body no-padding">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th>提交时间</th>
+                            <th>转账银行/类型</th>
+                            <th>开户名/账号</th>
+                            <th>金额</th>
+                            <th>审核状态</th>
+                            <th>审核时间</th>
+                        </tr>
+                        @foreach($charges as $charge)
+                            <tr role="row" class="odd">
+                                <td>{{ $charge->ctime }}</td>
+                                <td>@include('consumer/charge/type')</td>
+                                <td>{{ $charge->account_name }}</td>
+                                <td>{{ $charge->fund }}</td>
+                                <td>@include('consumer/charge/status')</td>
+                                <td>{{ $charge->vtime }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -224,10 +197,12 @@
     <div class="modal fade" id="Modal_card" tabindex="-1" role="dialog" data-backdrop="false" data-keyboard="false" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
+            <form method="post" action="{{ route('charge.bank',['id'=>Auth::id()]) }}">
+                @csrf
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="myModalLabel" style="display: inline-block">
-                        我的账户信息
+                        银行
                     </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
@@ -239,58 +214,56 @@
                             <h3 class="box-title">我的账户信息</h3>
                         </div>
                         <div class="box-body">
-                            <form method="post" action="{{ route('charge.bank',['id'=>Auth::id()]) }}">
-                                <div class="row">
-                                    <div class="form-group">
-                                        <div class="col-xs-12">
-                                            <select id="bank_type" name="bank_type" class="form-control m-b" required="">
-                                                <option value="0">请选择转账银行</option>
-                                                <option value="1">中国建设银行</option>
-                                                <option value="2">中国工商银行</option>
-                                                <option value="3">中国农业银行</option>
-                                                <option value="4">中国银行</option>
-                                                <option value="5">中国邮政储蓄银行</option>
-                                                <option value="6">招商银行</option>
-                                                <option value="7">平安银行</option>
-                                                <option value="8">民生银行</option>
-                                                <option value="9">交通银行</option>
-                                                <option value="10">光大银行</option>
-                                                <option value="11">中信银行</option>
-                                                <option value="12">广发银行</option>
-                                                <option value="13">兴业银行</option>
-                                                <option value="14">上海浦东发展银行</option>
-                                                <option value="49">其他银行</option>
-                                            </select>
-                                        </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <select id="bank_type" name="bank_type" class="form-control m-b" required="">
+                                            <option value="0">请选择转账银行</option>
+                                            <option value="1">中国建设银行</option>
+                                            <option value="2">中国工商银行</option>
+                                            <option value="3">中国农业银行</option>
+                                            <option value="4">中国银行</option>
+                                            <option value="5">中国邮政储蓄银行</option>
+                                            <option value="6">招商银行</option>
+                                            <option value="7">平安银行</option>
+                                            <option value="8">民生银行</option>
+                                            <option value="9">交通银行</option>
+                                            <option value="10">光大银行</option>
+                                            <option value="11">中信银行</option>
+                                            <option value="12">广发银行</option>
+                                            <option value="13">兴业银行</option>
+                                            <option value="14">上海浦东发展银行</option>
+                                            <option value="49">其他银行</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="hr-line-dashed"></div>
-                                <div class="row">
-                                    <div class="form-group has-success">
-                                        <div class="col-xs-12">
-                                            <input id="bank_code" name="bank_code" type="text" class="form-control" placeholder="转出银行卡号" maxlength="19" pattern="^[0-9]{12,19}$" required="">
-                                        </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="row">
+                                <div class="form-group has-success">
+                                    <div class="col-xs-12">
+                                        <input id="bank_code" name="bank_code" type="text" class="form-control" placeholder="转出银行卡号" maxlength="19" pattern="^[0-9]{12,19}$" required="">
                                     </div>
                                 </div>
-                                <div class="hr-line-dashed"></div>
-                                <div class="row">
-                                    <div class="form-group has-success">
-                                        <div class="col-xs-12">
-                                            <input id="true_name" name="true_name" type="text" class="form-control" placeholder="转出银行卡姓名[如选的其他银行,在姓名后备注银行名]" maxlength="20"  required="">
-                                            <span class="help-block m-b-none">填写你转出银行卡开户账号的姓名，方便财务核对，不要填手机号，<font class="badge">如选的其他银行,在姓名后备注银行名</font></span>
-                                        </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="row">
+                                <div class="form-group has-success">
+                                    <div class="col-xs-12">
+                                        <input id="true_name" name="true_name" type="text" class="form-control" placeholder="转出银行卡姓名[如选的其他银行,在姓名后备注银行名]" maxlength="20"  required="">
+                                        <span class="help-block m-b-none">填写你转出银行卡开户账号的姓名，方便财务核对，不要填手机号，<font class="badge">如选的其他银行,在姓名后备注银行名</font></span>
                                     </div>
                                 </div>
-                                <div class="hr-line-dashed"></div>
-                                <div class="row">
-                                    <div class="form-group has-success">
-                                        <div class="col-xs-12">
-                                            <input id="money" name="money" type="number" class="form-control" placeholder="转账金额（元）" min="1" step="0.01" required="">
-                                            <span class="help-block m-b-none">（充值1次提交1次即可，恶意反复提交将处罚或封号）</span>
-                                        </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="row">
+                                <div class="form-group has-success">
+                                    <div class="col-xs-12">
+                                        <input id="money" name="money" type="number" class="form-control" placeholder="转账金额（元）" min="1" step="0.01" required="">
+                                        <span class="help-block m-b-none">（充值1次提交1次即可，恶意反复提交将处罚或封号）</span>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
 
                         <div class="box-footer">
@@ -303,15 +276,18 @@
                     <button type="submit" class="btn btn-primary">提交</button>
                 </div>
             </div>
+            </form>
         </div>
     </div>
     <div class="modal fade" id="Modal_online" tabindex="-1" role="dialog" data-backdrop="false" data-keyboard="false" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
+            <form method="post" action="{{ route('charge.online',['id'=>Auth::id()]) }}">
+                @csrf
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="myModalLabel" style="display: inline-block">
-                        添加店铺
+                        我的账号信息
                     </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
@@ -320,32 +296,41 @@
                 <div class="modal-body">
                     <div class="box box-default">
                         <div class="box-header">
-                            <h3 class="box-title">店铺信息</h3>
+                            <h3 class="box-title">支付宝/微信</h3>
                         </div>
                         <div class="box-body">
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <select id="online_type" name="bank_type" class="form-control m-b" required="">
-                                        <option value="0">请选择转账类型</option>
-                                        <option value="1">支付宝</option>
-                                        <option value="2">微信</option>
-                                    </select>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <select id="online_type" name="online_type" class="form-control m-b" required="">
+                                            <option value="0">请选择转账类型</option>
+                                            <option value="1">支付宝</option>
+                                            <option value="2">微信</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group has-success">
-                                <div class="col-xs-12">
-                                    <input id="online_code" name="online_code" type="text" class="form-control" placeholder="转出账号" maxlength="19"  required="">
+                            <div class="hr-line-dashed"></div>
+                            <div class="row">
+                                <div class="form-group has-success">
+                                    <div class="col-xs-12">
+                                        <input id="online_code" name="online_code" type="text" class="form-control" placeholder="转出账号" maxlength="19"  required="">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group has-success">
-                                <div class="col-xs-12">
-                                    <input id="nick_name" name="nick_name" type="text" class="form-control" placeholder="转出昵称" maxlength="20"  required="">
-                                </div>
-                            </div>
-                            <div class="form-group has-success">
-                                <div class="col-xs-12">
-                                    <input id="online_money" name="online_money" type="number" class="form-control" placeholder="转账金额（元）" min="1" step="0.01" required="">
-                                    <span class="help-block m-b-none">（充值1次提交1次即可，恶意反复提交将处罚或封号）</span>
+                            <div class="hr-line-dashed"></div>
+                            <div class="row"><div class="form-group has-success">
+                                    <div class="col-xs-12">
+                                        <input id="nick_name" name="nick_name" type="text" class="form-control" placeholder="转出昵称" maxlength="20"  required="">
+                                    </div>
+                                </div></div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="row">
+                                <div class="form-group has-success">
+                                    <div class="col-xs-12">
+                                        <input id="online_money" name="online_money" type="number" class="form-control" placeholder="转账金额（元）" min="1" step="0.01" required="">
+                                        <span class="help-block m-b-none">（充值1次提交1次即可，恶意反复提交将处罚或封号）</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -356,9 +341,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary">提交</button>
+                    <button type="submit" class="btn btn-primary">提交</button>
                 </div>
             </div>
+            </form>
         </div>
     </div>
 @endsection

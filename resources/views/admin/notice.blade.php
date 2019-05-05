@@ -87,8 +87,8 @@
         <div class="col-md-9">
             <div class="box box-info">
                 <div class="box-header">
-                    <h3 class="box-title">CK Editor
-                        <small>Advanced and full of features</small>
+                    <h3 class="box-title">公告编辑
+                        <small>在以下编辑框中填写您需要发布的公告</small>
                     </h3>
                     <!-- tools box -->
                     <div class="pull-right box-tools">
