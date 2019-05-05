@@ -40,7 +40,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href=""><b>Finance</b>platform</a>
+        <a href=""><b>启拉</b>☁️</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
@@ -49,17 +49,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <form action="{{ route('login') }}" method="post">
             @csrf
             <div class="form-group has-feedback">
-                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
-
-                    @if ($errors->has('email'))
+                    <input id="tel" type="tel" placeholder="请输入手机" class="form-control{{ $errors->has('tel') ? ' is-invalid' : '' }}" name="tel" value="{{ old('tel') }}" required autofocus>
+                    <span class="glyphicon glyphicon-phone form-control-feedback"></span>
+                    @if ($errors->has('tel'))
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('email') }}</strong>
+                            <strong>{{ $errors->first('tel') }}</strong>
                         </span>
                     @endif
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                <input id="password" type="password" placeholder="请输入密码" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
 
                 @if ($errors->has('password'))
                     <span class="invalid-feedback" role="alert">
@@ -71,7 +70,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="row">
                 <div class="col-xs-8"></div>
                 <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
                 </div>
                 <!-- /.col -->
             </div>

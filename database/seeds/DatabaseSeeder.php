@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Token;
+use App\Charge;
 use App\Demand;
 
 class DatabaseSeeder extends Seeder

@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\token::class, function (Faker $faker) {
+$factory->define(App\Charge::class, function (Faker $faker) {
     $faker = \Faker\Factory::create('zh-CN');//设置faker，数据为中文
     return [
         'openid' => $faker->uuid,

@@ -57,7 +57,17 @@
 
             </div>
             <div class="form-group has-feedback">
-                <input id="email" type="email" placeholder="邮箱" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                <input id="tel" type="tel" placeholder="电话" class="form-control{{ $errors->has('tel') ? ' is-invalid' : '' }}" name="tel" value="{{ old('tel') }}" required>
+                <span class="glyphicon glyphicon-phone form-control-feedback"></span>
+                @if ($errors->has('tel'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('tel') }}</strong>
+                    </span>
+                @endif
+
+            </div>
+            <div class="form-group has-feedback">
+                <input id="email" type="email" placeholder="邮箱" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 @if ($errors->has('email'))
                     <span class="invalid-feedback" role="alert">

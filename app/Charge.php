@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Token extends Model
+class Charge extends Model
 {
     protected $table = 'token';
 }

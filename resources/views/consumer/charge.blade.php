@@ -31,9 +31,9 @@
                                                         <div class="timeline-body">
                                                             <p>
                                                                 转账途径　电脑网银、手机银行 注意：请勿通过其他途径转账<br>
-                                                                收款户名　黄耀莲<br>
-                                                                收款账号　6222 0320 1001 2054 735<br>
-                                                                收款银行　中国工商银行(虎门支行)<br>
+                                                                收款户名　晏建辉<br>
+                                                                收款账号　6217 9065 0002 9719 927<br>
+                                                                收款银行　中国银行<br>
                                                             </p>
                                                         </div>
                                                     </div>
@@ -239,45 +239,58 @@
                             <h3 class="box-title">我的账户信息</h3>
                         </div>
                         <div class="box-body">
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <select id="bank_type" name="bank_type" class="form-control m-b" required="">
-                                        <option value="0">请选择转账银行</option>
-                                        <option value="1">中国建设银行</option>
-                                        <option value="2">中国工商银行</option>
-                                        <option value="3">中国农业银行</option>
-                                        <option value="4">中国银行</option>
-                                        <option value="5">中国邮政储蓄银行</option>
-                                        <option value="6">招商银行</option>
-                                        <option value="7">平安银行</option>
-                                        <option value="8">民生银行</option>
-                                        <option value="9">交通银行</option>
-                                        <option value="10">光大银行</option>
-                                        <option value="11">中信银行</option>
-                                        <option value="12">广发银行</option>
-                                        <option value="13">兴业银行</option>
-                                        <option value="14">上海浦东发展银行</option>
-                                        <option value="49">其他银行</option>
-                                    </select>
+                            <form method="post" action="{{ route('charge.bank',['id'=>Auth::id()]) }}">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <select id="bank_type" name="bank_type" class="form-control m-b" required="">
+                                                <option value="0">请选择转账银行</option>
+                                                <option value="1">中国建设银行</option>
+                                                <option value="2">中国工商银行</option>
+                                                <option value="3">中国农业银行</option>
+                                                <option value="4">中国银行</option>
+                                                <option value="5">中国邮政储蓄银行</option>
+                                                <option value="6">招商银行</option>
+                                                <option value="7">平安银行</option>
+                                                <option value="8">民生银行</option>
+                                                <option value="9">交通银行</option>
+                                                <option value="10">光大银行</option>
+                                                <option value="11">中信银行</option>
+                                                <option value="12">广发银行</option>
+                                                <option value="13">兴业银行</option>
+                                                <option value="14">上海浦东发展银行</option>
+                                                <option value="49">其他银行</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group has-success">
-                                <div class="col-xs-12">
-                                    <input id="bank_code" name="bank_code" type="text" class="form-control" placeholder="转出银行卡号" maxlength="19" pattern="^[0-9]{12,19}$" required="">
+                                <div class="hr-line-dashed"></div>
+                                <div class="row">
+                                    <div class="form-group has-success">
+                                        <div class="col-xs-12">
+                                            <input id="bank_code" name="bank_code" type="text" class="form-control" placeholder="转出银行卡号" maxlength="19" pattern="^[0-9]{12,19}$" required="">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group has-success">
-                                <div class="col-xs-12">
-                                    <input id="true_name" name="true_name" type="text" class="form-control" placeholder="转出银行卡姓名[如选的其他银行,在姓名后备注银行名]" maxlength="20"  required="">
-                                    <span class="help-block m-b-none">填写你转出银行卡开户账号的姓名，方便财务核对，不要填手机号，<font class="badge">如选的其他银行,在姓名后备注银行名</font></span>
+                                <div class="hr-line-dashed"></div>
+                                <div class="row">
+                                    <div class="form-group has-success">
+                                        <div class="col-xs-12">
+                                            <input id="true_name" name="true_name" type="text" class="form-control" placeholder="转出银行卡姓名[如选的其他银行,在姓名后备注银行名]" maxlength="20"  required="">
+                                            <span class="help-block m-b-none">填写你转出银行卡开户账号的姓名，方便财务核对，不要填手机号，<font class="badge">如选的其他银行,在姓名后备注银行名</font></span>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group has-success">
-                                <div class="col-xs-12">
-                                    <input id="money" name="money" type="number" class="form-control" placeholder="转账金额（元）" min="1" step="0.01" required="">
-                                    <span class="help-block m-b-none">（充值1次提交1次即可，恶意反复提交将处罚或封号）</span>
+                                <div class="hr-line-dashed"></div>
+                                <div class="row">
+                                    <div class="form-group has-success">
+                                        <div class="col-xs-12">
+                                            <input id="money" name="money" type="number" class="form-control" placeholder="转账金额（元）" min="1" step="0.01" required="">
+                                            <span class="help-block m-b-none">（充值1次提交1次即可，恶意反复提交将处罚或封号）</span>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
 
                         <div class="box-footer">
@@ -287,7 +300,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary">提交</button>
+                    <button type="submit" class="btn btn-primary">提交</button>
                 </div>
             </div>
         </div>

@@ -80,7 +80,8 @@ Route::resource('permissions', 'PermissionController');
 Route::resource('roles', 'RoleController');
 
 Route::get('charge','ChargeController@index')->middleware('auth');
-Route::post('charge','ChargeController@charge')->middleware('auth');
+Route::post('charge/online','ChargeController@online')->name('charge.online')->middleware('auth');
+Route::post('charge/bank','ChargeController@bank')->name('charge.bank')->middleware('auth');
 
 Auth::routes();
 
