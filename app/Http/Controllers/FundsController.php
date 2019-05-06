@@ -37,6 +37,25 @@ class FundsController extends Controller
 //        return view('admin/demand',['demands'=>$demands,'demands_no_check'=>$demands_no_check,'demands_check_fail'=>$demands_check_fail]);
     }
 
+    public function capital(Request $request){
+        $start = $request->get('start');
+
+
+        $builder = DB::table('users')->get()->toArray();
+
+        $total = 3;
+
+        $data = [];
+        $data["draw"] = $request->get('draw');
+        $data["recordsTotal"] = $total;
+        $data["recordsFiltered"] = $total;
+        $data["data"] = $builder;
+        return response()->json($data);
+
+
+
+    }
+
     public function detail($id){
         $demand = DB::table('demand')
             ->leftJoin('token','demand.token_id','=','token.id')
