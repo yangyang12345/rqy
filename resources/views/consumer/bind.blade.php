@@ -1,5 +1,10 @@
 @extends('admin/base_template/dashboard')
 @section('content')
+    @if(!empty(session('success')))
+        　　<div class="alert alert-success" role="alert">
+            　　　　{{session('success')}}
+        </div>
+    @endif
     <div class="row">
         <div class="col-xs-12">
             <div class="box box-primary">
@@ -166,6 +171,8 @@
     <div class="modal fade" id="Modal_shop" tabindex="-1" role="dialog" data-backdrop="false" data-keyboard="false" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
+            <form method="post" action="{{ route('bind.shop',['id'=>Auth::id()]) }}">
+                @csrf
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="myModalLabel" style="display: inline-block">
@@ -187,19 +194,19 @@
                                     <div class="form-group form-inline">
                                         <div class="radio margin-r-20">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+                                                <input type="radio" name="shop_type" value="0" checked="">
                                                 淘宝
                                             </label>
                                         </div>
                                         <div class="radio margin-r-20">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                                <input type="radio" name="shop_type" value="1">
                                                 京东
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
+                                                <input type="radio" name="shop_type" value="2w">
                                                 拼多多
                                             </label>
                                         </div>
@@ -252,15 +259,15 @@
                                     <div class="row">
                                         <div class="form-group col-sm-4">
                                             <label class="sr-only" for="province">Province</label>
-                                            <select class="form-control" id="province"></select>
+                                            <select class="form-control" id="province" name="province"></select>
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label class="sr-only" for="city">City</label>
-                                            <select class="form-control" id="city"></select>
+                                            <select class="form-control" id="city" name="city"></select>
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label class="sr-only" for="district">District</label>
-                                            <select class="form-control" id="district"></select>
+                                            <select class="form-control" id="district" name="district"></select>
                                         </div>
                                     </div>
                                 </div>
@@ -309,9 +316,32 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary">提交</button>
+                    <button type="submit" name="submit" class="btn btn-primary">提交</button>
                 </div>
             </div>
+            </form>
         </div>
     </div>
+    @push('upload')
+        <div id="preview">
+            <input type="file" accept="image/*" id="file" value="" />
+        </div>
+        <script type="text/javascript">
+            var preview = document.querySelector('#preview');
+            var eleFile = document.querySelector('#file');
+            eleFile.addEventListener('change', function() {
+                var file = this.files[0];
+                // 确认选择的文件是图片
+                if(file.type.indexOf("image") == 0) {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = function(e) {
+                        // 图片base64化
+                        var newUrl = this.result;
+                        preview.style.backgroundImage = 'url(' + newUrl + ')';
+                    };
+                }
+            });
+        </script>
+    @endpush
 @endsection

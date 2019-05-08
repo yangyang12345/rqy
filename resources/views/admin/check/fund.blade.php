@@ -6,7 +6,28 @@
             <div class="box box-primary">
                 <div class="box-header">
                     <h3 class="box-title">充值审批</h3>
-                    {{--<button class="btn btn-info btn-xs pull-right">佣金转本金</button>--}}
+                    <div class="box-tools form-inline">
+                        <div class="form-group">
+                            <input type="text" placeholder="转账银行/类型" id="charge_type_name" name="charge_type_name" value="" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="账号" id="account" name="account" value="" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="账号名称" id="account_name" name="account_name" value="" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="status" name="status">
+                                <option value="99">状态</option>
+                                <option value="0">审核中</option>
+                                <option value="1">审核通过</option>
+                                <option value="2">失败</option>
+                            </select>
+                        </div>
+
+                        <a class="btn btn-primary btn-sm" title='搜索' id="btn_search" href="javascript:void(0)"><i class="fa fa-search"></i>搜索</a>
+
+                    </div>
                 </div>
                 <div class="box-body">
                     <div id="capital" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -38,6 +59,8 @@
         <script type="text/javascript">
             $dataTable = $("#fund_table");
             var table = $dataTable.DataTable({
+                "ordering": false,//排序 关闭
+                "searching": false,//是否显示搜索框，
                 "processing": true,
                 "serverSide": true,
                 "pageLength": 15,
@@ -47,6 +70,10 @@
                     "type":"post",
                     "data": function (data) {
                             data._token = "{{csrf_token()}}"
+                            data.charge_type_name = $('#charge_type_name').val();
+                            data.account = $('#account').val();
+                            data.account_name = $('#account_name').val();
+                            data.status = $('#status').val();
                     }
                 },
                 "columns": [
@@ -98,6 +125,10 @@
                         last: "最后一页"
                     }
                 }
+            });
+
+            $('#btn_search').click(function () {
+                table.draw();
             });
 
             // $dataTable.find('tbody').on('click', '.audit', function () {
