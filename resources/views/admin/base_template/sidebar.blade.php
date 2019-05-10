@@ -53,7 +53,7 @@
             <li class="{{ active_class(if_route('admin.shop')) }}"><a href="{{ url('/admin/shop') }}"><i class="fa fa-check-square-o"></i> <span>店铺审批</span></a></li>
             <li class="{{ active_class(if_uri_pattern('roles')) }}"><a href="{{ url('/roles') }}"><i class="fa fa-edit"></i> <span>角色管理</span></a></li>
             <li class="{{ active_class(if_uri_pattern('permissions')) }}"><a href="{{ url('/permissions') }}"><i class="fa fa-key"></i> <span>权限管理</span></a></li>
-            <li class="{{ active_class(if_route('user.api_doc')) }}"><a href="{{ url('/user/api_doc') }}"><i class="fa fa-book"></i> <span>接口文档</span></a></li>
+            <li><a href="{{ url('/user/api_doc') }}"><i class="fa fa-book"></i> <span>接口文档</span></a></li>
             @endrole
         </ul>
     </section>

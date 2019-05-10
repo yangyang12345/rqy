@@ -19,27 +19,10 @@ class FundsController extends Controller
                 return view('consumer/funds/brokerage');
                 break;
         }
-
-
-
-//
-//        $demands_no_check = DB::table('demand')
-//            ->leftJoin('token','demand.token_id','=','token.id')
-//            ->where('demand.status','<=','1')
-//            ->select('demand.id','token.nickname','demand.title','demand.created_at','demand.company_address','demand.contact')
-//            ->paginate(2,['*'], 'demands_no_check');
-//
-//        $demands_check_fail = DB::table('demand')
-//            ->leftJoin('token','demand.token_id','=','token.id')
-//            ->where('demand.status','=','3')
-//            ->select('demand.id','token.nickname','demand.title','demand.created_at','demand.company_address','demand.contact')
-//            ->paginate(2,['*'], 'demands_check_fail');
-//        return view('admin/demand',['demands'=>$demands,'demands_no_check'=>$demands_no_check,'demands_check_fail'=>$demands_check_fail]);
     }
 
     public function capital(Request $request){
         $start = $request->get('start');
-
 
         $builder = DB::table('users')->get()->toArray();
 
@@ -51,8 +34,6 @@ class FundsController extends Controller
         $data["recordsFiltered"] = $total;
         $data["data"] = $builder;
         return response()->json($data);
-
-
 
     }
 

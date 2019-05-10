@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "FR 接口文档",
-        "description": "用于微信小程序端接口文档",
+        "title": "启拉 接口文档",
+        "description": "用于移动端接口文档",
         "contact": {
             "email": "13986670515@163.com"
         },
@@ -11,7 +11,7 @@
     "servers": [
         {
             "url": "https://projects.dev/api/v1",
-            "description": "L5 Swagger OpenApi Server"
+            "description": "启拉平台"
         }
     ],
     "paths": {

@@ -93,4 +93,16 @@ class CheckController extends Controller{
         ];
         return response()->json($data);
     }
+
+    public function shop_list_test(){
+
+        $builder = DB::table('shop');
+
+        $list = $builder->orderBy('ctime', 'desc')->get()->toArray();
+
+        $data = [
+            "data"=>$list,
+        ];
+        return response()->json($data);
+    }
 }

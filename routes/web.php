@@ -63,9 +63,7 @@ Route::prefix('user')->group(function () {
         echo active_class(if_route('user.ban'), 'active', '');
     })->name('user.ban')->middleware('auth');
 
-    Route::get('api_doc', 'UserController@doc',function (){
-        echo active_class(if_route('user.api_doc'), 'active', '');
-    })->name('user.api_doc')->middleware('auth');
+    Route::get('api_doc', 'UserController@doc')->name('user.api_doc')->middleware('auth');
 
     Route::get('notice','NoticeController@show')->name('notice')->middleware('auth');
 

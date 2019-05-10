@@ -2,8 +2,8 @@
 /**
  * @OA\Info(
  *      version="1.0.0",
- *      title="FR 接口文档",
- *      description="用于微信小程序端接口文档",
+ *      title="启拉 接口文档",
+ *      description="用于移动端接口文档",
  *      @OA\Contact(
  *          email="13986670515@163.com"
  *      ),
