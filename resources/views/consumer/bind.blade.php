@@ -13,153 +13,22 @@
                     <button class="btn btn-info btn-xs pull-right" id="bind-shop">添加店铺</button>
                 </div>
                 <div class="box-body">
-                    <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                    <div id="bind" class="dataTables_wrapper form-inline dt-bootstrap">
                         <div class="row">
                             <div class="col-sm-12">
-                                <table id="example1" class="table table-bordered table-striped dataTable" role="grid"
-                                       aria-describedby="example1_info">
+                                <table id="bind_table" class="table table-bordered table-striped dataTable" role="grid"
+                                       aria-describedby="bind_table">
                                     <thead>
                                     <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
-                                            colspan="1" aria-sort="ascending"
-                                            aria-label="Rendering engine: activate to sort column descending"
-                                            style="width: 208px;">Rendering engine
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                            colspan="1" aria-label="Browser: activate to sort column ascending"
-                                            style="width: 255px;">Browser
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                            colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                                            style="width: 227px;">Platform(s)
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                            colspan="1" aria-label="Engine version: activate to sort column ascending"
-                                            style="width: 179px;">Engine version
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                            colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                            style="width: 131px;">CSS grade
-                                        </th>
+                                        <th>店铺类型</th>
+                                        <th>店铺名称</th>
+                                        <th>店铺截图</th>
+                                        <th>发货信息</th>
+                                        <th>控制店铺接单间隔</th>
+                                        <th>审核状态</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Firefox 1.0</td>
-                                        <td>Win 98+ / OSX.2+</td>
-                                        <td>1.7</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Firefox 1.5</td>
-                                        <td>Win 98+ / OSX.2+</td>
-                                        <td>1.8</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Firefox 2.0</td>
-                                        <td>Win 98+ / OSX.2+</td>
-                                        <td>1.8</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Firefox 3.0</td>
-                                        <td>Win 2k+ / OSX.3+</td>
-                                        <td>1.9</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Camino 1.0</td>
-                                        <td>OSX.2+</td>
-                                        <td>1.8</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Camino 1.5</td>
-                                        <td>OSX.3+</td>
-                                        <td>1.8</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Netscape 7.2</td>
-                                        <td>Win 95+ / Mac OS 8.6-9.2</td>
-                                        <td>1.7</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Netscape Browser 8</td>
-                                        <td>Win 98SE+</td>
-                                        <td>1.7</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Netscape Navigator 9</td>
-                                        <td>Win 98+ / OSX.2+</td>
-                                        <td>1.8</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Mozilla 1.0</td>
-                                        <td>Win 95+ / OSX.1+</td>
-                                        <td>1</td>
-                                        <td>A</td>
-                                    </tr>
-                                    </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <th rowspan="1" colspan="1">Rendering engine</th>
-                                        <th rowspan="1" colspan="1">Browser</th>
-                                        <th rowspan="1" colspan="1">Platform(s)</th>
-                                        <th rowspan="1" colspan="1">Engine version</th>
-                                        <th rowspan="1" colspan="1">CSS grade</th>
-                                    </tr>
-                                    </tfoot>
                                 </table>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-5">
-                                <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing
-                                    1 to 10 of 57 entries
-                                </div>
-                            </div>
-                            <div class="col-sm-7">
-                                <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-                                    <ul class="pagination">
-                                        <li class="paginate_button previous disabled" id="example1_previous"><a href="#"
-                                                                                                                aria-controls="example1"
-                                                                                                                data-dt-idx="0"
-                                                                                                                tabindex="0">Previous</a>
-                                        </li>
-                                        <li class="paginate_button active"><a href="#" aria-controls="example1"
-                                                                              data-dt-idx="1" tabindex="0">1</a></li>
-                                        <li class="paginate_button "><a href="#" aria-controls="example1"
-                                                                        data-dt-idx="2" tabindex="0">2</a></li>
-                                        <li class="paginate_button "><a href="#" aria-controls="example1"
-                                                                        data-dt-idx="3" tabindex="0">3</a></li>
-                                        <li class="paginate_button "><a href="#" aria-controls="example1"
-                                                                        data-dt-idx="4" tabindex="0">4</a></li>
-                                        <li class="paginate_button "><a href="#" aria-controls="example1"
-                                                                        data-dt-idx="5" tabindex="0">5</a></li>
-                                        <li class="paginate_button "><a href="#" aria-controls="example1"
-                                                                        data-dt-idx="6" tabindex="0">6</a></li>
-                                        <li class="paginate_button next" id="example1_next"><a href="#"
-                                                                                               aria-controls="example1"
-                                                                                               data-dt-idx="7"
-                                                                                               tabindex="0">Next</a>
-                                        </li>
-                                    </ul>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -171,7 +40,7 @@
     <div class="modal fade" id="Modal_shop" tabindex="-1" role="dialog" data-backdrop="false" data-keyboard="false" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
-            <form method="post" action="{{ route('bind.shop',['id'=>Auth::id()]) }}">
+            <form method="post" action="{{ route('bind.shop',['id'=>Auth::id()]) }}"  enctype="multipart/form-data">
                 @csrf
             <div class="modal-content">
                 <div class="modal-header">
@@ -206,7 +75,7 @@
                                         </div>
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="shop_type" value="2w">
+                                                <input type="radio" name="shop_type" value="2">
                                                 拼多多
                                             </label>
                                         </div>
@@ -298,9 +167,9 @@
                                     <label class="col-sm-4 control-label">店铺图片</label>
                                     <div class="col-sm-8">
                                         <div class="camera-area" data-id="1">
-                                            <input type="hidden" id="store_pic" name="store_pic" class="save"><br>
-                                            <input type="file" class="fileToUpload " accept="image/*"><br>
-                                            <span><p class="thumb_template"></p></span>
+                                            {{--<input type="hidden" id="store_pic" name="store_pic" class="save"><br>--}}
+                                            <input type="file" name="pic" class="fileToUpload " accept="image/*"><br>
+                                            {{--<span><p class="thumb_template"></p></span>--}}
                                             <p><a href="/images/1.jpg" target="_blank">查看示例</a></p>
                                             <span class="upload_progress"></span>
                                         </div>
@@ -322,25 +191,93 @@
             </form>
         </div>
     </div>
-    @push('upload')
-        <div id="preview">
-            <input type="file" accept="image/*" id="file" value="" />
-        </div>
+    @push('datatable-js')
         <script type="text/javascript">
-            var preview = document.querySelector('#preview');
-            var eleFile = document.querySelector('#file');
-            eleFile.addEventListener('change', function() {
-                var file = this.files[0];
-                // 确认选择的文件是图片
-                if(file.type.indexOf("image") == 0) {
-                    var reader = new FileReader();
-                    reader.readAsDataURL(file);
-                    reader.onload = function(e) {
-                        // 图片base64化
-                        var newUrl = this.result;
-                        preview.style.backgroundImage = 'url(' + newUrl + ')';
-                    };
+            $dataTable = $("#bind_table");
+            var table = $dataTable.DataTable({
+                "ordering": false,//排序 关闭
+                "searching": false,//是否显示搜索框，
+                "processing": true,
+                "serverSide": true,
+                "pageLength": 6,
+                "lengthMenu": [6, 10, 15],
+                "ajax": {
+                    "url": "{{ route('shop.getList') }}",
+                    "type":"post",
+                    "data": function (data) {
+                        data._token = "{{csrf_token()}}"
+                    }
+                },
+                "columns": [
+                    {'data':'type',"defaultContent": " ",'className':''},
+                    {'data':'store_name',"defaultContent": " ",'className':''},
+                    {'data':'url',"defaultContent": " ",'className':''},
+                    {'data':'province',"defaultContent": " ",'className':''},
+                    {'data':'gap_day',"defaultContent": " ",'className':''},
+                    {'data':'status',"defaultContent": " ",'className':''},
+                ],
+                "columnDefs": [
+                    {
+                        "render": function (data, type, row) {
+                            if (data == 0){
+                                return '<img src="{{ asset('images/t.png') }}"><span>淘宝</span>'
+                            }else if(data == 1){
+                                return '<img src="{{ asset('images/j.png') }}"><span>京东</span>'
+                            }else if (data == 2){
+                                return '<img src="{{ asset('images/p.png') }}"><span>拼多多</span>'
+                            }
+                        },
+                        "targets": 0
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            return '<p>'+row.store_name+'</p>'+
+                                    '<p>'+row.wangwang+'</p>';
+                        },
+                        "targets": 1
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            return '<img width="50" height="50" src="'+row.photo+'"><br>'+'<a href="'+row.url+'" target="_blank">查看店铺</a>'
+                        },
+                        "targets": 2
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            return '<p>发货电话'+row.tel+'</p>'+
+                                '<p>'+row.province+row.city+row.district+row.street+'</p>';
+                        },
+                        "targets": 3
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            if (data == 0) {
+                                return '<span><small class="label bg-yellow">审核中</small></span>';
+                            } else if (data == 1) {
+                                return '<span><small class="label bg-green">审核通过</small></span>';
+                            } else if(data == 2){
+                                return '<span><small class="label bg-red">失败</small></span>'
+                            }
+                        },
+                        "targets": 5
+                    },
+                ],
+                "language": {
+                    processing: "数据加载中...",
+                    info: "显示第 _START_ 至 _END_ 条，共 _TOTAL_ 条记录",
+                    infoEmpty: "暂无数据",
+                    lengthMenu: "显示 _MENU_ 条记录",
+                    paginate: {
+                        first: "首页",
+                        previous: "上一页",
+                        next: "下一页",
+                        last: "最后一页"
+                    }
                 }
+            });
+
+            $('#btn_search').click(function () {
+                table.draw();
             });
         </script>
     @endpush

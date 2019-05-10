@@ -8,13 +8,15 @@
                     <h3 class="box-title">店铺审批</h3>
                     <div class="box-tools form-inline">
                         <div class="form-group">
-                            <input type="text" placeholder="转账银行/类型" id="charge_type_name" name="charge_type_name" value="" class="form-control">
+                            <input type="text" placeholder="用户名称" id="user" name="user" value="" class="form-control">
                         </div>
                         <div class="form-group">
-                            <input type="text" placeholder="账号" id="account" name="account" value="" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" placeholder="账号名称" id="account_name" name="account_name" value="" class="form-control">
+                            <select class="form-control" id="type" name="type">
+                                <option value="99">店铺类型</option>
+                                <option value="0">淘宝</option>
+                                <option value="1">京东</option>
+                                <option value="2">拼多多</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <select class="form-control" id="status" name="status">
@@ -33,18 +35,17 @@
                     <div id="capital" class="dataTables_wrapper form-inline dt-bootstrap">
                         <div class="row">
                             <div class="col-sm-12">
-                                <table id="fund_table" class="table table-bordered table-striped dataTable" role="grid"
-                                       aria-describedby="fund_table">
+                                <table id="shop_table" class="table table-bordered table-striped dataTable" role="grid"
+                                       aria-describedby="shop_table">
                                     <thead>
                                     <tr role="row">
-                                        <th>用户</th>
                                         <th>店铺类型</th>
-                                        <th>店铺名</th>
-                                        <th>店铺链接</th>
-                                        <th>发货地址</th>
-                                        <th>电话</th>
-                                        <th>时间</th>
-                                        <th>状态</th>
+                                        <th>店铺名称</th>
+                                        <th>店铺截图</th>
+                                        <th>发货信息</th>
+                                        <th>控制店铺接单间隔</th>
+                                        <th>审核状态</th>
+                                        <th>用户名称</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -58,7 +59,7 @@
     </div>
     @push('datatable-js')
         <script type="text/javascript">
-            $dataTable = $("#fund_table");
+            $dataTable = $("#shop_table");
             var table = $dataTable.DataTable({
                 "ordering": false,//排序 关闭
                 "searching": false,//是否显示搜索框，
@@ -71,23 +72,54 @@
                     "type":"post",
                     "data": function (data) {
                         data._token = "{{csrf_token()}}"
-                        data.charge_type_name = $('#charge_type_name').val();
-                        data.account = $('#account').val();
-                        data.account_name = $('#account_name').val();
+                        data.user = $('#user').val();
+                        data.type = $('#type').val();
                         data.status = $('#status').val();
                     }
                 },
                 "columns": [
-                    {'data':'user_id',"defaultContent": " ",'className':''},
                     {'data':'type',"defaultContent": " ",'className':''},
-                    {'data':'name',"defaultContent": " ",'className':''},
+                    {'data':'store_name',"defaultContent": " ",'className':''},
                     {'data':'url',"defaultContent": " ",'className':''},
-                    {'data':'address',"defaultContent": " ",'className':''},
+                    {'data':'province',"defaultContent": " ",'className':''},
+                    {'data':'gap_day',"defaultContent": " ",'className':''},
                     {'data':'status',"defaultContent": " ",'className':''},
-                    {'data':'ctime',"defaultContent": " ",'className':''},
+                    {'data':'user_id',"defaultContent": " ",'className':''},
                     {'data':'',"defaultContent": " ",'className':''},
                 ],
                 "columnDefs": [
+                    {
+                        "render": function (data, type, row) {
+                            if (data == 0){
+                                return '<img src="{{ asset('images/t.png') }}"><span>淘宝</span>'
+                            }else if(data == 1){
+                                return '<img src="{{ asset('images/j.png') }}"><span>京东</span>'
+                            }else if (data == 2){
+                                return '<img src="{{ asset('images/p.png') }}"><span>拼多多</span>'
+                            }
+                        },
+                        "targets": 0
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            return '<p>'+row.store_name+'</p>'+
+                                '<p>'+row.wangwang+'</p>';
+                        },
+                        "targets": 1
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            return '<img width="50" height="50" src="'+row.photo+'"><br>'+'<a href="'+row.url+'" target="_blank">查看店铺</a>'
+                        },
+                        "targets": 2
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            return '<p>发货电话'+row.tel+'</p>'+
+                                '<p>'+row.province+row.city+row.district+row.street+'</p>';
+                        },
+                        "targets": 3
+                    },
                     {
                         "render": function (data, type, row) {
                             if (data == 0) {

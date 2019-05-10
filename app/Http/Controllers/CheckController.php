@@ -63,8 +63,23 @@ class CheckController extends Controller{
         $start = $request->get('start');
         $length = $request->get('length');
 
+        $user = empty($request->get('user'))?'':$request->get('user');
+        $type = $request->get('type')==99?'':$request->get('type');
+        $status = $request->get('status')==99?'':$request->get('status');
 
-        $builder = DB::table('charge_record');
+        $builder = DB::table('shop');
+
+        if ($user){
+            $builder->where('user_id','like','%'.$user.'%');
+        }
+
+        if ($type!=''){
+            $builder->where('type','=',$type);
+        }
+
+        if ($status!=''){
+            $builder->where('status','=',$status);
+        }
 
 
         $total = $builder->count();

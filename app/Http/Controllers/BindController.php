@@ -12,20 +12,43 @@ class BindController extends Controller{
         return view('consumer/bind');
     }
 
+    function list(Request $request){
+        $draw = $request->get('draw');
+        $start = $request->get('start');
+        $length = $request->get('length');
+
+        $builder = DB::table('shop');
+
+        $total = $builder->count();
+        $list = $builder->orderBy('ctime', 'desc')->offset($start)->take($length)->get()->toArray();
+
+        $data = [
+            "draw"=>$draw,
+            "recordsTotal"=>$total,
+            "recordsFiltered"=>$total,
+            "data"=>$list,
+        ];
+        return response()->json($data);
+    }
+
     public function shop(Request $request){
         $user_id = $request->id;
         $shop_type = $request->shop_type;
         $store_name = $request->store_name;
         $wangwang = $request->wangwang;
         $gap_day = $request->gap_day;
+        $store_url = $request->store_url;
         $province = $request->province;
         $city = $request->city;
-        $district = $request->store_url;
+        $district = $request->district;
         $addr = $request->addr;
         $tel = $request->tel;
 
-        $file = $request->file('store_pic');
-//        var_dump($file);exit();
+        $file = $request->file('pic');
+
+        if (strpos($store_url,'http') === false){
+            $store_url = 'http://'.$store_url;
+        }
 
         // 文件是否上传成功
         if ($file->isValid()) {
@@ -59,13 +82,14 @@ class BindController extends Controller{
                 'store_name' => $store_name,
                 'wangwang' => $wangwang,
                 'gap_day' => $gap_day,
+                'url'=> $store_url,
                 'province'=>$province,
                 'city'=>$city,
                 'district'=>$district,
                 'street'=>$addr,
                 'tel'=>$tel,
                 'photo'=>$photo,
-                'status'=>'0',
+                'status'=>'0', //0 表示审核中
                 'ctime'=>date('Y-m-d h:i:s',time())
             ]
         );
