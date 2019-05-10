@@ -69,7 +69,7 @@
                     "url": "{{ route('check.fund.getList') }}",
                     "type":"post",
                     "data": function (data) {
-                            data._token = "{{csrf_token()}}"
+                            data._token = "{{csrf_token()}}";
                             data.charge_type_name = $('#charge_type_name').val();
                             data.account = $('#account').val();
                             data.account_name = $('#account_name').val();
@@ -102,7 +102,7 @@
                     {
                         "render": function (data, type, row) {
                             if (row.status == '0'){
-                                return '<a href="#" title="审核" class="fa fa-edit check"></a>'
+                                return '<a href="{{ route('check.fund') }}/'+row.id+'" title="审核" class="fa fa-edit check"></a>'
                             }
                         },
                         "targets": 7
@@ -131,34 +131,24 @@
                 table.draw();
             });
 
-            // $dataTable.find('tbody').on('click', '.audit', function () {
-            //     var data = table.row($(this).parents('tr')).data();
-            //     var id = data.id;
-            //     var userid = data.userid;
-            //     var group_id = data.group_id;
-            //     var dynamic_id = data.dynamic_id;
-            //     var dynamic_type = data.dynamic_type;
-            //     var type = $(this).data('type');
-            //     audit(id, type, userid, group_id, dynamic_id, dynamic_type)
-            // });
-
-            // 审核操作
-            {{--function audit(id, type, userid, group_id, dynamic_id, dynamic_type) {--}}
-            {{--$.post("{{ route('audit.index') }}/" + id, {--}}
-            {{--id: id,--}}
-            {{--type: type,--}}
-            {{--userid: userid,--}}
-            {{--group_id: group_id,--}}
-            {{--dynamic_id: dynamic_id,--}}
-            {{--dynamic_type: dynamic_type,--}}
-            {{--_token: "{{ csrf_token() }}",--}}
-            {{--_method: "PUT"--}}
-            {{--}, function (data) {--}}
-            {{--if (data.result == 0) {--}}
-            {{--table.ajax.reload();--}}
-            {{--toastr.success("操作成功！");--}}
-            {{--}--}}
+            {{--$dataTable.find('tbody').on('click', '.check', function () {--}}
+                {{--var data = table.row($(this).parents('tr')).data();--}}
+                {{--var id = data.id;--}}
+                {{--audit(id)--}}
             {{--});--}}
+
+            {{--// 审核操作--}}
+            {{--function audit(id) {--}}
+                {{--$.post("{{ route('check.fund') }}/" + id, {--}}
+                    {{--id: id,--}}
+                    {{--_token: "{{ csrf_token() }}",--}}
+                    {{--_method: "PUT"--}}
+                {{--}, function (data) {--}}
+                    {{--if (data.result == 0) {--}}
+                        {{--table.ajax.reload();--}}
+                        {{--toastr.success("操作成功！");--}}
+                    {{--}--}}
+                {{--});--}}
             {{--}--}}
 
             // $("#is_audit").select2({

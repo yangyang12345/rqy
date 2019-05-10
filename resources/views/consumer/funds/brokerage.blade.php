@@ -9,174 +9,41 @@
                     <button class="btn btn-info btn-xs pull-right">佣金转本金</button>
                 </div>
                 <div class="box-body">
-                    <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                    <div id="brokerage" class="dataTables_wrapper form-inline dt-bootstrap">
                         <div class="row">
                             <div class="col-sm-12">
-                                {{--<div class="dataTables_length" id="example1_length">--}}
-                                    {{--<label>Show--}}
-                                        {{--<select name="example1_length" aria-controls="example1" class="form-control input-sm">--}}
-                                            {{--<option value="10">10</option>--}}
-                                            {{--<option value="25">25</option>--}}
-                                            {{--<option value="50">50</option>--}}
-                                            {{--<option value="100">100</option>--}}
-                                        {{--</select> entries</label></div>--}}
                                 <h4>本金账户：￥0.00元 　<a href="{{ url('/user/funds/capital') }}">明细</a>　　佣金账户：￥5.00元 　<a href="{{ url('/user/funds/brokerage') }}">明细</a></h4>
                             </div>
                             <div class="col-sm-12"><hr></div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div id="example1_filter" class="dataTables_filter">
-                                    <label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="example1"></label>
-                                </div>
+
+                        <div class="box-tools pull-right form-inline">
+                            <div class="form-group">
+                                <select class="form-control" id="type" name="type">
+                                    <option value="99">筛选类型</option>
+                                    <option value="0">邀请买家提成</option>
+                                    <option value="1">邀请商家提成</option>
+                                    <option value="2">管理员调节</option>
+                                </select>
                             </div>
+
+                            <a class="btn btn-primary btn-sm" title="搜索" id="btn_search" href="javascript:void(0)"><i class="fa fa-search"></i>搜索</a>
+
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <table id="example1" class="table table-bordered table-striped dataTable" role="grid"
-                                       aria-describedby="example1_info">
+                                <table id="brokerage_table" class="table table-bordered table-striped dataTable" role="grid"
+                                       aria-describedby="brokerage_table">
                                     <thead>
                                     <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
-                                            colspan="1" aria-sort="ascending"
-                                            aria-label="Rendering engine: activate to sort column descending"
-                                            style="width: 208px;">Rendering engine
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                            colspan="1" aria-label="Browser: activate to sort column ascending"
-                                            style="width: 255px;">Browser
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                            colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                                            style="width: 227px;">Platform(s)
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                            colspan="1" aria-label="Engine version: activate to sort column ascending"
-                                            style="width: 179px;">Engine version
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                            colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                            style="width: 131px;">CSS grade
-                                        </th>
+                                        <th>时间</th>
+                                        <th>收/支</th>
+                                        <th>内容</th>
+                                        <th>金额</th>
+                                        <th>余额</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Firefox 1.0</td>
-                                        <td>Win 98+ / OSX.2+</td>
-                                        <td>1.7</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Firefox 1.5</td>
-                                        <td>Win 98+ / OSX.2+</td>
-                                        <td>1.8</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Firefox 2.0</td>
-                                        <td>Win 98+ / OSX.2+</td>
-                                        <td>1.8</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Firefox 3.0</td>
-                                        <td>Win 2k+ / OSX.3+</td>
-                                        <td>1.9</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Camino 1.0</td>
-                                        <td>OSX.2+</td>
-                                        <td>1.8</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Camino 1.5</td>
-                                        <td>OSX.3+</td>
-                                        <td>1.8</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Netscape 7.2</td>
-                                        <td>Win 95+ / Mac OS 8.6-9.2</td>
-                                        <td>1.7</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Netscape Browser 8</td>
-                                        <td>Win 98SE+</td>
-                                        <td>1.7</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Netscape Navigator 9</td>
-                                        <td>Win 98+ / OSX.2+</td>
-                                        <td>1.8</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Mozilla 1.0</td>
-                                        <td>Win 95+ / OSX.1+</td>
-                                        <td>1</td>
-                                        <td>A</td>
-                                    </tr>
-                                    </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <th rowspan="1" colspan="1">Rendering engine</th>
-                                        <th rowspan="1" colspan="1">Browser</th>
-                                        <th rowspan="1" colspan="1">Platform(s)</th>
-                                        <th rowspan="1" colspan="1">Engine version</th>
-                                        <th rowspan="1" colspan="1">CSS grade</th>
-                                    </tr>
-                                    </tfoot>
                                 </table>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-5">
-                                <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing
-                                    1 to 10 of 57 entries
-                                </div>
-                            </div>
-                            <div class="col-sm-7">
-                                <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-                                    <ul class="pagination">
-                                        <li class="paginate_button previous disabled" id="example1_previous"><a href="#"
-                                                                                                                aria-controls="example1"
-                                                                                                                data-dt-idx="0"
-                                                                                                                tabindex="0">Previous</a>
-                                        </li>
-                                        <li class="paginate_button active"><a href="#" aria-controls="example1"
-                                                                              data-dt-idx="1" tabindex="0">1</a></li>
-                                        <li class="paginate_button "><a href="#" aria-controls="example1"
-                                                                        data-dt-idx="2" tabindex="0">2</a></li>
-                                        <li class="paginate_button "><a href="#" aria-controls="example1"
-                                                                        data-dt-idx="3" tabindex="0">3</a></li>
-                                        <li class="paginate_button "><a href="#" aria-controls="example1"
-                                                                        data-dt-idx="4" tabindex="0">4</a></li>
-                                        <li class="paginate_button "><a href="#" aria-controls="example1"
-                                                                        data-dt-idx="5" tabindex="0">5</a></li>
-                                        <li class="paginate_button "><a href="#" aria-controls="example1"
-                                                                        data-dt-idx="6" tabindex="0">6</a></li>
-                                        <li class="paginate_button next" id="example1_next"><a href="#"
-                                                                                               aria-controls="example1"
-                                                                                               data-dt-idx="7"
-                                                                                               tabindex="0">Next</a>
-                                        </li>
-                                    </ul>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -184,5 +51,78 @@
             </div>
         </div>
     </div>
+
+    @push('datatable-js')
+        <script type="text/javascript">
+            $dataTable = $("#brokerage_table");
+            var table = $dataTable.DataTable({
+                "ordering": false,//排序 关闭
+                "searching": false,//是否显示搜索框，
+                "processing": true,
+                "serverSide": true,
+                "pageLength": 25,
+                "lengthMenu": [10, 25, 50, 75, 100, 200],
+                "ajax": {
+                    "url": "{{ route('brokerage.getList') }}",
+                    "type":"post",
+                    "data": function (data) {
+                        data.type = $('#type').val();
+                        data._token = "{{csrf_token()}}"
+                    }
+                },
+                "columns": [
+                    {'data':'ctime',"defaultContent": " ",'className':''},
+                    {'data':'in_out',"defaultContent": " ",'className':''},
+                    {'data':'content',"defaultContent": " ",'className':''},
+                    {'data':'quota',"defaultContent": " ",'className':''},
+                    {'data':'balance',"defaultContent": " ",'className':''},
+                ],
+                "columnDefs": [
+                    {
+                        "render": function (data, type, row) {
+                            if (data == 0) {
+                                return "收";
+                            } else if (data == 1) {
+                                return "支";
+                            }
+                        },
+                        "targets": 1
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            if (row.in_out == 0) {
+                                return "-"+data;
+                            } else if (row.in_out == 1) {
+                                return "+"+data;
+                            }
+                        },
+                        "targets": 3
+                    }
+                ],
+                // "createdRow": function (row, data, index) {
+                //     $('td', row).eq(4).attr('style', 'word-break:break-all');
+                //     $('td', row).eq(2).attr('style', 'word-break:break-all');
+                //     $('td', row).eq(5).attr('style', 'word-break:break-all');
+                // },
+                "language": {
+                    processing: "数据加载中...",
+                    info: "显示第 _START_ 至 _END_ 条，共 _TOTAL_ 条记录",
+                    infoEmpty: "暂无数据",
+                    lengthMenu: "显示 _MENU_ 条记录",
+                    paginate: {
+                        first: "首页",
+                        previous: "上一页",
+                        next: "下一页",
+                        last: "最后一页"
+                    }
+                }
+            });
+
+            $('#btn_search').click(function () {
+                table.draw();
+            });
+
+        </script>
+    @endpush
 @endsection
 

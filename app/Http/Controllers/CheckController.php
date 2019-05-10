@@ -54,6 +54,16 @@ class CheckController extends Controller{
         return response()->json($data);
     }
 
+    public function fund_check(Request $request){
+        $id = $request->id;
+        $data = DB::table('charge_record as c')
+            ->leftJoin('users as u','c.user_id','=','u.id')
+            ->select('c.id','c.user_id','c.account','c.account_name','c.fund','c.charge_type_name','c.ctime','u.name','u.email','u.tel','u.qq','u.wx','u.sex','u.created_at')
+            ->where('c.id','=',$id)
+            ->first();
+        return view('admin/check/fund_comfire',['data'=>$data]);
+    }
+
     public function shop(){
         return view('admin/check/shop');
     }

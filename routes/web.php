@@ -41,6 +41,8 @@ Route::prefix('user')->group(function () {
 
     Route::post('funds/capital/list', 'FundsController@capital')->name('capital.getList')->middleware('auth');
 
+    Route::post('funds/brokerage/list', 'FundsController@brokerage')->name('brokerage.getList')->middleware('auth');
+
     Route::get('bind', 'BindController@index',function (){
         echo active_class(if_route('user.bind'), 'active', '');
     })->name('user.bind')->middleware('auth');
@@ -79,6 +81,7 @@ Route::prefix('admin')->group(function(){
     Route::get('fund','CheckController@fund')->name('admin.fund')->middleware('auth');
 
     Route::post('fund/list','CheckController@fund_list')->name('check.fund.getList')->middleware('auth');
+    Route::any('fund/check/{id?}','CheckController@fund_check')->name('check.fund')->middleware('auth');
 
     Route::get('shop','CheckController@shop')->name('admin.shop')->middleware('auth');
 
