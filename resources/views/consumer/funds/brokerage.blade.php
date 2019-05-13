@@ -12,7 +12,12 @@
                     <div id="brokerage" class="dataTables_wrapper form-inline dt-bootstrap">
                         <div class="row">
                             <div class="col-sm-12">
-                                <h4>本金账户：￥0.00元 　<a href="{{ url('/user/funds/capital') }}">明细</a>　　佣金账户：￥5.00元 　<a href="{{ url('/user/funds/brokerage') }}">明细</a></h4>
+                                <h4>本金账户：
+                                    ￥{{ $capital->balance?$capital->balance:0 }}元 　
+                                    <a href="{{ url('/user/funds/capital') }}">明细</a>　　
+                                    佣金账户：￥{{ $brokerage->balance?$brokerage->balance:0 }}元 　
+                                    <a href="{{ url('/user/funds/brokerage') }}">明细</a>
+                                </h4>
                             </div>
                             <div class="col-sm-12"><hr></div>
                         </div>
@@ -39,8 +44,8 @@
                                         <th>时间</th>
                                         <th>收/支</th>
                                         <th>内容</th>
-                                        <th>金额</th>
-                                        <th>余额</th>
+                                        <th>金额（单位：元）</th>
+                                        <th>余额（单位：元）</th>
                                     </tr>
                                     </thead>
                                 </table>
@@ -91,9 +96,9 @@
                     {
                         "render": function (data, type, row) {
                             if (row.in_out == 0) {
-                                return "-"+data;
-                            } else if (row.in_out == 1) {
                                 return "+"+data;
+                            } else if (row.in_out == 1) {
+                                return "-"+data;
                             }
                         },
                         "targets": 3

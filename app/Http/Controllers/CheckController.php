@@ -64,6 +64,51 @@ class CheckController extends Controller{
         return view('admin/check/fund_comfire',['data'=>$data]);
     }
 
+    public function fund_confim(Request $request){
+        $id = $request->id;
+        $user_id = $request->user_id;
+        $fund = $request->fund;
+
+        //审核通过
+        DB::table('charge_record')
+            ->where('id', '=',$id)
+            ->update([
+                'status' => 1,
+                'vtime' => date('Y-m-d h:i:s',time())
+            ]);
+        //把本金充值写入本金详情表中
+
+        $data = DB::table('capital_record')
+            ->where('user_id','=',$user_id)
+            ->orderByDesc('ctime')
+            ->first();
+
+        if (empty($data->balance)){
+            $pre_blance = 0;
+        }else{
+            $pre_blance =$data->balance;
+        }
+
+        $balance = $pre_blance+$fund;
+
+        $Getid = DB::table('capital_record')->insertGetId(
+            [
+                'user_id' => $user_id,
+                'type' => '0',
+                'in_out' => '0',
+                'content' => '本金充值',
+                'quota' => $fund,
+                'balance' => $balance,
+                'ctime'=>date('Y-m-d h:i:s',time())
+            ]
+        );
+
+        if ($Getid){
+            return redirect()->route('admin.fund')->with('success','审批成功');
+        }
+
+    }
+
     public function shop(){
         return view('admin/check/shop');
     }

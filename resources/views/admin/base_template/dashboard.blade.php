@@ -107,6 +107,8 @@
 
 @stack('datatable-js')
 
+@stack('common-js')
+
 <!-- dialog 获取数据插件 -->
 {{--<script src="{{ asset("/js/ajax.js") }}"></script>--}}
 

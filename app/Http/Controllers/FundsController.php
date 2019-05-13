@@ -9,14 +9,24 @@ use Illuminate\Support\Facades\Auth;
 class FundsController extends Controller
 {
     public function index(Request $request) {
+        $user_id = Auth::id();
         $type=$request->type;
+
+        $capital = DB::table('capital_record')
+            ->where('user_id','=',$user_id)
+            ->orderByDesc('ctime')
+            ->first();
+        $brokerage = DB::table('brokerage_record')
+            ->where('user_id','=',$user_id)
+            ->orderByDesc('ctime')
+            ->first();
+
         switch ($type){
             case 'capital':
-//                $capital = DB::table('capital')->paginate('15');
-                return view('consumer/funds/capital');
+                return view('consumer/funds/capital',['capital'=>$capital,'brokerage'=>$brokerage]);
                 break;
             case 'brokerage':
-                return view('consumer/funds/brokerage');
+                return view('consumer/funds/brokerage',['capital'=>$capital,'brokerage'=>$brokerage]);
                 break;
         }
     }

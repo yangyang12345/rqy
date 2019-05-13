@@ -12,7 +12,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <!-- <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"> -->
     <link rel="stylesheet" type="text/css" href="{{ asset("/bower_components/bootstrap/dist/css/bootstrap.min.css")}}">
     <!-- Font Awesome -->
     <!-- <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css"> -->
@@ -42,7 +41,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="login-logo">
         <a href=""><b>启拉</b>☁️</a>
     </div>
-    <!-- /.login-logo -->
     <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
 
@@ -72,13 +70,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="col-xs-4">
                     <button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
                 </div>
-                <!-- /.col -->
             </div>
         </form>
+        <a href="{{ route('register') }}" class="text-center">注册账号</a>
     </div>
-    <!-- /.login-box-body -->
 </div>
-<!-- /.login-box -->
 
 <!-- jQuery 3 -->
 <script src="{{ asset("/bower_components/jquery/dist/jquery.min.js")}}"></script>

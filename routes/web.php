@@ -19,17 +19,11 @@ Route::prefix('user')->group(function () {
         echo active_class(if_route('user.center'), 'active', '');
     })->name('user.center')->middleware('auth');
 
-    Route::get('release_task', 'ManagementController@task',function(){
-        echo active_class(if_route('user.release_task'), 'active', '');
-    })->name('user.release_task')->middleware('auth');
+    Route::get('release_task', 'ManagementController@task')->name('user.release_task')->middleware('auth');
 
-    Route::get('advance_duty', 'ManagementController@advance',function(){
-        echo active_class(if_route('user.advance'), 'active', '');
-    })->name('user.advance')->middleware('auth');
+    Route::get('advance_duty', 'ManagementController@advance')->name('user.advance')->middleware('auth');
 
-    Route::get('browse_task', 'ManagementController@browse',function(){
-        echo active_class(if_route('user.browse_task'), 'active', '');
-    })->name('user.browse_task')->middleware('auth');
+    Route::get('browse_task', 'ManagementController@browse')->name('user.browse_task')->middleware('auth');
 
     Route::get('funds/{type}', 'FundsController@index',function (){
         echo active_class(if_route('user.funds'), 'active', '');
@@ -81,6 +75,7 @@ Route::prefix('admin')->group(function(){
 
     Route::post('fund/list','CheckController@fund_list')->name('check.fund.getList')->middleware('auth');
     Route::any('fund/check/{id?}','CheckController@fund_check')->name('check.fund')->middleware('auth');
+    Route::post('fund/confim}','CheckController@fund_confim')->name('check.fund.confim')->middleware('auth');
 
     Route::get('shop','CheckController@shop')->name('admin.shop')->middleware('auth');
 

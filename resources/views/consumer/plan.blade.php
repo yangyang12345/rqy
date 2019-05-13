@@ -81,12 +81,14 @@
                     <div class="row">
                         <div class="col-sm-3 text-center">
                             <div style="margin:10px auto;" id="ad_qcode">
-                            {!! QrCode::size(200)->generate('https://www.51rqy.com/user/reg.html?recommend=46166'); !!}
+                                @php
+                                    $reg = route('register',['recommend'=>Auth::id()]);
+                                @endphp
+                            {!! QrCode::size(200)->generate($reg); !!}
                             </div>
                         </div>
-                        <div class="col-sm-9"><p class="font-90 text-muted m-b-1">将商家注册链接发送给朋友注册,您可获得推广佣金</p> <input
-                                    type="text" class="form-control" id="turl"
-                                    value="https://www.51rqy.com/user/reg.html?recommend=46166"> <br>
+                        <div class="col-sm-9"><p class="font-90 text-muted m-b-1">将商家注册链接发送给朋友注册,您可获得推广佣金</p>
+                            <input type="text" class="form-control" id="turl" value="{{ $reg }}"> <br>
                             <button class="btn btn-danger" href="javascript:" id="fuzhi">复制链接</button>
                         </div>
                     </div>
@@ -102,12 +104,14 @@
                     <div class="row">
                         <div class="col-sm-3 text-center">
                             <div style="margin:10px auto;" id="ad_qcode1">
-                            {!! QrCode::size(200)->generate('hello world'); !!}
+                                @php
+                                    $reg_m = route('register',['recommend'=>Auth::id(),'type'=>'1']);
+                                @endphp
+                            {!! QrCode::size(200)->generate($reg_m); !!}
                             </div>
                         </div>
-                        <div class="col-sm-9"><p class="font-90 text-muted m-b-1">将买家注册链接发送给朋友注册,您可获得推广佣金</p> <input
-                                    type="text" class="form-control" id="turl1"
-                                    value="https://www.51rqy.com/user/reg.html?recommend=46166&amp;type=1"> <br>
+                        <div class="col-sm-9"><p class="font-90 text-muted m-b-1">将买家注册链接发送给朋友注册,您可获得推广佣金</p>
+                            <input type="text" class="form-control" id="turl1" value="{{ $reg_m }}"> <br>
                             <button class="btn btn-danger" href="javascript:" id="fuzhi1">复制链接</button>
                         </div>
                     </div>

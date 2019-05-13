@@ -34,7 +34,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
                 </a>
-                <ul class="treeview-menu">
+                <ul class="treeview-menu {{ active_class(if_uri_pattern('release_task')) }}">
                     <li class="padding_l_20 {{ active_class(if_route('user.release_task')) }}"><a href="{{ url('/user/release_task') }}"><i class="fa fa-circle-o"></i>发布推广任务</a></li>
                     <li class="padding_l_20 {{ active_class(if_route('user.advance_duty')) }}"><a href="{{ url('/user/advance_duty') }}"><i class="fa fa-circle-o"></i>垫付任务管理</a></li>
                     <li class="padding_l_20 {{ active_class(if_route('user.browse_task')) }}"><a href="{{ url('/user/browse_task') }}"><i class="fa fa-circle-o"></i>浏览任务管理</a></li>
