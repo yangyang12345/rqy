@@ -69,6 +69,8 @@ Route::prefix('user')->group(function () {
 
     Route::get('notice','NoticeController@show')->name('notice')->middleware('auth');
 
+    Route::get('notice/help','NoticeController@help')->name('help')->middleware('auth');
+
 });
 
 Route::prefix('admin')->group(function(){

@@ -174,13 +174,6 @@
                     <h3 class="box-title">商家公告</h3>
                     <div class="box-tools">
                         {{ $notice->links() }}
-                        {{--<ul class="pagination pagination-sm no-margin pull-right">--}}
-                            {{--<li><a href="#">«</a></li>--}}
-                            {{--<li><a href="#">1</a></li>--}}
-                            {{--<li><a href="#">2</a></li>--}}
-                            {{--<li><a href="#">3</a></li>--}}
-                            {{--<li><a href="#">»</a></li>--}}
-                        {{--</ul>--}}
                     </div>
                 </div>
                 <!-- /.box-header -->
@@ -199,7 +192,6 @@
                                 <td>
                                     @include('consumer/notice/type')
                                 </td>
-                                {{--<td><span class="badge bg-red">55%</span></td>--}}
                             </tr>
                         @endforeach
 

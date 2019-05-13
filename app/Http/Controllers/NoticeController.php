@@ -111,4 +111,8 @@ class NoticeController extends Controller{
         }
     }
 
+    public function help(){
+        return view('consumer/help');
+    }
+
 }

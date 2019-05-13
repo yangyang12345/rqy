@@ -115,7 +115,7 @@
                     },
                     {
                         "render": function (data, type, row) {
-                            return '<p>发货电话'+row.tel+'</p>'+
+                            return '<p>发货电话：'+row.tel+'</p>'+
                                 '<p>'+row.province+row.city+row.district+row.street+'</p>';
                         },
                         "targets": 3

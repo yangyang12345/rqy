@@ -21,7 +21,7 @@
                                 </div>
                                 <hr>
                                 <div>
-                                    <h4>第一步：选择任务类型 <a href="#">查看价格表</a></h4>
+                                    <h4>第一步：选择任务类型 <a href="{{ route('help') }}">查看价格表</a></h4>
                                 </div>
                                 <div style="padding-left:50px;">
                                     <div class="form-group">
@@ -31,35 +31,35 @@
                                     <hr>
                                     <ul class="tasktype-list" style="padding-left: 30px; display: block;">
                                         <li>
-                                            <input class="tasktype" name="task_type" type="radio" value="1" >
+                                            <input onclick="show_list(0)" class="tasktype" name="task_type" type="radio" value="1" >
                                             <img class="platlogo" src="{{ asset('images/t.png') }}">
                                             <span class="taskname">手机淘宝/天猫</span>任务 （用户在手机淘宝app下单）
                                         </li>
                                         <li>
-                                            <input class="tasktype" name="task_type" type="radio" value="5">
+                                            <input onclick="show_list(0)" class="tasktype" name="task_type" type="radio" value="5">
                                             <img class="platlogo" src="{{ asset('images/t.png') }}">
                                             <span class="taskname">淘宝<span style="color: #157cdc;font-weight: bold;">特别</span></span>任务 <span>（支持淘客秒拍、聚划算、淘抢购、淘金币、淘口令或其它渠道活动） </span>
 
                                         </li>
                                         <li>
-                                            <input class="tasktype" name="task_type" type="radio" value="3">
+                                            <input onclick="show_list(1)" class="tasktype" name="task_type" type="radio" value="3">
                                             <img class="platlogo" src="{{ asset('images/j.png') }}">
                                             <span class="taskname">手机京东</span>任务
                                         </li>
                                         <li>
-                                            <input class="tasktype" name="task_type" type="radio" value="4">
+                                            <input onclick="show_list(1)" class="tasktype" name="task_type" type="radio" value="4">
                                             <img class="platlogo" src="{{ asset('images/j.png') }}">
                                             <span class="taskname">京东<span style="color: #157cdc;font-weight: bold;">特别</span></span>任务 <span>
 									（支持购买链接转二维码、自定义链接转二维码、各类活动搜索或其它渠道活动） </span>
                                         </li>
                                         <li>
-                                            <input class="tasktype" name="task_type" type="radio" value="6">
+                                            <input onclick="show_list(2)" class="tasktype" name="task_type" type="radio" value="6">
                                             <img class="platlogo" src="{{ asset('images/p.png') }}">
                                             <span class="taskname">手机拼多多</span>任务
 
                                         </li>
                                         <li>
-                                            <input class="tasktype" name="task_type" type="radio" value="2">
+                                            <input onclick="show_list(2)" class="tasktype" name="task_type" type="radio" value="2">
                                             <img class="platlogo" src="{{ asset('images/p.png') }}">
                                             <span class="taskname">拼多多<span style="color: #157cdc;font-weight: bold;">特别</span></span>任务 <span>（支持购买链接转二维码、自定义链接转二维码、各类活动搜索或其它渠道活动） </span>
                                         </li>
@@ -97,6 +97,54 @@
                                             <img class="platlogo" src="{{ asset('images/p.png') }}">
                                             <span class="taskname">拼多多<span style="color: #157cdc;font-weight: bold;">特别</span></span>浏览任务 <span>（支持购买链接转二维码、自定义链接转二维码、各类活动搜索或其它渠道活动） </span>
                                         </li>
+                                    </ul>
+                                </div>
+                                <hr>
+                                <div><h4>第二步：选择店铺 <a class="pull-right1" href="{{ route('user.bind') }}">去绑店铺</a></h4></div>
+                                <div>
+                                    <div class="shopname-list" style="padding-left: 50px; display: none;">
+                                        <div class="row">
+                                            @foreach($shops as $shop)
+                                                @if($shop->type==0)
+                                                    <div class="col-sm-3" style="margin-top:10px;">
+                                                        <input class="tasktype sid" name="sid" type="radio" value="{{ $shop->id }}" checked="" title="{{ $shop->store_name }}">
+                                                        <span class="label label-warning">淘宝</span> {{ $shop->store_name }}
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    <div class="shopname-list" style="padding-left: 50px; display: none;">
+                                        <div class="row">
+                                            @foreach($shops as $shop)
+                                                @if($shop->type==1)
+                                                <div class="col-sm-3" style="margin-top:10px;">
+                                                    <input class="tasktype sid" name="sid" type="radio" value="{{ $shop->id }}" checked="" title="{{ $shop->store_name }}">
+                                                    <span class="label label-warning">京东</span> {{ $shop->store_name }}
+                                                </div>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    <div class="shopname-list" style="padding-left:50px;display:none">
+                                        <div class="row">
+                                            @foreach($shops as $shop)
+                                                @if($shop->type==2)
+                                                <div class="col-sm-3" style="margin-top:10px;">
+                                                    <input class="tasktype sid" name="sid" type="radio" value="{{ $shop->id }}" checked="" title="{{ $shop->store_name }}">
+                                                    <span class="label label-warning">拼多多</span> {{ $shop->store_name }}
+                                                </div>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div>
+                                    <h4>第三步：选择平台返款模式 </h4>
+                                    <ul style="padding-left:50px; list-style: none">
+                                        <li> <input cclass="tasktype" type="radio" checked="">平台系统返款+买号安全筛查　（收取服务费2元/单）</li>
+                                        <li class="prompt"> <span class="striking">优先展示给用户</span>，商家押商品本金到平台，只需在“返款管理”中确认返款金额，一键返款给用户(<span class="striking">24小时内</span>)，商家无需耗费时间、人力处理退款。</li>
                                     </ul>
                                 </div>
                             </div>
@@ -203,7 +251,6 @@
                                                 dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
                                             </p>
                                         </div>
-                                        <!-- /.col -->
                                         <div class="col-xs-6">
                                             <p class="lead">Amount Due 2/22/2014</p>
 
@@ -268,6 +315,10 @@
                     stepCounts:4,//总共的步骤数
                 })
             });
+
+            function show_list(id){
+                $(".shopname-list:eq("+id+")").show().siblings().hide();
+            }
         </script>
     @endpush
 
