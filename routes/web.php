@@ -31,10 +31,6 @@ Route::prefix('user')->group(function () {
         echo active_class(if_route('user.browse_task'), 'active', '');
     })->name('user.browse_task')->middleware('auth');
 
-//    Route::get('user', 'UserController@index',function(){
-//        echo active_class(if_route('user.center'), 'active', '');
-//    })->middleware('auth');
-
     Route::get('funds/{type}', 'FundsController@index',function (){
         echo active_class(if_route('user.funds'), 'active', '');
     })->name('user.funds')->middleware('auth');
@@ -56,14 +52,15 @@ Route::prefix('user')->group(function () {
     })->name('user.explain')->middleware('auth');
 
     Route::get('explain/push', 'ExplainController@push')->middleware('auth');
+    Route::post('explain/push', 'ExplainController@refer')->name('explain')->middleware('auth');
+    Route::post('explain/list', 'ExplainController@explain_list')->name('explain.getList')->middleware('auth');
 
     Route::get('plan', 'PlanController@index',function (){
         echo active_class(if_route('user.plan'), 'active', '');
     })->name('user.plan')->middleware('auth');
 
-    Route::get('ban', 'BanController@index',function (){
-        echo active_class(if_route('user.ban'), 'active', '');
-    })->name('user.ban')->middleware('auth');
+    Route::get('ban', 'CenterController@ban')->name('user.ban')->middleware('auth');
+    Route::post('ban/list', 'CenterController@ban_list')->name('ban.getList')->middleware('auth');
 
     Route::get('api_doc', 'UserController@doc')->name('user.api_doc')->middleware('auth');
 

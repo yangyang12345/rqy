@@ -1,5 +1,10 @@
 @extends('admin/base_template/dashboard')
 @section('content')
+    @if(!empty(session('success')))
+        　　<div class="alert alert-success" role="alert">
+            　　　　{{session('success')}}
+        </div>
+    @endif
     <div class="row">
         <div class="col-xs-12">
             <div class="box box-primary">
@@ -8,153 +13,42 @@
                     <a href="{{ url('/user/explain/push') }}" class="btn btn-info btn-xs pull-right" id="bind-shop">发起申述</a>
                 </div>
                 <div class="box-body">
-                    <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table id="example1" class="table table-bordered table-striped dataTable" role="grid"
-                                       aria-describedby="example1_info">
-                                    <thead>
-                                    <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
-                                            colspan="1" aria-sort="ascending"
-                                            aria-label="Rendering engine: activate to sort column descending"
-                                            style="width: 208px;">Rendering engine
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                            colspan="1" aria-label="Browser: activate to sort column ascending"
-                                            style="width: 255px;">Browser
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                            colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                                            style="width: 227px;">Platform(s)
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                            colspan="1" aria-label="Engine version: activate to sort column ascending"
-                                            style="width: 179px;">Engine version
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                            colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                            style="width: 131px;">CSS grade
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Firefox 1.0</td>
-                                        <td>Win 98+ / OSX.2+</td>
-                                        <td>1.7</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Firefox 1.5</td>
-                                        <td>Win 98+ / OSX.2+</td>
-                                        <td>1.8</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Firefox 2.0</td>
-                                        <td>Win 98+ / OSX.2+</td>
-                                        <td>1.8</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Firefox 3.0</td>
-                                        <td>Win 2k+ / OSX.3+</td>
-                                        <td>1.9</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Camino 1.0</td>
-                                        <td>OSX.2+</td>
-                                        <td>1.8</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Camino 1.5</td>
-                                        <td>OSX.3+</td>
-                                        <td>1.8</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Netscape 7.2</td>
-                                        <td>Win 95+ / Mac OS 8.6-9.2</td>
-                                        <td>1.7</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Netscape Browser 8</td>
-                                        <td>Win 98SE+</td>
-                                        <td>1.7</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Netscape Navigator 9</td>
-                                        <td>Win 98+ / OSX.2+</td>
-                                        <td>1.8</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="sorting_1">Gecko</td>
-                                        <td>Mozilla 1.0</td>
-                                        <td>Win 95+ / OSX.1+</td>
-                                        <td>1</td>
-                                        <td>A</td>
-                                    </tr>
-                                    </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <th rowspan="1" colspan="1">Rendering engine</th>
-                                        <th rowspan="1" colspan="1">Browser</th>
-                                        <th rowspan="1" colspan="1">Platform(s)</th>
-                                        <th rowspan="1" colspan="1">Engine version</th>
-                                        <th rowspan="1" colspan="1">CSS grade</th>
-                                    </tr>
-                                    </tfoot>
-                                </table>
+                    <div id="explain" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="box-tools pull-right form-inline">
+                            <div class="form-group">
+                                <select class="form-control" id="uid_type" name="uid_type">
+                                    <option value="99">类型</option>
+                                    <option value="1">我发起的申诉</option>
+                                    <option value="2">我收到的申诉</option>
+                                </select>
+                                <select class="form-control" id="status" name="status">
+                                    <option value="99">申诉状态</option>
+                                    <option value="0">处理中 </option>
+                                    <option value="1">已完结</option>
+                                    <option value="2">系统完结</option>
+                                </select>
+                                <input type="text" placeholder="任务ID" id="tid" name="tid" value="" class="form-control">
+                                <input type="text" placeholder="订单ID" id="oid" name="oid" value="" class="form-control">
                             </div>
+
+                            <a class="btn btn-primary btn-sm" title="搜索" id="btn_search" href="javascript:void(0)"><i class="fa fa-search"></i>搜索</a>
+
                         </div>
                         <div class="row">
-                            <div class="col-sm-5">
-                                <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing
-                                    1 to 10 of 57 entries
-                                </div>
-                            </div>
-                            <div class="col-sm-7">
-                                <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-                                    <ul class="pagination">
-                                        <li class="paginate_button previous disabled" id="example1_previous"><a href="#"
-                                                                                                                aria-controls="example1"
-                                                                                                                data-dt-idx="0"
-                                                                                                                tabindex="0">Previous</a>
-                                        </li>
-                                        <li class="paginate_button active"><a href="#" aria-controls="example1"
-                                                                              data-dt-idx="1" tabindex="0">1</a></li>
-                                        <li class="paginate_button "><a href="#" aria-controls="example1"
-                                                                        data-dt-idx="2" tabindex="0">2</a></li>
-                                        <li class="paginate_button "><a href="#" aria-controls="example1"
-                                                                        data-dt-idx="3" tabindex="0">3</a></li>
-                                        <li class="paginate_button "><a href="#" aria-controls="example1"
-                                                                        data-dt-idx="4" tabindex="0">4</a></li>
-                                        <li class="paginate_button "><a href="#" aria-controls="example1"
-                                                                        data-dt-idx="5" tabindex="0">5</a></li>
-                                        <li class="paginate_button "><a href="#" aria-controls="example1"
-                                                                        data-dt-idx="6" tabindex="0">6</a></li>
-                                        <li class="paginate_button next" id="example1_next"><a href="#"
-                                                                                               aria-controls="example1"
-                                                                                               data-dt-idx="7"
-                                                                                               tabindex="0">Next</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                            <div class="col-sm-12">
+                                <table id="explain_table" class="table table-bordered table-striped dataTable" role="grid"
+                                       aria-describedby="explain_table">
+                                    <thead>
+                                    <tr role="row">
+                                        <th>发起时间</th>
+                                        <th>投诉类型</th>
+                                        <th>任务ID</th>
+                                        <th>订单及用户信息</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -162,4 +56,80 @@
             </div>
         </div>
     </div>
+    @push('datatable-js')
+        <script type="text/javascript">
+            $dataTable = $("#explain_table");
+            var table = $dataTable.DataTable({
+                "ordering": false,//排序 关闭
+                "searching": false,//是否显示搜索框，
+                "processing": true,
+                "serverSide": true,
+                "pageLength": 6,
+                "lengthMenu": [6, 10, 15],
+                "ajax": {
+                    "url": "{{ route('explain.getList') }}",
+                    "type":"post",
+                    "data": function (data) {
+                        data._token = "{{csrf_token()}}"
+                    }
+                },
+                "columns": [
+                    {'data':'ctime',"defaultContent": " ",'className':''},
+                    {'data':'explain_type',"defaultContent": " ",'className':''},
+                    {'data':'order_id',"defaultContent": " ",'className':''},
+                    {'data':'order_id',"defaultContent": " ",'className':''},
+                    {'data':'status',"defaultContent": " ",'className':''},
+                    {'data':'',"defaultContent": " ",'className':''},
+                ],
+                "columnDefs": [
+                    {
+                        "render": function (data, type, row) {
+                            if (data == 0) {
+                                return '<span><small class="label bg-primary">浏览错商品或店铺</small></span>';
+                            } else if (data == 1) {
+                                return '<span><small class="label bg-primary">问题任务</small></span>';
+                            } else if(data == 2){
+                                return '<span><small class="label bg-primary">用户做任务问题</small></span>'
+                            } else if(data == 3){
+                                return '<span><small class="label bg-primary">用户确认收货，好评问题</small></span>'
+                            } else if(data == 4){
+                                return '<span><small class="label bg-primary">淘宝客/村淘投诉</small></span>'
+                            } else if(data == 5){
+                                return '<span><small class="label bg-primary">其它</small></span>'
+                            }
+                        },
+                        "targets": 1
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            if (data == 0) {
+                                return '<span><small class="label bg-yellow">处理中</small></span>';
+                            } else if (data == 1) {
+                                return '<span><small class="label bg-green">已完结</small></span>';
+                            } else if(data == 2){
+                                return '<span><small class="label bg-red">系统完结</small></span>'
+                            }
+                        },
+                        "targets": 4
+                    },
+                ],
+                "language": {
+                    processing: "数据加载中...",
+                    info: "显示第 _START_ 至 _END_ 条，共 _TOTAL_ 条记录",
+                    infoEmpty: "暂无数据",
+                    lengthMenu: "显示 _MENU_ 条记录",
+                    paginate: {
+                        first: "首页",
+                        previous: "上一页",
+                        next: "下一页",
+                        last: "最后一页"
+                    }
+                }
+            });
+
+            $('#btn_search').click(function () {
+                table.draw();
+            });
+        </script>
+    @endpush
 @endsection
