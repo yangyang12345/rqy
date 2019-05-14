@@ -42,11 +42,11 @@
     </div>
 
     <div class="register-box-body">
-        <p class="login-box-msg"><h4 class="text-center">注册新会员(当前为商家注册)<a style="font-size: 12px" href="{{ route('register.consumer') }}">我是买手</a></h4></p>
+        <p class="login-box-msg"><h4 class="text-center">注册新会员(当前为买手注册)<a style="font-size: 12px" href="{{ route('register') }}">我是商家</a></h4></p>
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
-            <input id="type" type="hidden" name="type" value="1">
+            <input type="hidden" name="type" value="0">
             <div class="form-group has-feedback">
                 <input id="name" type="text" placeholder="姓名" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>

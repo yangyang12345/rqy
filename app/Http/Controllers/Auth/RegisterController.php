@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -42,6 +43,10 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+//    public function register(Request $request){
+//        dd($request->id);
+//    }
+
 
     /**
      * Get a validator for an incoming registration request.
@@ -53,9 +58,11 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-//            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+//            'email' => ['string', 'email', 'max:255', 'unique:users'],
             'tel' => ['required', 'string','size:11','unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'type' => ['required', 'string'],
+
         ]);
     }
 
@@ -72,11 +79,15 @@ class RegisterController extends Controller
 //            'email' => $data['email'],
             'tel' => $data['tel'],
             'password' => $data['password'],
+            'type' => $data['type'],
         ]);
     }
 
     protected function registered(Request $request, $user)
     {
+        Auth::logout();
+//        $request->session()->flash('success', '注册成功！商家请登录，买手请下载app登录，app下载地址www.baidu.com');
+        session(['success' => '注册成功，商家请登录，买手请下载app登录']);
         $parm = $_SERVER['HTTP_REFERER'];
         /*
          * 存在type
@@ -162,5 +173,9 @@ class RegisterController extends Controller
                 ]
             );
         }
+    }
+
+    public function register_consumer(){
+        return view('auth.register_consumer');
     }
 }

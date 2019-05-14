@@ -38,11 +38,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
+    @if(!empty(session('success')))
+        <div class="alert alert-success" role="alert">
+            {{session('success')}}
+        </div>
+        <?php session()->forget('success');?>
+    @endif
     <div class="login-logo">
-        <a href=""><b>启拉</b>☁️</a>
+        <a href=""><b>启拉</b>云️</a>
     </div>
     <div class="login-box-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+        <p class="login-box-msg">商家登录</p>
 
         <form action="{{ route('login') }}" method="post">
             @csrf
