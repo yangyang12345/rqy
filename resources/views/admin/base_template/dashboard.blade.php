@@ -32,8 +32,6 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset("/css/main.css")}}">
 
-    @stack('step-css')
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -111,8 +109,6 @@
 
 <!-- dialog 获取数据插件 -->
 {{--<script src="{{ asset("/js/ajax.js") }}"></script>--}}
-
-@stack('step-js')
 
 <!-- 省市三级联动 顺序并不能乱-->
 <script src="{{ asset("/js/distpicker.data.min.js") }}"></script>

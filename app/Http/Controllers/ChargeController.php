@@ -44,14 +44,20 @@ class ChargeController extends Controller{
 
     public function index(){
 
-        $id = Auth::id();
+        $user_id = Auth::id();
 
         $charges = DB::table('charge_record')
-            -> where('user_id', '=', $id)
+            -> where('user_id', '=', $user_id)
             -> orderBy('ctime','desc')
             -> take(5)
             -> get();
-        return view('consumer/charge',['charges'=>$charges]);
+
+        $capital = DB::table('capital_record')
+            ->where('user_id','=',$user_id)
+            ->orderByDesc('ctime')
+            ->first();
+
+        return view('consumer/charge',['charges'=>$charges,'capital'=>$capital]);
     }
 
 

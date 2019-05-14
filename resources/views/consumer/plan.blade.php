@@ -89,7 +89,7 @@
                         </div>
                         <div class="col-sm-9"><p class="font-90 text-muted m-b-1">将商家注册链接发送给朋友注册,您可获得推广佣金</p>
                             <input type="text" class="form-control" id="turl" value="{{ $reg }}"> <br>
-                            <button class="btn btn-danger" href="javascript:" id="fuzhi">复制链接</button>
+                            {{--<button class="btn btn-danger" href="javascript:" id="fuzhi">复制链接</button>--}}
                         </div>
                     </div>
                 </div>
@@ -112,7 +112,7 @@
                         </div>
                         <div class="col-sm-9"><p class="font-90 text-muted m-b-1">将买家注册链接发送给朋友注册,您可获得推广佣金</p>
                             <input type="text" class="form-control" id="turl1" value="{{ $reg_m }}"> <br>
-                            <button class="btn btn-danger" href="javascript:" id="fuzhi1">复制链接</button>
+                            {{--<button class="btn btn-danger" href="javascript:" id="fuzhi1">复制链接</button>--}}
                         </div>
                     </div>
                 </div>

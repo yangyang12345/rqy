@@ -9,7 +9,7 @@
         <div class="col-sm-12">
             <div class="box box-info">
                 <div class="box-header">
-                    <span class="label label-primary pull-right">本金余额0.00</span>
+                    <span class="label label-primary pull-right">本金余额{{ $capital->balance?$capital->balance:0 }}</span>
                     <h3 class="box-title">本金充值</h3>
                 </div>
                 <div class="box-body">

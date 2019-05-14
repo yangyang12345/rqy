@@ -12,38 +12,25 @@
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
-
-        {{--<!-- search form (Optional) -->--}}
-        {{--<form action="#" method="get" class="sidebar-form">--}}
-            {{--<div class="input-group">--}}
-                {{--<input type="text" name="q" class="form-control" placeholder="Search...">--}}
-                {{--<span class="input-group-btn">--}}
-              {{--<button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>--}}
-              {{--</button>--}}
-            {{--</span>--}}
-            {{--</div>--}}
-        {{--</form>--}}
-        {{--<!-- /.search form -->--}}
-
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">用户使用</li>
             <li class="{{ active_class(if_route('user.center')) }}"><a href="{{ url('/user/center') }}"><i class="fa fa-home"></i> <span>商家中心</span></a></li>
-            <li class="treeview">
+            <li class="treeview {{ active_class(if_uri_pattern('user/management/*'),'menu-open') }}">
                 <a href="#"><i class="fa fa-cloud-upload"></i> <span>发布/管理</span>
                     <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
                 </a>
-                <ul class="treeview-menu {{ active_class(if_uri_pattern('release_task')) }}">
-                    <li class="padding_l_20 {{ active_class(if_route('user.release_task')) }}"><a href="{{ url('/user/release_task') }}"><i class="fa fa-circle-o"></i>发布推广任务</a></li>
-                    <li class="padding_l_20 {{ active_class(if_route('user.advance_duty')) }}"><a href="{{ url('/user/advance_duty') }}"><i class="fa fa-circle-o"></i>垫付任务管理</a></li>
-                    <li class="padding_l_20 {{ active_class(if_route('user.browse_task')) }}"><a href="{{ url('/user/browse_task') }}"><i class="fa fa-circle-o"></i>浏览任务管理</a></li>
+                <ul class="treeview-menu {{ active_class(if_uri_pattern('user/management/*')) }}" style="display: {{ active_class(if_uri_pattern('user/management/*'),'block') }}">
+                    <li class="padding_l_20 {{ active_class(if_route('user.release_task')) }}"><a href="{{ route('user.release_task') }}"><i class="fa fa-circle-o"></i>发布推广任务</a></li>
+                    <li class="padding_l_20 {{ active_class(if_route('user.advance_duty')) }}"><a href="{{ route('user.advance_duty') }}"><i class="fa fa-circle-o"></i>垫付任务管理</a></li>
+                    <li class="padding_l_20 {{ active_class(if_route('user.browse_task')) }}"><a href="{{ route('user.browse_task') }}"><i class="fa fa-circle-o"></i>浏览任务管理</a></li>
                 </ul>
             </li>
             <li class="{{ active_class(if_route('user.funds')) }}"><a href="{{ url('/user/funds/capital') }}"><i class="fa fa-credit-card"></i> <span>资金明细</span></a></li>
             <li class="{{ active_class(if_route('user.bind')) }}"><a href="{{ url('/user/bind') }}"><i class="fa fa-link"></i> <span>店铺管理</span></a></li>
             <li class="{{ active_class(if_route('user.explain')) }}"><a href="{{ url('/user/explain') }}"><i class="fa fa-exclamation-circle"></i> <span>申述中心</span></a></li>
-            <li class="{{ active_class(if_route('user.plan')) }}"><a href="{{ url('/user/plan') }}"><i class="fa  fa-dollar"></i> <span>推广赚奖金</span></a></li>
+            <li class="{{ active_class(if_route('user.plan')) }}"><a href="{{ url('/user/plan') }}"><i class="fa  fa-dollar"></i> <span>推广赚奖金</span><span class="pull-right-container"><small class="label pull-right bg-red">奖</small></span></a></li>
             <li class="{{ active_class(if_route('user.ban')) }}"><a href="{{ url('/user/ban') }}"><i class="fa fa-minus-circle"></i> <span>黑名单</span></a></li>
             @role('Administer')
             <li class="header">管理模块</li>

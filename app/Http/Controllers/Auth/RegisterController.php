@@ -111,6 +111,16 @@ class RegisterController extends Controller
                 ]
             );
 
+            //记录邀请关系
+            DB::table('invite')->insert(
+                [
+                    'inviter' => $user_id, //邀请人
+                    'invites' => $user->id, //受邀请人
+                    'invites_type' => '0',  //0代表受邀请人是买家
+                    'ctime'=> date('Y-m-d h:i:s',time()),
+                ]
+            );
+
         }elseif(!strstr($parm,'type') && strstr($parm,'recommend')){
             $arr = explode('recommend=',$parm);
             $user_id = $arr[1];
@@ -138,6 +148,16 @@ class RegisterController extends Controller
                     'content' => '邀请商家提成',
                     'quota' => '10',
                     'balance' => $balance,
+                    'ctime'=> date('Y-m-d h:i:s',time()),
+                ]
+            );
+
+            //记录邀请关系
+            DB::table('invite')->insert(
+                [
+                    'inviter' => $user_id, //邀请人
+                    'invites' => $user->id, //受邀请人
+                    'invites_type' => '1',  //0代表受邀请人是卖家
                     'ctime'=> date('Y-m-d h:i:s',time()),
                 ]
             );

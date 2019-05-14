@@ -19,11 +19,11 @@ Route::prefix('user')->group(function () {
         echo active_class(if_route('user.center'), 'active', '');
     })->name('user.center')->middleware('auth');
 
-    Route::get('release_task', 'ManagementController@task')->name('user.release_task')->middleware('auth');
+    Route::get('management/release_task', 'ManagementController@task')->name('user.release_task')->middleware('auth');
 
-    Route::get('advance_duty', 'ManagementController@advance')->name('user.advance')->middleware('auth');
+    Route::get('management/advance_duty', 'ManagementController@advance')->name('user.advance_duty')->middleware('auth');
 
-    Route::get('browse_task', 'ManagementController@browse')->name('user.browse_task')->middleware('auth');
+    Route::get('management/browse_task', 'ManagementController@browse')->name('user.browse_task')->middleware('auth');
 
     Route::get('funds/{type}', 'FundsController@index',function (){
         echo active_class(if_route('user.funds'), 'active', '');

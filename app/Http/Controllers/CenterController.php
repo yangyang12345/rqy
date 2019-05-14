@@ -3,15 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class CenterController extends Controller{
     public function index(){
+        $user_id = Auth::id();
 
         $notice = DB::table('notice')->paginate(10);
 
-        return view('consumer/center',['notice'=>$notice]);
+        $capital = DB::table('capital_record')
+            ->where('user_id','=',$user_id)
+            ->orderByDesc('ctime')
+            ->first();
+        $brokerage = DB::table('brokerage_record')
+            ->where('user_id','=',$user_id)
+            ->orderByDesc('ctime')
+            ->first();
+
+        return view('consumer/center',['notice'=>$notice,'capital'=>$capital,'brokerage'=>$brokerage]);
     }
 
     public function ban(){

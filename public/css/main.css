@@ -6,6 +6,10 @@
     padding-left: 20px;
 }
 
+h4{
+    font-size: 14px;
+}
+
 .hr-line-dashed{
     border-top: 1px dashed #e7eaec;
     color: #ffffff;

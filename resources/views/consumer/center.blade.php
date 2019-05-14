@@ -9,9 +9,9 @@
                     <h3 class="box-title">佣金账户</h3>
                 </div>
                 <div class="box-body">
-                    <h2>5.00</h2>
+                    <h2>￥{{ $brokerage->balance?$brokerage->balance:0 }}元</h2>
                     <small>人民币</small>
-                    <a href="{{ asset('/user/funds') }}" onclick="">
+                    <a href="{{ url('/user/funds/brokerage') }}">　
                         <div class="pull-right font-bold text-primary">明细 <i class="fa fa-level-up"></i></div>
                     </a>
                 </div>
@@ -25,13 +25,12 @@
                     <i class="fa fa-rmb"></i>
                     <h3 class="box-title">本金账户</h3>
                 </div>
-                <!-- /.box-header -->
                 <div class="box-body">
-                    <h2>5.00
+                    <h2>￥{{ $capital->balance?$capital->balance:0 }}元
                         <a href="{{ asset('/charge') }}"><span class="label label-danger pull-right" style="font-size: 16px">充值</span></a>
                     </h2>
                     <small>人民币</small>
-                    <a href="{{ asset('/user/funds') }}" onclick="">
+                    <a href="{{ url('/user/funds/capital') }}">
                         <div class="pull-right font-bold text-info">明细 <i class="fa fa-level-up"></i></div>
                     </a>
                 </div>
