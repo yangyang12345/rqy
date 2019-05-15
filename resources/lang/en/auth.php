@@ -13,7 +13,9 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed' => '账号错误无法匹配，请确认该账号为商家账号',
+//    'failed' => 'These credentials do not match our records.',
+//    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'throttle' => '多次尝试错误，请稍后重试. Please try again in :seconds seconds.',
 
 ];

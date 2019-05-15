@@ -6,6 +6,6 @@
  */
 
 return [
-    'title'=>'Qi La Plantform',
+    'title'=>'启拉云',
     'title_short'=>'QL'
 ];

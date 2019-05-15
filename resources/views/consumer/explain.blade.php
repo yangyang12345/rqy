@@ -37,7 +37,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <table id="explain_table" class="table table-bordered table-striped dataTable" role="grid"
-                                       aria-describedby="explain_table">
+                                       aria-describedby="explain_table" style="width:100%">
                                     <thead>
                                     <tr role="row">
                                         <th>发起时间</th>

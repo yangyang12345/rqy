@@ -38,6 +38,7 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+
     public function username()
     {
         return 'tel';
@@ -52,5 +53,12 @@ class LoginController extends Controller
         $request->session()->regenerate();
 
         return redirect('/login');
+    }
+
+    //重写父类的credentials方法，只允许商家登录
+    protected function credentials(Request $request){
+        $credentials = $request->only($this->username(), 'password');
+        $credentials['type'] = 1;
+        return $credentials;
     }
 }

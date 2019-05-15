@@ -56,7 +56,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <input id="tel" type="tel" placeholder="请输入手机" class="form-control{{ $errors->has('tel') ? ' is-invalid' : '' }}" name="tel" value="{{ old('tel') }}" required autofocus>
                     <span class="glyphicon glyphicon-phone form-control-feedback"></span>
                     @if ($errors->has('tel'))
-                        <span class="invalid-feedback" role="alert">
+                        <span class="invalid-feedback alert-danger" role="alert">
                             <strong>{{ $errors->first('tel') }}</strong>
                         </span>
                     @endif
@@ -65,7 +65,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <input id="password" type="password" placeholder="请输入密码" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
 
                 @if ($errors->has('password'))
-                    <span class="invalid-feedback" role="alert">
+                    <span class="invalid-feedback alert-danger" role="alert">
                         <strong>{{ $errors->first('password') }}</strong>
                     </span>
                 @endif
