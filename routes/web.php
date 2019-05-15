@@ -75,7 +75,7 @@ Route::prefix('admin')->group(function(){
 
     Route::post('fund/list','CheckController@fund_list')->name('check.fund.getList')->middleware('auth');
     Route::any('fund/check/{id?}','CheckController@fund_check')->name('check.fund')->middleware('auth');
-    Route::post('fund/confim}','CheckController@fund_confim')->name('check.fund.confim')->middleware('auth');
+    Route::post('fund/confim','CheckController@fund_confim')->name('check.fund.confim')->middleware('auth');
 
     Route::get('shop','CheckController@shop')->name('admin.shop')->middleware('auth');
 

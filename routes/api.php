@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/test','CheckController@shop_list_test');
+Route::post('/task_list','ManagementController@task_list');
