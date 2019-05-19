@@ -38,7 +38,7 @@
         </div>
     </div>
     <div class="row">
-        <a href="{{ asset('/user/release_task') }}">
+        <a href="{{ route('user.release_task') }}">
             <div class="col-sm-2">
                 <div class="small-box bg-aqua">
                     <div class="inner">
@@ -51,7 +51,7 @@
                 </div>
             </div>
         </a>
-        <a href="{{ asset('/user/advance_duty') }}">
+        <a href="{{ route('user.advance_duty') }}">
             <div class="col-sm-2">
                 <div class="small-box bg-light-blue">
                     <div class="inner">
@@ -64,7 +64,7 @@
                 </div>
             </div>
         </a>
-        <a href="{{ asset('/user/browse_task') }}">
+        <a href="{{ route('user.browse_task') }}">
             <div class="col-sm-2">
                 <div class="small-box bg-green">
                     <div class="inner">
@@ -77,7 +77,7 @@
                 </div>
             </div>
         </a>
-        <a href="{{ asset('/user/funds') }}">
+        <a href="{{ url('/user/funds/capital') }}">
             <div class="col-sm-2">
                 <div class="small-box bg-red">
                     <div class="inner">
@@ -90,7 +90,7 @@
                 </div>
             </div>
         </a>
-        <a href="{{ asset('/user/bind') }}">
+        <a href="{{ url('/user/bind') }}">
             <div class="col-sm-2">
                 <div class="small-box bg-yellow">
                     <div class="inner">
