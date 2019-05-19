@@ -61,7 +61,7 @@
                 <small>欢迎来到启拉！因为专业所以信赖</small>
             </h1>
 
-            @include('admin/base_template/breadcrumbs')
+{{--            @include('admin/base_template/breadcrumbs')--}}
 
         </section>
 
