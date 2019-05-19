@@ -36,7 +36,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <table id="shop_table" class="table table-bordered table-striped dataTable" role="grid"
-                                       aria-describedby="shop_table">
+                                       aria-describedby="shop_table" style="width:100%">
                                     <thead>
                                     <tr role="row">
                                         <th>店铺类型</th>

@@ -20,10 +20,14 @@ Route::prefix('user')->group(function () {
     })->name('user.center')->middleware('auth');
 
     Route::get('management/release_task', 'ManagementController@task')->name('user.release_task')->middleware('auth');
+    Route::get('management/release_task/success', 'ManagementController@success')->name('user.release_task.success')->middleware('auth');
+    Route::post('management/task/publish', 'ManagementController@publish')->name('user.release_task.publish')->middleware('auth');
 
     Route::get('management/advance_duty', 'ManagementController@advance')->name('user.advance_duty')->middleware('auth');
+    Route::post('management/advance_duty', 'ManagementController@advance_list')->name('advance_duty.getList')->middleware('auth');
 
     Route::get('management/browse_task', 'ManagementController@browse')->name('user.browse_task')->middleware('auth');
+    Route::post('management/browse_task', 'ManagementController@browse_list')->name('browse.getList')->middleware('auth');
 
     Route::get('funds/{type}', 'FundsController@index',function (){
         echo active_class(if_route('user.funds'), 'active', '');

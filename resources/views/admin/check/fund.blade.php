@@ -39,7 +39,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <table id="fund_table" class="table table-bordered table-striped dataTable" role="grid"
-                                       aria-describedby="fund_table">
+                                       aria-describedby="fund_table" style="width:100%">
                                     <thead>
                                     <tr role="row">
                                         <th>用户</th>

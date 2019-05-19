@@ -40,7 +40,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <table id="capital_table" class="table table-bordered table-striped dataTable" role="grid"
-                                       aria-describedby="capital_table">
+                                       aria-describedby="capital_table" style="width:100%">
                                     <thead>
                                     <tr role="row">
                                         <th>时间</th>

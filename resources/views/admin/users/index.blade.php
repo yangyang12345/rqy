@@ -22,7 +22,7 @@
                                 <thead>
                                 <tr>
                                     <th>姓名</th>
-                                    <th>邮箱</th>
+                                    <th>电话</th>
                                     <th>注册时间</th>
                                     <th>用户角色</th>
                                     <th>操作</th>
@@ -34,7 +34,7 @@
                                     <tr>
 
                                         <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
+                                        <td>{{ $user->tel }}</td>
                                         <td>{{ $user->created_at->format('F d, Y h:ia') }}</td>
                                         <td>{{  $user->roles()->pluck('name')->implode(' ') }}</td>{{-- Retrieve array of roles associated to a user and convert to string --}}
                                         <td>
@@ -52,7 +52,7 @@
                             </table>
                         </div>
 
-                        <a href="{{ route('users.create') }}" class="btn btn-success">添加用户</a>
+                        {{--<a href="{{ route('users.create') }}" class="btn btn-success">添加用户</a>--}}
 
                     </div>
                 </div>

@@ -17,7 +17,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <table id="bind_table" class="table table-bordered table-striped dataTable" role="grid"
-                                       aria-describedby="bind_table">
+                                       aria-describedby="bind_table" style="width:100%">
                                     <thead>
                                     <tr role="row">
                                         <th>店铺类型</th>

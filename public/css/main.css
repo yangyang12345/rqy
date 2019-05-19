@@ -96,7 +96,7 @@ h4{
 }
 
 #wizard{
-    height: 1300px;
+    height: 900px;
     /*margin: 20px auto;*/
     width: 100%;
     overflow: hidden;
@@ -112,4 +112,28 @@ h4{
     padding: 20px 30px;
     width: 25%;
     float: left;
+}
+
+input[type=radio]{
+    margin-right: 5px;
+}
+
+.padding-lr{
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+.type_select{
+    margin-bottom: 30px;
+    border: 1px solid #e7eaec;
+}
+
+.sel_type .type_bar{
+    height: 49px;
+    padding-left: 20px;
+    line-height: 49px;
+    font-weight: bolder;
+    border-bottom: 1px solid #e7eaec;
+    border-top: 4px solid #e7eaec;
+    background-color: #74d8b3;
 }
