@@ -61,4 +61,19 @@ class LoginController extends Controller
         $credentials['type'] = 1;
         return $credentials;
     }
+
+    //登录添加验证码
+    protected function validateLogin(Request $request){
+        $this->validate($request, [
+            $this->username() => 'required',
+            'password' => 'required',
+            'captcha' => 'required|captcha',
+        ],[
+//            'captcha.required' => trans('validation.required'),
+//            'captcha.captcha' => trans('validation.captcha'),
+            'captcha.required' => '请填写验证码',
+            'captcha.captcha' => '验证码错误',
+
+        ]);
+    }
 }

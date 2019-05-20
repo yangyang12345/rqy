@@ -6,7 +6,7 @@
                 <div class="box-header">
                     <h5 class="box-title">推广赚金</h5>
                 </div>
-                <div class="box-body text-center"><img src="{{ asset('/images/ivt_top.png') }}"></div>
+                <div class="box-body text-center"><img class="img-responsive" src="{{ asset('/images/ivt_top.png') }}"></div>
             </div>
         </div>
     </div>
@@ -105,7 +105,7 @@
                         <div class="col-sm-3 text-center">
                             <div style="margin:10px auto;" id="ad_qcode1">
                                 @php
-                                    $reg_m = route('register',['recommend'=>Auth::id(),'type'=>'1']);
+                                    $reg_m = route('register.consumer',['recommend'=>Auth::id(),'type'=>'1']);
                                 @endphp
                             {!! QrCode::size(200)->generate($reg_m); !!}
                             </div>

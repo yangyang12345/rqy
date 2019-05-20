@@ -44,7 +44,7 @@ class RegisterController extends Controller
     }
 
 //    public function register(Request $request){
-//        dd($request->id);
+//        dd($request->exists('consumer'));
 //    }
 
 
@@ -86,7 +86,6 @@ class RegisterController extends Controller
     protected function registered(Request $request, $user)
     {
         Auth::logout();
-//        $request->session()->flash('success', '注册成功！商家请登录，买手请下载app登录，app下载地址www.baidu.com');
         session(['success' => '注册成功，商家请登录，买手请下载app登录']);
         $parm = $_SERVER['HTTP_REFERER'];
         /*

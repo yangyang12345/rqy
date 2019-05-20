@@ -95,8 +95,7 @@ Route::post('charge/online','ChargeController@online')->name('charge.online')->m
 Route::post('charge/bank','ChargeController@bank')->name('charge.bank')->middleware('auth');
 
 Route::get('register/consumer', 'Auth\RegisterController@register_consumer')->name('register.consumer');
-//Route::post('register/{type}', 'Auth\AuthController@register');
-//Route::auth();
+
 
 Auth::routes();
 

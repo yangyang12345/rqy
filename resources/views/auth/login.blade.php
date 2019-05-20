@@ -56,20 +56,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <input id="tel" type="tel" placeholder="请输入手机" class="form-control{{ $errors->has('tel') ? ' is-invalid' : '' }}" name="tel" value="{{ old('tel') }}" required autofocus>
                     <span class="glyphicon glyphicon-phone form-control-feedback"></span>
                     @if ($errors->has('tel'))
-                        <span class="invalid-feedback alert-danger" role="alert">
+                        <p class="text-danger text-left">
                             <strong>{{ $errors->first('tel') }}</strong>
-                        </span>
+                        </p>
                     @endif
             </div>
             <div class="form-group has-feedback">
                 <input id="password" type="password" placeholder="请输入密码" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
 
                 @if ($errors->has('password'))
-                    <span class="invalid-feedback alert-danger" role="alert">
+                    <p class="text-danger text-leftr">
                         <strong>{{ $errors->first('password') }}</strong>
-                    </span>
+                    </p>
                 @endif
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="text" style="width: 217px;display: inline-block;" class="form-control {{$errors->has('captcha')?'parsley-error':''}}" name="captcha" placeholder="请输入验证码">
+                <img src="{{captcha_src()}}" style="cursor: pointer;margin-top: -3px" onclick="this.src='{{captcha_src()}}'+Math.random()">
+
+                @if ($errors->has('captcha'))
+                    <p class="text-danger text-left">
+                        <strong>{{$errors->first('captcha')}}</strong>
+                    </p>
+                @endif
+
             </div>
             <div class="row">
                 <div class="col-xs-8"></div>
