@@ -71,17 +71,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 @endif
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
-            <div class="form-group has-feedback">
-                <input type="text" style="width: 217px;display: inline-block;" class="form-control {{$errors->has('captcha')?'parsley-error':''}}" name="captcha" placeholder="请输入验证码">
-                <img src="{{captcha_src()}}" style="cursor: pointer;margin-top: -3px" onclick="this.src='{{captcha_src()}}'+Math.random()">
+            {{--<div class="form-group has-feedback">--}}
+                {{--<input type="text" style="width: 217px;display: inline-block;" class="form-control {{$errors->has('captcha')?'parsley-error':''}}" name="captcha" placeholder="请输入验证码">--}}
+                {{--<img src="{{captcha_src()}}" style="cursor: pointer;margin-top: -3px" onclick="this.src='{{captcha_src()}}'+Math.random()">--}}
 
-                @if ($errors->has('captcha'))
-                    <p class="text-danger text-left">
-                        <strong>{{$errors->first('captcha')}}</strong>
-                    </p>
-                @endif
+                {{--@if ($errors->has('captcha'))--}}
+                    {{--<p class="text-danger text-left">--}}
+                        {{--<strong>{{$errors->first('captcha')}}</strong>--}}
+                    {{--</p>--}}
+                {{--@endif--}}
 
-            </div>
+            {{--</div>--}}
             <div class="row">
                 <div class="col-xs-8"></div>
                 <div class="col-xs-4">

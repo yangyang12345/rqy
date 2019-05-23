@@ -37,34 +37,34 @@
                                                 <img class="platlogo" src="{{ asset('images/t.png') }}">
                                                 <span class="taskname">手机淘宝/天猫</span>任务 （用户在手机淘宝app下单）
                                             </li>
-                                            <li>
-                                                <input onclick="show_list(0)" class="tasktype" name="task_type" type="radio" value="2">
-                                                <img class="platlogo" src="{{ asset('images/t.png') }}">
-                                                <span class="taskname">淘宝<span style="color: #157cdc;font-weight: bold;">特别</span></span>任务 <span>（支持淘客秒拍、聚划算、淘抢购、淘金币、淘口令或其它渠道活动） </span>
+                                            {{--<li>--}}
+                                                {{--<input onclick="show_list(0)" class="tasktype" name="task_type" type="radio" value="2">--}}
+                                                {{--<img class="platlogo" src="{{ asset('images/t.png') }}">--}}
+                                                {{--<span class="taskname">淘宝<span style="color: #157cdc;font-weight: bold;">特别</span></span>任务 <span>（支持淘客秒拍、聚划算、淘抢购、淘金币、淘口令或其它渠道活动） </span>--}}
 
-                                            </li>
+                                            {{--</li>--}}
                                             <li>
                                                 <input onclick="show_list(1)" class="tasktype" name="task_type" type="radio" value="3">
                                                 <img class="platlogo" src="{{ asset('images/j.png') }}">
                                                 <span class="taskname">手机京东</span>任务
                                             </li>
-                                            <li>
-                                                <input onclick="show_list(1)" class="tasktype" name="task_type" type="radio" value="4">
-                                                <img class="platlogo" src="{{ asset('images/j.png') }}">
-                                                <span class="taskname">京东<span style="color: #157cdc;font-weight: bold;">特别</span></span>任务 <span>
-									（支持购买链接转二维码、自定义链接转二维码、各类活动搜索或其它渠道活动） </span>
-                                            </li>
+                                            {{--<li>--}}
+                                                {{--<input onclick="show_list(1)" class="tasktype" name="task_type" type="radio" value="4">--}}
+                                                {{--<img class="platlogo" src="{{ asset('images/j.png') }}">--}}
+                                                {{--<span class="taskname">京东<span style="color: #157cdc;font-weight: bold;">特别</span></span>任务 <span>--}}
+									{{--（支持购买链接转二维码、自定义链接转二维码、各类活动搜索或其它渠道活动） </span>--}}
+                                            {{--</li>--}}
                                             <li>
                                                 <input onclick="show_list(2)" class="tasktype" name="task_type" type="radio" value="5">
                                                 <img class="platlogo" src="{{ asset('images/p.png') }}">
                                                 <span class="taskname">手机拼多多</span>任务
 
                                             </li>
-                                            <li>
-                                                <input onclick="show_list(2)" class="tasktype" name="task_type" type="radio" value="6">
-                                                <img class="platlogo" src="{{ asset('images/p.png') }}">
-                                                <span class="taskname">拼多多<span style="color: #157cdc;font-weight: bold;">特别</span></span>任务 <span>（支持购买链接转二维码、自定义链接转二维码、各类活动搜索或其它渠道活动） </span>
-                                            </li>
+                                            {{--<li>--}}
+                                                {{--<input onclick="show_list(2)" class="tasktype" name="task_type" type="radio" value="6">--}}
+                                                {{--<img class="platlogo" src="{{ asset('images/p.png') }}">--}}
+                                                {{--<span class="taskname">拼多多<span style="color: #157cdc;font-weight: bold;">特别</span></span>任务 <span>（支持购买链接转二维码、自定义链接转二维码、各类活动搜索或其它渠道活动） </span>--}}
+                                            {{--</li>--}}
                                         </ul>
                                         <ul class="tasktype-list" style="padding-left: 30px; display: none;">
                                             <li>
@@ -73,32 +73,32 @@
                                                 <span class="taskname">手机淘宝/天猫浏览、收藏、加购物车（全真人加购，不被屏蔽不降权。）</span>
 
                                             </li>
-                                            <li>
-                                                <input onclick="show_list(0)" class="tasktype" name="task_type" type="radio" value="8">
-                                                <img class="platlogo" src="{{ asset('images/t.png') }}">
-                                                <span class="taskname">淘宝<span style="color: #157cdc;font-weight: bold;">特别</span></span>任务 <span>（支持淘客秒拍、聚划算、淘抢购、淘金币、淘口令或其它渠道活动） </span>
-                                            </li>
+                                            {{--<li>--}}
+                                                {{--<input onclick="show_list(0)" class="tasktype" name="task_type" type="radio" value="8">--}}
+                                                {{--<img class="platlogo" src="{{ asset('images/t.png') }}">--}}
+                                                {{--<span class="taskname">淘宝<span style="color: #157cdc;font-weight: bold;">特别</span></span>任务 <span>（支持淘客秒拍、聚划算、淘抢购、淘金币、淘口令或其它渠道活动） </span>--}}
+                                            {{--</li>--}}
                                             <li>
                                                 <input onclick="show_list(1)" class="tasktype" name="task_type" type="radio" value="9">
                                                 <img class="platlogo" src="{{ asset('images/j.png') }}">
                                                 <span class="taskname">手机京东浏览、收藏、加购物车</span>
                                             </li>
-                                            <li>
-                                                <input onclick="show_list(1)" class="tasktype" name="task_type" type="radio" value="10">
-                                                <img class="platlogo" src="{{ asset('images/j.png') }}">
-                                                <span class="taskname">京东<span style="color: #157cdc;font-weight: bold;">特别</span></span>浏览任务 <span>
-									（支持购买链接转二维码、自定义链接转二维码、各类活动搜索或其它渠道活动） </span>
-                                            </li>
+                                            {{--<li>--}}
+                                                {{--<input onclick="show_list(1)" class="tasktype" name="task_type" type="radio" value="10">--}}
+                                                {{--<img class="platlogo" src="{{ asset('images/j.png') }}">--}}
+                                                {{--<span class="taskname">京东<span style="color: #157cdc;font-weight: bold;">特别</span></span>浏览任务 <span>--}}
+									{{--（支持购买链接转二维码、自定义链接转二维码、各类活动搜索或其它渠道活动） </span>--}}
+                                            {{--</li>--}}
                                             <li>
                                                 <input onclick="show_list(2)" class="tasktype" name="task_type" type="radio" value="11">
                                                 <img class="platlogo" src="{{ asset('images/p.png') }}">
                                                 <span class="taskname">手机拼多多浏览任务 （用户在手机拼多多上操作任务）</span>
                                             </li>
-                                            <li>
-                                                <input onclick="show_list(2)" class="tasktype" name="task_type" type="radio" value="12">
-                                                <img class="platlogo" src="{{ asset('images/p.png') }}">
-                                                <span class="taskname">拼多多<span style="color: #157cdc;font-weight: bold;">特别</span></span>浏览任务 <span>（支持购买链接转二维码、自定义链接转二维码、各类活动搜索或其它渠道活动） </span>
-                                            </li>
+                                            {{--<li>--}}
+                                                {{--<input onclick="show_list(2)" class="tasktype" name="task_type" type="radio" value="12">--}}
+                                                {{--<img class="platlogo" src="{{ asset('images/p.png') }}">--}}
+                                                {{--<span class="taskname">拼多多<span style="color: #157cdc;font-weight: bold;">特别</span></span>浏览任务 <span>（支持购买链接转二维码、自定义链接转二维码、各类活动搜索或其它渠道活动） </span>--}}
+                                            {{--</li>--}}
                                         </ul>
                                     </div>
                                     <hr>
