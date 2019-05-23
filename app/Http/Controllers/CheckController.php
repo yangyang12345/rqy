@@ -10,6 +10,7 @@ class CheckController extends Controller{
         return view('admin/check');
     }
 
+    // 资金审核
     public function fund(){
         return view('admin/check/fund');
     }
@@ -109,6 +110,8 @@ class CheckController extends Controller{
 
     }
 
+
+    // 店铺审核
     public function shop(){
         return view('admin/check/shop');
     }
@@ -159,5 +162,11 @@ class CheckController extends Controller{
             "data"=>$list,
         ];
         return response()->json($data);
+    }
+
+
+    //买手审核
+    public function buyer(){
+        return view('admin/check/buyer');
     }
 }

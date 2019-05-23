@@ -19,6 +19,7 @@ Route::prefix('user')->group(function () {
         echo active_class(if_route('user.center'), 'active', '');
     })->name('user.center')->middleware('auth');
 
+    // 发布管理
     Route::get('management/release_task', 'ManagementController@task')->name('user.release_task')->middleware('auth');
     Route::get('management/release_task/success', 'ManagementController@success')->name('user.release_task.success')->middleware('auth');
     Route::post('management/task/publish', 'ManagementController@publish')->name('user.release_task.publish')->middleware('auth');
@@ -75,18 +76,20 @@ Route::prefix('admin')->group(function(){
     Route::post('notice','NoticeController@store')->middleware('auth');
     Route::post('uploadImage','NoticeController@upload')->middleware('auth');
 
-    Route::get('fund','CheckController@fund')->name('admin.fund')->middleware('auth');
-
+    // 充值审核
+    Route::get('check/fund','CheckController@fund')->name('admin.fund')->middleware('auth');
     Route::post('fund/list','CheckController@fund_list')->name('check.fund.getList')->middleware('auth');
     Route::any('fund/check/{id?}','CheckController@fund_check')->name('check.fund')->middleware('auth');
     Route::post('fund/confim','CheckController@fund_confim')->name('check.fund.confim')->middleware('auth');
 
-    Route::get('shop','CheckController@shop')->name('admin.shop')->middleware('auth');
-
+    Route::get('check/shop','CheckController@shop')->name('admin.shop')->middleware('auth');
     Route::post('shop/list','CheckController@shop_list')->name('check.shop.getList')->middleware('auth');
+
+    // 买手审核
+    Route::get('check/buyer','CheckController@buyer')->name('admin.buyer')->middleware('auth');
 });
 
-Route::resource('users', 'UserController');
+//Route::resource('users', 'UserController');
 Route::resource('permissions', 'PermissionController');
 Route::resource('roles', 'RoleController');
 

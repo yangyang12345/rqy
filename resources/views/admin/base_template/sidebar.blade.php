@@ -34,10 +34,20 @@
             <li class="{{ active_class(if_route('user.ban')) }}"><a href="{{ url('/user/ban') }}"><i class="fa fa-minus-circle"></i> <span>黑名单</span></a></li>
             @role('Administer')
             <li class="header">管理模块</li>
-            <li class="{{ active_class(if_uri_pattern('users')) }}"><a href="{{ url('/users') }}"><i class="fa fa-user"></i> <span>成员管理</span></a></li>
+            <li class="treeview {{ active_class(if_uri_pattern('admin/check/*'),'menu-open') }}">
+                <a href="#"><i class="fa fa-cloud-upload"></i> <span>审批管理</span>
+                    <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                </a>
+                <ul class="treeview-menu {{ active_class(if_uri_pattern('admin/check/*')) }}" style="display: {{ active_class(if_uri_pattern('admin/check/*'),'block') }}">
+                    <li class="padding_l_20 {{ active_class(if_route('admin.fund')) }}"><a href="{{ route('admin.fund') }}"><i class="fa fa-circle-o"></i> <span>充值审批</span></a></li>
+                    <li class="padding_l_20 {{ active_class(if_route('admin.shop')) }}"><a href="{{ route('admin.shop') }}"><i class="fa fa-circle-o"></i> <span>店铺审批</span></a></li>
+                    <li class="padding_l_20 {{ active_class(if_route('admin.buyer')) }}"><a href="{{ route('admin.buyer') }}"><i class="fa fa-circle-o"></i> <span>买手审批</span></a></li>
+                </ul>
+            </li>
+            {{--<li class="{{ active_class(if_uri_pattern('users')) }}"><a href="{{ url('/users') }}"><i class="fa fa-user"></i> <span>成员管理</span></a></li>--}}
             <li class="{{ active_class(if_route('admin.notice')) }}"><a href="{{ url('/admin/notice') }}"><i class="fa fa-bullhorn"></i> <span>发布公告</span></a></li>
-            <li class="{{ active_class(if_route('admin.fund')) }}"><a href="{{ url('/admin/fund') }}"><i class="fa fa-leanpub"></i> <span>充值审批</span></a></li>
-            <li class="{{ active_class(if_route('admin.shop')) }}"><a href="{{ url('/admin/shop') }}"><i class="fa fa-check-square-o"></i> <span>店铺审批</span></a></li>
             <li class="{{ active_class(if_uri_pattern('roles')) }}"><a href="{{ url('/roles') }}"><i class="fa fa-edit"></i> <span>角色管理</span></a></li>
             <li class="{{ active_class(if_uri_pattern('permissions')) }}"><a href="{{ url('/permissions') }}"><i class="fa fa-key"></i> <span>权限管理</span></a></li>
             <li><a href="{{ url('/user/api_doc') }}"><i class="fa fa-book"></i> <span>接口文档</span></a></li>

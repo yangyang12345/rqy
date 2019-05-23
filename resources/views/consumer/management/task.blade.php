@@ -292,16 +292,16 @@
                                                             <p> <span class="label label-danger">必填</span>搜索关键词
                                                                 <input name="commen_keywords" type="text" maxlength="100">
                                                                 <span class="view_hide">添加垫付
-                                                                <input  name="commen_num" type="number" min="1" onkeyup="value=value.replace(/[^\d]/,'')" data-toggle="tooltip" title="一单对应一评语,设置垫付为1"> 单
+                                                                <input  name="commen_num" type="number" min="1" onkeyup="value=value.replace(/[^\d]/,'')" title="一单对应一评语,设置垫付为1"> 单
                                                             </span>
                                                             </p>
                                                             <div>添加浏览任务
-                                                                <input name="commen_view_num" type="number" min="0" maxlength="5" onkeyup="if(/[^\d\.]/.test(value))value=0"> 个 (<span class="flow-price">+0.6 元/个</span>)
+                                                                <input name="commen_view_num" type="number" min="1" maxlength="5" onkeyup="value=value.replace(/[^\d]/,'')"> 个 (<span class="flow-price">+0.6 元/个</span>)
                                                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中
                                                                 <input  type="checkbox" name="commen_is_fav" value="1"> 收藏商品
                                                                 <input  type="checkbox" name="commen_is_store" value="1"> 收藏店铺
                                                                 <span><input type="checkbox" name="commen_is_cart" value="1"> 加购物车</span>&nbsp;&nbsp;设置
-                                                                <input type="number" min="0" name="commen_fav_num" maxlength="5" onkeyup="if(/[^\d\.]/.test(value))value=0"> 个 (<span class="flow-price">+0.6 元/个</span>)
+                                                                <input type="number" min="1" name="commen_fav_num" maxlength="5" onkeyup="value=value.replace(/[^\d]/,'')"> 个 (<span class="flow-price">+0.6 元/个</span>)
                                                             </div>
                                                         </div>
                                                     </div>
@@ -316,16 +316,16 @@
                                                             <p> <span class="label label-danger">必填</span> 搜索关键词
                                                                 <input name="appoint_keywords" type="text" maxlength="100">　
                                                                 <span class="view_hide">添加垫付
-                                                                <input name="appoint_num" type="number" min="1" onkeyup="value=value.replace(/[^\d]/,'')" data-toggle="tooltip" title="一单对应一评语,设置垫付为1"> 单
+                                                                <input name="appoint_num" type="number" min="1" onkeyup="value=value.replace(/[^\d]/,'')"  title="一单对应一评语,设置垫付为1"> 单
                                                             </span>
                                                             </p>
                                                             <div>添加浏览任务
-                                                                <input name="appoint_view_num" type="number" min="0" maxlength="5" onkeyup="if(/[^\d\.]/.test(value))value=0"> 个 (<span class="flow-price">+0.6 元/个</span>)
+                                                                <input name="appoint_view_num" type="number" min="1" maxlength="5" onkeyup="value=value.replace(/[^\d]/,'')"> 个 (<span class="flow-price">+0.6 元/个</span>)
                                                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中
                                                                 <input  type="checkbox" name="appoint_is_fav" value="1"> 收藏商品
                                                                 <input  type="checkbox" name="appoint_is_store" value="1"> 收藏店铺
                                                                 <span class="pdd-hide"><input type="checkbox" name="appoint_is_cart" value="1"> 加购物车</span>&nbsp;&nbsp;设置
-                                                                <input type="number" min="0" name="appoint_fav_num" maxlength="5" onkeyup="if(/[^\d\.]/.test(value))value=0"> 个 (<span class="flow-price">+0.6 元/个</span>)
+                                                                <input type="number" min="1" name="appoint_fav_num" maxlength="5" onkeyup="value=value.replace(/[^\d]/,'')"> 个 (<span class="flow-price">+0.6 元/个</span>)
                                                             </div>
                                                         </div>
                                                         <div class="callout">
