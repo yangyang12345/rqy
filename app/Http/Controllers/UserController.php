@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 use App\User;
 use Auth;
 
@@ -147,7 +147,36 @@ class UserController extends Controller {
         return redirect('api/documentation');
     }
 
-    public function setting(){
-        return view('consumer.setting');
+    public function setting(Request $request){
+
+        $id = Auth::id();
+
+        if($request->isMethod('post')){
+            $qq = $request->qq;
+            $wx = $request->wx;
+            $sex = $request->sex;
+
+            $update = array(
+                'qq'  => $qq,
+                'wx'  => $wx,
+                'sex'  => $sex,
+              );
+              $result = DB::table('users')
+              ->where('id',$id)
+              ->update($update);
+
+            if($result){
+                return redirect()->route('user.setting')->with('success','修改成功');
+            }else{
+                return redirect()->route('user.setting')->with('fail','修改失败');
+            }
+        }
+
+        $info = DB::table('users')
+            ->select('name','tel','qq','wx','sex')
+            ->where('id','=',$id)
+            ->first();
+
+        return view('consumer.setting',["info"=>$info]);
     }
 }
