@@ -146,4 +146,8 @@ class UserController extends Controller {
     public function doc(){
         return redirect('api/documentation');
     }
+
+    public function setting(){
+        return view('consumer.setting');
+    }
 }

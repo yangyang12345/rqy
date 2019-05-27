@@ -90,7 +90,7 @@
                 </div>
             </div>
         </a>
-        <a href="{{ url('/user/bind') }}">
+        <a href="{{ route('user.bind') }}">
             <div class="col-sm-2">
                 <div class="small-box bg-yellow">
                     <div class="inner">
@@ -103,7 +103,7 @@
                 </div>
             </div>
         </a>
-        <a href="">
+        <a href="{{ route('user.setting') }}">
             <div class="col-sm-2">
                 <div class="small-box bg-purple">
                     <div class="inner">

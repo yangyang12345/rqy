@@ -67,6 +67,9 @@ Route::prefix('user')->group(function () {
 
     Route::get('notice/help','NoticeController@help')->name('help')->middleware('auth');
 
+    // 用户设置
+    Route::get('setting','UserController@setting')->name('user.setting')->middleware('auth');
+
 });
 
 Route::prefix('admin')->group(function(){
