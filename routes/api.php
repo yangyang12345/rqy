@@ -13,9 +13,17 @@ use Illuminate\Http\Request;
 |
 */
 
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// 用于登录，注册
+Route::post('/login','ApiController@app_login');
+Route::post('/register','ApiController@app_register');
+Route::post('/reset','ApiController@reset_password');
+
+
+// 业务逻辑
 Route::post('/test','CheckController@shop_list_test');
-Route::post('/task_list','ManagementController@task_list');
+Route::post('/task_list','ApiController@task_list');

@@ -80,24 +80,6 @@ class ManagementController extends Controller{
         return response()->json($data);
     }
 
-    public function task_list(Request $request){
-
-
-        $platform = $request->input('platform');
-
-        $builder = DB::table('task_record as t')
-            ->leftJoin('shop as s','t.shop_id','=','s.id')
-            ->select('t.task_type','t.task_name','t.goods_name','t.goods_url','t.goods_key','t.goods_pic','t.goods_price','t.goods_num','s.store_name','s.wangwang','s.url')
-            ->where('t.platform','=',$platform);
-
-        $list = $builder->orderBy('t.ctime', 'desc')->get()->toArray();
-
-        $data = [
-            "data"=>$list,
-        ];
-        return response()->json($data);
-    }
-
     public function publish(Request $request){
         $serial = $request->serial;
         $task_type = $request->wrap_task_type;
