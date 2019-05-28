@@ -119,6 +119,7 @@ class ApiController extends Controller{
      * status:0表未接单，1表示已接单，2表示订单已完成
      */
     public function order_list(Request $request){
+        $wrap_type = $request->wrap_type;
         $type = $request->type;
         
         if(empty($type)){
@@ -127,6 +128,7 @@ class ApiController extends Controller{
 
         $builder = DB::table('order_record')
             ->select('serial','charge')
+            ->where('wrap_type','=',$wrap_type)
             ->where('type','=',$type)
             ->where('status','=','0');
 
@@ -144,11 +146,154 @@ class ApiController extends Controller{
      */
     public function order_receiving(Request $request){
         $serial = $request->serial;
+        $buyer = $request->buyer;
+        $id = $request->id;
+
+        if(empty($serial) || empty($buyer) || empty($id)){
+            return response()->json('参数错误');
+        }
+
+        $update = array(
+            'user_id'=> $id,
+            'buyer'  => $buyer,
+            'status' => 1
+        );
+
+        $result = DB::table('order_record')
+            ->where('serial','=',$serial)
+            ->where('status','<>','1')
+            ->update($update);
+
+        if($result){
+            return response()->json('sucess');
+        }else{
+            return response()->json('此游戏已被他人选择，请重新选择');
+        }
     }
 
     /**
      * 订单详情
      */
+    public function order_info(Request $request){
+        $serial = $request->serial;
+        if(empty($serial)){
+            return response()->json('参数错误');
+        }
+        $list = DB::table('order_record as o')
+            ->leftJoin('buyer as b','o.buyer','=','b.id')
+            ->select('b.name','o.serial','o.type','o.keywords')
+            ->where('serial','=',$serial)
+            ->get()
+            ->toArray();
+
+        $data = [
+            "data"=>$list,
+        ];
+
+        return response()->json($data);
+    }
+
+    /**
+     * 取消订单
+     */
+    public function order_off(Request $request){
+        $serial = $request->serial;
+        if(empty($serial)){
+            return response()->json('参数错误');
+        }
+        $update = array(
+            'user_id'=> '',
+            'buyer'  => '',
+            'status' => 0
+        );
+
+        $result = DB::table('order_record')
+            ->where('serial','=',$serial)
+            ->update($update);
+
+        if($result){
+            return response()->json('sucess');
+        }else{
+            return response()->json('取消失败，请重试');
+        }
+    }
+
+    /**
+     * 完成订单
+     */
+    public function order_complete(Request $request){
+        $serial = $request->serial;
+        $shop_name = $request->shop_name;
+        $goods_url = $request->goods_url;
+        $keywords = $request->keywords;
+        if(empty($serial) || empty($shop_name) || empty($goods_url) || empty($keywords)){
+            return response()->json('参数错误');
+        }
+
+        $list = DB::table('order_record')
+            ->select('shop_name','goods_url','keywords')
+            ->where('serial','=',$serial)
+            ->first();
+
+        if($list->shop_name != $shop_name){
+            return response()->json('店铺名称错误');
+        }
+        if($list->goods_url != $goods_url){
+            return response()->json('商品链接错误');
+        }
+        if($list->keywords != $keywords){
+            return response()->json('商品关键字错误');
+        }
+
+        $result = DB::table('order_record')
+            ->where('serial','=',$serial)
+            ->update(['status'=>2]);
+
+        if($result){
+            // $Getid = DB::table('brokerage_record')->insertGetId(
+            //     [
+            //         'user_id'=>$tel,
+            //         'type' => $name,
+            //         'in_out' => $email,
+            //         'content' => '订单提成',
+            //         'quota' => '',
+            //         'balance' => $wx,
+            //         'ctime' => date('Y-m-d H:i:s',time()),
+            //     ]
+            // );
+    
+            // if ($Getid){
+            //     return response()->json('scuccess');
+            // }
+            return response()->json('scuccess');
+        }else{
+            return response()->json('系统繁忙，请重试');
+        }
+    }
+
+    /**
+     * 买手列表
+     */
+    public function buyer_list(Request $request){
+        $user_id = $request->id;
+
+        if(empty($user_id)){
+            return response()->json('参数错误');
+        }
+
+        $builder = DB::table('buyer')
+            ->select('id','name','platform')
+            ->where('user_id','=',$user_id)
+            ->where('status','=','1');
+
+        $list = $builder->orderBy('ctime', 'desc')->get()->toArray();
+
+        $data = [
+            "data"=>$list,
+        ];
+        return response()->json($data);
+    }
+
 
     /**
      * 任务列表
