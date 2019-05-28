@@ -1,54 +1,101 @@
 @extends('admin/base_template/dashboard')
 @section('content')
+	@if(!empty(session('success')))
+        <div class="alert alert-success" role="alert">
+        	{{session('success')}}
+        </div>
+	@endif
+	@if(!empty(session('fail')))
+        <div class="alert alert-danger" role="alert">
+        	{{session('fail')}}
+        </div>
+    @endif
     <div class="row">
-        <div class="col-xs-12">
-            <div class="box box-info">
-                <div class="box-header">
-                    <h3 class="box-title">个人设置</h3>
-                    <div class="box-tools">
+        <div class="col-sm-12">
+            <div class="box box-primary">
+                <div class="box-header"><h5 class="box-title">个人设置</h5></div>
+                <div class="box-body">
+                    <form class="form-horizontal" action="{{ route('user.setting') }}" method="post">
+                        @csrf
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+								账号：
+                            </label>
+                            <div class="col-sm-8 control-label">
+								<label class="text-red pull-left">18276137963</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+								QQ：
+                            </label>
+                            <div class="col-sm-8 control-label">
+								<input class="form-control" placeholder="请输入qq号" id="qq" name="qq" type="text" value="{{ $info->qq }}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+								微信：
+							</label>
+                            <div class="col-sm-8 control-label">
+								<input class="form-control" placeholder="请输入微信账号" id="wx" name="wx" type="text" value="{{ $info->wx }}" >
+                            </div>
+						</div>
+						<div class="form-group">
+                            <label class="col-sm-3 control-label">
+								性别：
+							</label>
+                            <div class="col-sm-8 control-label">
+								<label class="pull-left"><input {{ $info->sex==0?'checked':''}} name="sex" type="radio" value="0" >保密</label>
+								<label class="pull-left padding_l_20"><input {{ $info->sex==1?'checked':''}} name="sex" type="radio" value="1" >先生</label>
+								<label class="pull-left padding_l_20"><input {{ $info->sex==2?'checked':''}} name="sex" type="radio" value="2" >女士</label>
+                            </div>
+                        </div>
                         
-                    </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-8">
+                                <button class="btn btn-primary " type="submit"><i class="fa fa-check"></i>&nbsp;提交
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="box-body no-padding">
-                    <form method="get">
-							<div class="form-group">
-								<label class="col-sm-2 control-label"><h4>人气云ID</h3></label>
-								<label class="col-sm-10 control-label"><h3 class="text-navy pull-left">46166</h3></label>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-2 control-label"><h4>帐号</h4></label>
-								<label class="col-sm-10 control-label"><h3 class="text-navy pull-left">18276137963</h3></label>
-							</div>
-							<!-- <div class="hr-line-dashed"></div>							 -->
-							<div class="form-group">
-								<label class="col-sm-2 control-label"><h3>QQ</h3></label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" name="qq" placeholder="请输入QQ号码" maxlength="13" required="" oninvalid="setCustomValidity('请输入QQ号码')" oninput="setCustomValidity('')" pattern="^[1-9][0-9]{4,12}$" value="1049209561">
-								</div>
-							</div>
-							<div class="hr-line-dashed"></div>							
-							<div class="form-group">
-								<label class="col-sm-2 control-label"><h3>微信</h3></label>
-								<div class="col-sm-10">
-									<input type="text" name="weixin" class="form-control" placeholder="请输入微信帐号" oninvalid="setCustomValidity('请输入微信帐号,不能为手机及邮箱帐号')" oninput="setCustomValidity('')" required="" pattern="^[a-zA-Z]+[a-zA-Z0-9_\-]*$" maxlength="20" value="yanjianhui25">
-									<span class="help-block m-b-none">请输入微信帐号,不能为手机及邮箱帐号</span>
-								</div>
-							</div>
-							<div class="hr-line-dashed"></div>							
-							<div class="form-group">
-								<label class="col-sm-2 control-label"><h3>性别</h3></label>
-								<div class="col-sm-10">
-									<input type="radio" name="sex" checked="" value="0" title="保密"><div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i><div>保密</div></div><input type="radio" name="sex" value="1" title="先生"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>先生</div></div><input type="radio" name="sex" value="2" title="女士"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>女士</div></div>								</div>
-							</div>
-							<div class="hr-line-dashed"></div>							
-							 <div class="form-group">
-								<div class="col-sm-10 col-sm-offset-2">
-								<button class="btn btn-lg btn-primary btn-block" type="submit">保存</button>
-								</div>
-							</div>
-						</form>
+            </div>
+        </div>
+	</div>
+	<div class="row">
+        <div class="col-sm-12">
+            <div class="box box-primary">
+                <div class="box-header"><h5 class="box-title">修改密码</h5></div>
+                <div class="box-body">
+                    <form class="form-horizontal" action="{{ route('explain') }}" method="post">
+                        @csrf
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+								旧密码:
+                            </label>
+                            <div class="col-sm-8 control-label">
+								<input class="form-control" id="old_password" name="old_password" type="password">
+                            </div>
+						</div>
+						<div class="form-group">
+                            <label class="col-sm-3 control-label">
+								新密码:
+                            </label>
+                            <div class="col-sm-8 control-label">
+								<input class="form-control" id="qq" name="new_password" type="password">
+                            </div>
+                        </div>
+                    
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-8">
+                                <button class="btn btn-primary " type="submit"><i class="fa fa-check"></i>&nbsp;提交
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-@endsection()
+@endsection

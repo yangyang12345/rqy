@@ -15,9 +15,7 @@ Route::redirect('/', '/user/center', 301);
 
 Route::prefix('user')->group(function () {
 
-    Route::get('center', 'CenterController@index',function (){
-        echo active_class(if_route('user.center'), 'active', '');
-    })->name('user.center')->middleware('auth');
+    Route::get('center', 'CenterController@index')->name('user.center')->middleware('auth');
 
     // 发布管理
     Route::get('management/release_task', 'ManagementController@task')->name('user.release_task')->middleware('auth');
@@ -69,6 +67,7 @@ Route::prefix('user')->group(function () {
 
     // 用户设置
     Route::get('setting','UserController@setting')->name('user.setting')->middleware('auth');
+    Route::post('setting','UserController@setting')->name('user.setting')->middleware('auth');
 
 });
 
