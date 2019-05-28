@@ -27,3 +27,4 @@ Route::post('/reset','ApiController@reset_password');
 // 业务逻辑
 Route::post('/test','CheckController@shop_list_test');
 Route::post('/task_list','ApiController@task_list');
+Route::post('/getOrderList','ApiController@order_list');

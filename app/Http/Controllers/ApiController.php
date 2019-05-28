@@ -113,6 +113,43 @@ class ApiController extends Controller{
 
     }
 
+
+    /**
+     * 订单列表
+     * status:0表未接单，1表示已接单，2表示订单已完成
+     */
+    public function order_list(Request $request){
+        $type = $request->type;
+        
+        if(empty($type)){
+            return response()->json('参数错误');
+        }
+
+        $builder = DB::table('order_record')
+            ->select('serial','charge')
+            ->where('type','=',$type)
+            ->where('status','=','0');
+
+        $list = $builder->orderBy('ctime', 'desc')->get()->toArray();
+
+         $data = [
+            "data"=>$list,
+        ];
+        return response()->json($data);
+        
+    }
+
+    /**
+     * 接订单
+     */
+    public function order_receiving(Request $request){
+        $serial = $request->serial;
+    }
+
+    /**
+     * 订单详情
+     */
+
     /**
      * 任务列表
      */
