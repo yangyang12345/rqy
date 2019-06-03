@@ -18,7 +18,7 @@ Route::prefix('user')->group(function () {
     Route::get('center', 'CenterController@index')->name('user.center')->middleware('auth');
 
     // 发布管理
-    Route::get('management/release_task', 'ManagementController@task')->name('user.release_task')->middleware('auth');
+    Route::get('management/release_task/{step}', 'ManagementController@task')->name('user.release_task')->middleware('auth');
     Route::get('management/release_task/success', 'ManagementController@success')->name('user.release_task.success')->middleware('auth');
     Route::post('management/task/publish', 'ManagementController@publish')->name('user.release_task.publish')->middleware('auth');
 

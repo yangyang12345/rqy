@@ -6,23 +6,35 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ManagementController extends Controller{
-    function task(){
-        $user_id = Auth::id();
-        $shops = DB::table('shop')
-            ->where('user_id','=',$user_id)
-            ->get();
-        $capital = DB::table('capital_record as c')
-            ->leftJoin('users as u','c.user_id','=','u.id')
-            ->select('c.user_id','c.balance','u.name','u.email','u.tel','u.qq','u.wx')
-            ->where('c.user_id','=',$user_id)
-            ->orderByDesc('c.ctime')
-            ->first();
-        return view('consumer/management/task',['shops'=>$shops,'capital'=>$capital]);
+
+    public function task(Request $request){
+
+        $step = $request->step;
+        if ($step == 1){
+            $user_id = Auth::id();
+            $shops = DB::table('shop')
+                ->where('user_id','=',$user_id)
+                ->get();
+            // $capital = DB::table('capital_record as c')
+            //     ->leftJoin('users as u','c.user_id','=','u.id')
+            //     ->select('c.user_id','c.balance','u.name','u.email','u.tel','u.qq','u.wx')
+            //     ->where('c.user_id','=',$user_id)
+            //     ->orderByDesc('c.ctime')
+            //     ->first();
+            return view('consumer/management/task_one',['shops'=>$shops]);
+        }
+
+        if ($step == 2){
+            return view('consumer/management/task_two');
+        }
+
+        
     }
 
-    function advance(){
+    public function advance(){
         return view('consumer/management/advance');
     }
 
@@ -80,13 +92,72 @@ class ManagementController extends Controller{
         return response()->json($data);
     }
 
+    /**
+     * task_type
+     * 1:手机淘宝/天猫任务 （用户在手机淘宝app下单）
+     * 3:手机京东任务
+     * 5:手机拼多多
+     * 7:手机淘宝/天猫浏览、收藏、加购物车（全真人加购，不被屏蔽不降权。）
+     * 9:手机京东浏览、收藏、加购物车
+     * 11:手机拼多多浏览任务 （用户在手机拼多多上操作任务）
+     * 
+     */
+
     public function publish(Request $request){
+        $step = $request->step;
+    
+        if ($step == 1) {
+            $tasktype = $request->tasktype;
+            $sid = $request->sid;
+
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'tasktype' => 'required',
+                    'sid' => 'required',
+                ],
+                [
+                    'tasktype.required' => '请先选择任务类型',
+                    'sid.required' => '请先选择店铺',
+                ]
+            );
+
+            if ($validator->fails()) {
+                return redirect()
+                    ->back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+
+            session([
+                'tasktype' => $tasktype,
+                'sid' => $sid
+            ]);
+
+            return redirect()->route('user.release_task',['step'=>2]);
+        }
         $serial = $request->serial;
-        $task_type = $request->wrap_task_type;
+        $wrap_task_type = $request->wrap_task_type;   // 任务类型,0表示垫付任务，1表示浏览任务
+        $task_type = $request->task_type;
+        $task_name = $request->wrap_task_type == 0?'垫付任务':'浏览任务';
+
+        // 平台类型，1表示淘宝，2表示京东，3表示拼多多
+        if(in_array($task_type,['1,7'])){
+            $platform = 1;
+        }
+
+        if(in_array($task_type,['3,9'])){
+            $platform = 2;
+        }
+
+        if(in_array($task_type,['7,11'])){
+            $platform = 3;
+        }
+    
         $shop_id = $request->sid;
         $goods_name = $request->goods_name;
         $goods_url = $request->goods_url;
-        $goods_key = $request->goods_key;
+        $goods_key = $request->goods_keyword;
         $goods_price = $request->goods_price;
         $goods_num = $request->goods_num;
         $ctime = $request->ctime;

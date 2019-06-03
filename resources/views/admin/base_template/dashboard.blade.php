@@ -18,12 +18,7 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset("/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css")}}">
 
-    <!-- Datatables -->
-    {{--<link href="/vendor/yajra/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">--}}
-    {{--<link href="/vendor/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">--}}
-    {{--<link href="/vendor/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">--}}
-    {{--<link href="/vendor/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">--}}
-    {{--<link href="/vendor/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">--}}
+    <link rel="stylesheet" type="text/css" href="{{ asset("/bower_components/admin-lte/plugins/iCheck/all.css")}}">
 
     <link rel="stylesheet" type="text/css" href="{{ asset("/bower_components/ckeditor/skins/moono-lisa/editor.css")}}">
 
@@ -100,6 +95,8 @@
 
 <!-- SlimScroll -->
 <script src="{{ asset("/bower_components/jquery-slimscroll/jquery.slimscroll.min.js") }}"></script>
+
+<script src="{{ asset("/bower_components/admin-lte/plugins/iCheck/icheck.min.js") }}"></script>
 
 @stack('notice-js')
 
