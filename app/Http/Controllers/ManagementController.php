@@ -129,12 +129,7 @@ class ManagementController extends Controller{
                     ->withInput();
             }
 
-            session([
-                'tasktype' => $tasktype,
-                'sid' => $sid
-            ]);
-
-            return redirect()->route('user.release_task',['step'=>2]);
+            return redirect()->route('user.release_task',['step'=>2])->with(['tasktype' => $tasktype,'sid' => $sid]);
         }
         $serial = $request->serial;
         $wrap_task_type = $request->wrap_task_type;   // 任务类型,0表示垫付任务，1表示浏览任务

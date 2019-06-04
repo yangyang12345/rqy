@@ -15,9 +15,16 @@
             <div class="box box-primary">
                 <div class="box-header"><h5 class="box-title">个人设置</h5></div>
                 <div class="box-body">
+                    <form method="post" action="{{ route('user.release_task.publish') }}">
+                    @csrf
+                    <input type="hidden" value="1" name="step">
+                    <input type="hidden" value="{{ session('tasktype') }}" name="step">
+                    <input type="hidden" value="{{ session('sid') }}" name="step">
                     <a class="btn btn-info pull-right" href="{{ route('user.release_task',['step'=>1]) }}">
                         <i class="fa fa-fast-forward"></i> 上一步
                     </a>
+                    </form>
+                    
                 </div>
             </div>
         </div>

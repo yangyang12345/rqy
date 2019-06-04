@@ -10,7 +10,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-sm-3">
             <div class="box box-default">
                 <div class="box-header with-border">
@@ -72,7 +72,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="row">
         <div class="col-sm-12">
             <div class="box box-info">
