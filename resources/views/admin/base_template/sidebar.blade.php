@@ -22,7 +22,7 @@
               </span>
                 </a>
                 <ul class="treeview-menu {{ active_class(if_uri_pattern('user/management/*')) }}" style="display: {{ active_class(if_uri_pattern('user/management/*'),'block') }}">
-                    <li class="padding_l_20 {{ active_class(if_route('user.release_task')) }}"><a href="{{ route('user.release_task',['step'=>1]) }}"><i class="fa fa-circle-o"></i>发布推广任务</a></li>
+                    <li class="padding_l_20 {{ active_class(if_route('user.release_task')) }}"><a href="{{ route('user.release_task') }}"><i class="fa fa-circle-o"></i>发布推广任务</a></li>
                     <li class="padding_l_20 {{ active_class(if_route('user.advance_duty')) }}"><a href="{{ route('user.advance_duty') }}"><i class="fa fa-circle-o"></i>垫付任务管理</a></li>
                     <li class="padding_l_20 {{ active_class(if_route('user.browse_task')) }}"><a href="{{ route('user.browse_task') }}"><i class="fa fa-circle-o"></i>浏览任务管理</a></li>
                 </ul>

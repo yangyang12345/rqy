@@ -10,26 +10,20 @@ use Illuminate\Support\Facades\Validator;
 
 class ManagementController extends Controller{
 
-    public function task(Request $request){
+    public function task()
+    {
 
-        $step = $request->step;
-        if ($step == 1){
-            $user_id = Auth::id();
-            $shops = DB::table('shop')
-                ->where('user_id','=',$user_id)
-                ->get();
+        $user_id = Auth::id();
+        $shops = DB::table('shop')
+            ->where('user_id','=',$user_id)
+            ->get();
             // $capital = DB::table('capital_record as c')
             //     ->leftJoin('users as u','c.user_id','=','u.id')
             //     ->select('c.user_id','c.balance','u.name','u.email','u.tel','u.qq','u.wx')
             //     ->where('c.user_id','=',$user_id)
             //     ->orderByDesc('c.ctime')
             //     ->first();
-            return view('consumer/management/task_one',['shops'=>$shops]);
-        }
-
-        if ($step == 2){
-            return view('consumer/management/task_two');
-        }
+        return view('consumer/management/task_one',['shops'=>$shops]);
 
         
     }
@@ -110,26 +104,26 @@ class ManagementController extends Controller{
             $tasktype = $request->tasktype;
             $sid = $request->sid;
 
-            $validator = Validator::make(
-                $request->all(),
-                [
-                    'tasktype' => 'required',
-                    'sid' => 'required',
-                ],
-                [
-                    'tasktype.required' => '请先选择任务类型',
-                    'sid.required' => '请先选择店铺',
-                ]
-            );
+            // $validator = Validator::make(
+            //     $request->all(),
+            //     [
+            //         'tasktype' => 'required',
+            //         'sid' => 'required',
+            //     ],
+            //     [
+            //         'tasktype.required' => '请先选择任务类型',
+            //         'sid.required' => '请先选择店铺',
+            //     ]
+            // );
 
-            if ($validator->fails()) {
-                return redirect()
-                    ->back()
-                    ->withErrors($validator)
-                    ->withInput();
-            }
+            // if ($validator->fails()) {
+            //     return redirect()
+            //         ->back()
+            //         ->withErrors($validator)
+            //         ->withInput();
+            // }
 
-            return redirect()->route('user.release_task',['step'=>2])->with(['tasktype' => $tasktype,'sid' => $sid]);
+            return redirect()->route('user.release_task')->with(['tasktype' => $tasktype,'sid' => $sid]);
         }
         $serial = $request->serial;
         $wrap_task_type = $request->wrap_task_type;   // 任务类型,0表示垫付任务，1表示浏览任务
