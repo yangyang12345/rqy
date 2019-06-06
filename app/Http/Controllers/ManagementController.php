@@ -100,31 +100,31 @@ class ManagementController extends Controller{
     public function publish(Request $request){
         $step = $request->step;
     
-        if ($step == 1) {
-            $tasktype = $request->tasktype;
-            $sid = $request->sid;
+        // if ($step == 1) {
+        //     $tasktype = $request->tasktype;
+        //     $sid = $request->sid;
 
-            // $validator = Validator::make(
-            //     $request->all(),
-            //     [
-            //         'tasktype' => 'required',
-            //         'sid' => 'required',
-            //     ],
-            //     [
-            //         'tasktype.required' => '请先选择任务类型',
-            //         'sid.required' => '请先选择店铺',
-            //     ]
-            // );
+        //     $validator = Validator::make(
+        //         $request->all(),
+        //         [
+        //             'tasktype' => 'required',
+        //             'sid' => 'required',
+        //         ],
+        //         [
+        //             'tasktype.required' => '请先选择任务类型',
+        //             'sid.required' => '请先选择店铺',
+        //         ]
+        //     );
 
-            // if ($validator->fails()) {
-            //     return redirect()
-            //         ->back()
-            //         ->withErrors($validator)
-            //         ->withInput();
-            // }
+        //     if ($validator->fails()) {
+        //         return redirect()
+        //             ->back()
+        //             ->withErrors($validator)
+        //             ->withInput();
+        //     }
 
-            return redirect()->route('user.release_task')->with(['tasktype' => $tasktype,'sid' => $sid]);
-        }
+        //     return redirect()->route('user.release_task')->with(['tasktype' => $tasktype,'sid' => $sid]);
+        // }
         $serial = $request->serial;
         $wrap_task_type = $request->wrap_task_type;   // 任务类型,0表示垫付任务，1表示浏览任务
         $task_type = $request->task_type;
