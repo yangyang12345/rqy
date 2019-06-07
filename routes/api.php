@@ -33,4 +33,6 @@ Route::post('/orderInfo','ApiController@order_info');
 Route::post('/orderOff','ApiController@order_off');
 Route::post('/orderComplete','ApiController@order_complete');
 
+Route::post('/orderHas','ApiController@order_has');
+
 Route::post('/getBuyerList','ApiController@buyer_list');

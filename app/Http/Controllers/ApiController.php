@@ -316,4 +316,26 @@ class ApiController extends Controller{
         ];
         return response()->json($data);
     }
+
+    /**
+     * 已完成订单
+     */
+    public function order_has(Request $request){
+        $user_id = $request->id;
+
+        if(empty($user_id)){
+            return response()->json('参数错误');
+        }
+
+        $builder = DB::table('order_record')
+            ->where('user_id','=',$user_id)
+            ->where('status','=','2');
+
+        $list = $builder->orderBy('ctime', 'desc')->get()->toArray();
+
+        $data = [
+            "data"=>$list,
+        ];
+        return response()->json($data);
+    }
 }
