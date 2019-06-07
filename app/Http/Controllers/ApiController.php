@@ -38,7 +38,12 @@ class ApiController extends Controller{
             return response()->json('密码错误');
         }
 
-        return response()->json('scuccess');
+        $info = DB::table('users')
+        ->where('tel','=',$tel)
+        ->select('id','name','email','tel','qq','wx','sex')
+        ->first();
+
+        return response()->json(["sucess"=>"true","info"=>$info]);
     }
 
     /**
@@ -54,12 +59,10 @@ class ApiController extends Controller{
         $sex = $request->sex;
         $type = '0';
         $ctime = date('Y-m-d H:i:s',time());
-
         $t = DB::table('users')->where('tel','=',$tel)->get();
         if($t->count()){
             return response()->json('此账号已被注册，请重新选择');
         }
-
         $Getid = DB::table('users')->insertGetId(
             [
                 'tel'=>$tel,
