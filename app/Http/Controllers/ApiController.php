@@ -56,7 +56,7 @@ class ApiController extends Controller{
         $ctime = date('Y-m-d H:i:s',time());
 
         $t = DB::table('users')->where('tel','=',$tel)->get();
-        if(!$t->count()){
+        if($t->count()){
             return response()->json('此账号已被注册，请重新选择');
         }
 
