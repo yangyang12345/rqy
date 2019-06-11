@@ -275,6 +275,49 @@ class ApiController extends Controller{
     }
 
     /**
+     * 添加买手
+     */
+
+    public function add_buyer(Request $request){
+        $user_id = $request->id;
+        $name = $request->name;
+        $platform = $request->platform;
+        $sex = $request->sex;
+        $Ymd = $request->Ymd;
+        $credit = $request->credit;
+        $tag = $request->tag;
+        $receiver_name = $request->receiver_name;
+        $receiver_tel = $request->receiver_tel;
+        $address = $request->adress;
+        $street = $request->street;
+
+        $Getid = DB::table('buyer')->insertGetId(
+            [
+                'user_id'=>$user_id,
+                'name' => $name,
+                'platform' => $platform,
+                'sex' => $sex,
+                'Ymd' => $Ymd,
+                'credit' => $credit,
+                'tag' => $tag,
+                'receiver_name' => $receiver_name,
+                'receiver_tel' => $receiver_tel,
+                'address' => $address,
+                'street' => $street,
+                'status' => '0',
+                'ctime' => date('Y-m-d H:i:s',time()),
+            ]
+        );
+
+        if ($Getid){
+            return response()->json('scuccess');
+        }else{
+            return response()->json('系统繁忙，请重试');
+        }
+
+    }
+
+    /**
      * 买手列表
      */
     public function buyer_list(Request $request){

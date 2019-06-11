@@ -35,4 +35,5 @@ Route::post('/orderComplete','ApiController@order_complete');
 
 Route::post('/orderHas','ApiController@order_has');
 
+Route::post('/addBuyer','ApiController@add_buyer');
 Route::post('/getBuyerList','ApiController@buyer_list');
