@@ -286,6 +286,7 @@ class ApiController extends Controller{
         $Ymd = $request->Ymd;
         $credit = $request->credit;
         $tag = $request->tag;
+        $serial = $request->serial;
         $receiver_name = $request->receiver_name;
         $receiver_tel = $request->receiver_tel;
         $address = $request->adress;
@@ -300,6 +301,7 @@ class ApiController extends Controller{
                 'Ymd' => $Ymd,
                 'credit' => $credit,
                 'tag' => $tag,
+                'serial' => $serial,
                 'receiver_name' => $receiver_name,
                 'receiver_tel' => $receiver_tel,
                 'address' => $address,
