@@ -190,7 +190,7 @@ class ApiController extends Controller{
             ->toArray();
 
         $data = [
-            "data"=>$list,
+            "data"=>$list[0],
         ];
 
         return response()->json($data);
