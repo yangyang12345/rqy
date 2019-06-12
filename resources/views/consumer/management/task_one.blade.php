@@ -30,6 +30,7 @@
                 </div>
                 <div class="box-body">
                     <div class="col-md-12">
+                        <input type="hidden" name="wrap_type" value="0">
                         <ul class="timeline">
                             <li class="time-label">
                                 <span class="bg-green">第一步-选择任务类型</span>
@@ -303,45 +304,27 @@
                         <table class="table">
                             <tbody>
                                 <tr class="danger text-center h4">
-                                    <td>第三步：选择任务类型和单数</td>
+                                    <td>第三步：填写订单相关信息</td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="row">
-                            <div class="col-sm-12">
-                                <label class="col-sm-12 control-label"><span class="label label-danger">必填</span>填写订单相关信息</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="sel_type padding-lr">
-                                    <div class="commen_type">
-                                        <div class="type_bar type-select">
-                                            <input class="type-check" type="checkbox" checked disabled name="commen_type" value="1">
-                                            <span>自由好评任务</span>
-                                        </div>
-                                        <div class="type_content">
-                                            <div class="callout">
-                                                <p> <span class="label label-danger">必填</span>搜索关键词
-                                                    <input name="commen_keywords" type="text" maxlength="100" required>
-                                                    <span class="hide">添加任务单数
-                                                        <input class="task_required" name="commen_num" type="number" min="1" required onkeyup="value=value.replace(/[^\d]/,'')" title="一单对应一评语,设置垫付为1"> 单
-                                                    </span>
-                                                </p>
-                                                <!-- <div>添加浏览任务
-                                                    <input name="commen_view_num" type="number" min="1" maxlength="5" onkeyup="value=value.replace(/[^\d]/,'')"> 个 (<span class="flow-price">+0.6 元/个</span>)
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中
-                                                    <input type="checkbox" name="commen_is_fav" value="1"> 收藏商品
-                                                    <input type="checkbox" name="commen_is_store" value="1"> 收藏店铺
-                                                    <span><input type="checkbox" name="commen_is_cart" value="1"> 加购物车</span>&nbsp;&nbsp;设置
-                                                    <input type="number" min="1" name="commen_fav_num" maxlength="5" onkeyup="value=value.replace(/[^\d]/,'')"> 个 (<span class="flow-price">+0.6 元/个</span>)
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                    </div>
+                            <label class="col-sm-2 control-label"><span class="label label-danger">必填</span> 搜索关键词</label>
+                            <div class="col-sm-10">
+                                <div class="form-group">
+                                    <input class="form-control" name="commen_keywords" type="text" maxlength="100" required>
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <label class="col-sm-2 control-label"><span class="label label-danger">必填</span> 添加任务单数</label>
+                            <div class="col-sm-10">
+                                <div class="form-group">
+                                <input class="form-control task_required" name="commen_num" type="number" min="1" required onkeyup="value=value.replace(/[^\d]/,'')" title="一单对应一评语,设置垫付为1">
+                                </div>
+                            </div>
+                        </div>
+
                         <hr>
                     </div>
 
@@ -439,11 +422,13 @@
         if ($('.nav-tabs-custom ul li:eq(0)').is('.active')) {
             $("input[type='radio'].sid").iCheck('uncheck');
             $("input[type='radio'].tasktype").iCheck('uncheck');
+            $("input[type='hidden'].wrap_type").val('0');
             $('.shopname-list').hide();
             $('#check').hide();
         } else {
             $("input[type='radio'].sid").iCheck('uncheck');
             $("input[type='radio'].tasktype").iCheck('uncheck');
+            $("input[type='hidden'].wrap_type").val('1');
             $('.shopname-list').hide();
             $('#check').show();
         }
@@ -480,7 +465,6 @@
                 $("#step1").hide();
                 $('#step2').show();
                 $('div').removeClass('hide');
-                $('span').removeClass('hide');
             } else {
                 $("#step1").hide();
                 $('#step2').show();
@@ -499,18 +483,22 @@
     }
 
     function task_sub() {
-        // $num = $('input[type="text"].commen_num').val()+$('input[type="text"].commen_num').val()+$('input[type="text"].commen_num').val();
-        $('.goods_name').text($('input[type="text"].goods_name').val());
-        $('.goods_url').text($('input[type="text"].goods_url').val());
-        $('.goods_price').text($('input[type="text"].goods_price').val());
-        $('.goods_keyword').text($('input[type="text"].goods_keyword').val());
+        // $price = ($('input[type="text"].goods_price').val()*$('input[type="text"].goods_num').val()+2)*$('input[type="text"].commen_num').val();
+        // $('.goods_name').text($('input[type="text"].goods_name').val());
+        // $('.goods_url').text($('input[type="text"].goods_url').val());
+        // $('.goods_price').text($('input[type="text"].goods_price').val());
+        // $('.goods_keyword').text($('input[type="text"].goods_keyword').val());
 
-        $('.search_key').text($('input[type="text"].commen_keywords').val());
-        $('.order_num').text($('input[type="text"].commen_num').val());
-        $('.order_price').text($('input[type="text"].goods_keyword').val());
-        $('#model_task').modal('toggle');
+        // $('.search_key').text($('input[type="text"].commen_keywords').val());
+        // $('.order_num').text($('input[type="text"].commen_num').val());
+        // $('.order_price').text($price);
+        // $('#model_task').modal('toggle');
         // if()
-        return false;
+        if (confirm("是否确认订单")) {
+                return true;
+            } else {
+                return false;
+            }
     }
 
     // $('.type-check').click(function() {

@@ -185,7 +185,7 @@ class ApiController extends Controller{
         $list = DB::table('order_record as o')
             ->leftJoin('buyer as b','o.buyer','=','b.id')
             ->select('b.name','o.serial','o.type','o.keywords')
-            ->where('serial','=',$serial)
+            ->where('o.serial','=',$serial)
             ->get()
             ->toArray();
 

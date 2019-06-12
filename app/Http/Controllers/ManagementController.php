@@ -98,7 +98,7 @@ class ManagementController extends Controller{
      */
 
     public function publish(Request $request){
-        $step = $request->step;
+        // $step = $request->step;
     
         // if ($step == 1) {
         //     $tasktype = $request->tasktype;
@@ -125,8 +125,8 @@ class ManagementController extends Controller{
 
         //     return redirect()->route('user.release_task')->with(['tasktype' => $tasktype,'sid' => $sid]);
         // }
-        $serial = $request->serial;
-        $wrap_task_type = $request->wrap_task_type;   // 任务类型,0表示垫付任务，1表示浏览任务
+        $serial = date(YmdHsm,time());
+        $wrap_type = $request->wrap_type;   // 任务类型,0表示垫付任务，1表示浏览任务
         $task_type = $request->task_type;
         $task_name = $request->wrap_task_type == 0?'垫付任务':'浏览任务';
 
