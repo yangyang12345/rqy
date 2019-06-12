@@ -123,7 +123,7 @@ class ApiController extends Controller{
      */
     public function order_list(Request $request){
         $wrap_type = $request->wrap_type;
-        $type = $request->type;
+        $platform = $request->platform;
         
         if(empty($type)){
             return response()->json('参数错误');
@@ -132,7 +132,7 @@ class ApiController extends Controller{
         $builder = DB::table('order_record')
             ->select('serial','charge')
             ->where('wrap_type','=',$wrap_type)
-            ->where('type','=',$type)
+            ->where('platform','=',$platform)
             ->where('status','=','0');
 
         $list = $builder->orderBy('ctime', 'desc')->get()->toArray();
