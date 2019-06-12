@@ -125,7 +125,7 @@ class ApiController extends Controller{
         $wrap_type = $request->wrap_type;
         $platform = $request->platform;
         
-        if(empty($type)){
+        if(empty($wrap_type)){
             return response()->json('参数错误');
         }
 
@@ -392,6 +392,7 @@ class ApiController extends Controller{
      */
     public function order_has(Request $request){
         $user_id = $request->id;
+        $status = $request->status;
 
         if(empty($user_id)){
             return response()->json('参数错误');
@@ -399,7 +400,7 @@ class ApiController extends Controller{
 
         $builder = DB::table('order_record')
             ->where('user_id','=',$user_id)
-            ->where('status','=','2');
+            ->where('status','=',$status);
 
         $list = $builder->orderBy('ctime', 'desc')->get()->toArray();
 
