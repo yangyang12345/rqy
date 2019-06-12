@@ -393,14 +393,16 @@ class ApiController extends Controller{
     public function order_has(Request $request){
         $user_id = $request->id;
         $status = $request->status;
+        $wrap_type = $request->wrap_type;
 
-        if(empty($user_id)){
+        if(empty($user_id) || empty($status) || empty($wrap_type)){
             return response()->json('参数错误');
         }
 
         $builder = DB::table('order_record')
             ->where('user_id','=',$user_id)
-            ->where('status','=',$status);
+            ->where('status','=',$status)
+            ->where('wrap_type','=',$wrap_type);
 
         $list = $builder->orderBy('ctime', 'desc')->get()->toArray();
 
