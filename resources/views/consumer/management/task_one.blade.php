@@ -382,10 +382,10 @@
                     <div id="goods_info" class="panel-collapse collapse in">
                         <div class="box-body">
                             <div class="invoice-col">
-                                <strong class="goods_name"></strong><br>
-                                <span class="goods_url" style="word-wrap:break-word"></span><br>
-                                <span class="goods_price"></span><br>
-                                <span class="goods_keyword"></span><br>
+                                <label>商品名称：</label><strong class="goods_name"></strong><br>
+                                <label>商品链接：</label><span class="goods_url" style="word-wrap:break-word"></span><br>
+                                <label>商品价格：</label><span class="goods_price"></span><br>
+                                <label>商品关键字：</label><span class="goods_keyword"></span><br>
                             </div>
                         </div>
                     </div>
@@ -402,9 +402,9 @@
                     <div id="order_info" class="panel-collapse collapse in">
                         <div class="box-body">
                             <div class="invoice-col">
-                                <span class="search_key"></span><br>
-                                <span class="order_num"></span><br>
-                                <span class="order_price"></span><br>
+                                <label>搜索关键字：</label><span class="search_key"></span><br>
+                                <label>订单数目：</label><span class="order_num"></span><br>
+                                <label>订单总价格：</label><span class="order_price"></span><br>
                             </div>
                         </div>
                     </div>
@@ -503,6 +503,10 @@
         $('.goods_url').text($('input[type="text"].goods_url').val());
         $('.goods_price').text($('input[type="text"].goods_price').val());
         $('.goods_keyword').text($('input[type="text"].goods_keyword').val());
+
+        $('.search_key').text($('input[type="text"].commen_keywords').val());
+        $('.order_num').text($('input[type="text"].commen_num').val());
+        $('.order_price').text($('input[type="text"].goods_keyword').val());
         $('#model_task').modal('toggle');
         // if()
         return false;

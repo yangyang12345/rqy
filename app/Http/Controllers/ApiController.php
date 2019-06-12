@@ -336,8 +336,33 @@ class ApiController extends Controller{
 
         $list = $builder->orderBy('ctime', 'desc')->get()->toArray();
 
+        $tb = [];
+        $jd = [];
+        $pdd = [];
+        
+        foreach ($list as $l){
+            $temp = [
+                'id' => $l->id,
+                'name' => $l->name,
+            ];
+            if($l->platform == 0){
+                array_push($tb,$temp);
+            }
+            if($l->platform == 1){
+                array_push($jd,$temp);
+            }
+            if($l->platform == 2){
+                array_push($pdd,$temp);
+            }
+        }
+
+
         $data = [
-            "data"=>$list,
+            "data" => (object)[
+                '0' => $tb,
+                '1' => $jd,
+                '2' => $pdd,
+            ],
         ];
         return response()->json($data);
     }
