@@ -98,6 +98,7 @@ class ManagementController extends Controller{
      */
 
     public function publish(Request $request){
+        
         // $step = $request->step;
     
         // if ($step == 1) {
@@ -125,32 +126,42 @@ class ManagementController extends Controller{
 
         //     return redirect()->route('user.release_task')->with(['tasktype' => $tasktype,'sid' => $sid]);
         // }
-        $serial = date(YmdHsm,time());
+        $user_id = Auth::id();
+        $serial = date('YmdHis',time()).$user_id;
         $wrap_type = $request->wrap_type;   // 任务类型,0表示垫付任务，1表示浏览任务
-        $task_type = $request->task_type;
-        $task_name = $request->wrap_task_type == 0?'垫付任务':'浏览任务';
+        
+        $task_type = $request->tasktype;
+        $task_name = $request->wrap_type == 0?'垫付任务':'浏览任务';
 
-        // 平台类型，1表示淘宝，2表示京东，3表示拼多多
+        // 平台类型，0表示淘宝，1表示京东，2表示拼多多
         if(in_array($task_type,['1,7'])){
-            $platform = 1;
+            $platform = 0;
         }
 
         if(in_array($task_type,['3,9'])){
-            $platform = 2;
+            $platform = 1;
         }
 
         if(in_array($task_type,['7,11'])){
-            $platform = 3;
+            $platform = 2;
         }
     
         $shop_id = $request->sid;
         $goods_name = $request->goods_name;
         $goods_url = $request->goods_url;
         $goods_key = $request->goods_keyword;
-        $goods_price = $request->goods_price;
-        $goods_num = $request->goods_num;
-        $ctime = $request->ctime;
-        $user_id = Auth::id();
+        $goods_price = $request->has('goods_price')?$request->goods_price:'';
+        $goods_num = $request->has('num')?$request->goods_num:'';
+
+        $sort_style = $request->sort_style;
+        $list_price = $request->list_price;
+        $receive_num = $request->receive_num;
+        $filter = $request->filter;
+        $order_msg = $request->order_msg;
+        $commen_keywords = $request->commen_keywords;
+        $commen_num = $request->commen_num;
+
+        $ctime = date('Y-m-d H:i:s',time());
 
         $goods_pic = $request->file('goods_pic');
 
@@ -189,6 +200,14 @@ class ManagementController extends Controller{
                 'goods_pic'=>$photo,
                 'goods_price'=>$goods_price,
                 'goods_num'=>$goods_num,
+                'list_price'=>$list_price,
+                'sort_style'=>$sort_style,
+                'receive_num'=>$receive_num,
+                'filter'=>$filter,
+                'order_msg'=>$order_msg,
+                'commen_keywords'=>$commen_keywords,
+                'commen_num'=>$commen_num,
+                'status'=>0,   
                 'ctime'=>$ctime
             ]
         );

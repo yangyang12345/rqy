@@ -274,7 +274,7 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            <input name="list_price" type="number" class="form-control list_price" onkeyup="if(/[^\d\.]/.test(value))value=0" min="1" step="0.01">
+                                            <input class="form-control" name="receive_num" type="number" min="1" onkeyup="value=value.replace(/[^\d]/,'')">
                                         </div>
                                     </div>
                                 </div>
@@ -310,7 +310,7 @@
                         </table>
                         <div class="row">
                             <label class="col-sm-2 control-label"><span class="label label-danger">必填</span> 搜索关键词</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <input class="form-control" name="commen_keywords" type="text" maxlength="100" required>
                                 </div>
@@ -318,7 +318,7 @@
                         </div>
                         <div class="row">
                             <label class="col-sm-2 control-label"><span class="label label-danger">必填</span> 添加任务单数</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                 <input class="form-control task_required" name="commen_num" type="number" min="1" required onkeyup="value=value.replace(/[^\d]/,'')" title="一单对应一评语,设置垫付为1">
                                 </div>
