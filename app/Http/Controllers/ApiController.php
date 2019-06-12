@@ -125,9 +125,9 @@ class ApiController extends Controller{
         $wrap_type = $request->wrap_type;
         $platform = $request->platform;
         
-        if(empty($wrap_type)){
-            return response()->json('参数错误');
-        }
+        // if(empty($wrap_type)){
+        //     return response()->json('参数错误');
+        // }
 
         $builder = DB::table('order_record')
             ->select('serial','charge')
@@ -395,7 +395,7 @@ class ApiController extends Controller{
         $status = $request->status;
         $wrap_type = $request->wrap_type;
 
-        if(empty($user_id) || empty($status) || empty($wrap_type)){
+        if(empty($user_id) || empty($status)){
             return response()->json('参数错误');
         }
 

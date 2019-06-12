@@ -309,7 +309,7 @@
                         </table>
                         <div class="row">
                             <div class="col-sm-12">
-                                <label class="col-sm-12 control-label"><span class="label label-danger">必填</span>选择添加推广任务类型</label>
+                                <label class="col-sm-12 control-label"><span class="label label-danger">必填</span>填写订单相关信息</label>
                             </div>
                         </div>
                         <div class="row">
@@ -324,18 +324,18 @@
                                             <div class="callout">
                                                 <p> <span class="label label-danger">必填</span>搜索关键词
                                                     <input name="commen_keywords" type="text" maxlength="100" required>
-                                                    <span class="hide">添加垫付
+                                                    <span class="hide">添加任务单数
                                                         <input class="task_required" name="commen_num" type="number" min="1" required onkeyup="value=value.replace(/[^\d]/,'')" title="一单对应一评语,设置垫付为1"> 单
                                                     </span>
                                                 </p>
-                                                <div>添加浏览任务
+                                                <!-- <div>添加浏览任务
                                                     <input name="commen_view_num" type="number" min="1" maxlength="5" onkeyup="value=value.replace(/[^\d]/,'')"> 个 (<span class="flow-price">+0.6 元/个</span>)
                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中
                                                     <input type="checkbox" name="commen_is_fav" value="1"> 收藏商品
                                                     <input type="checkbox" name="commen_is_store" value="1"> 收藏店铺
                                                     <span><input type="checkbox" name="commen_is_cart" value="1"> 加购物车</span>&nbsp;&nbsp;设置
                                                     <input type="number" min="1" name="commen_fav_num" maxlength="5" onkeyup="value=value.replace(/[^\d]/,'')"> 个 (<span class="flow-price">+0.6 元/个</span>)
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
@@ -499,6 +499,7 @@
     }
 
     function task_sub() {
+        // $num = $('input[type="text"].commen_num').val()+$('input[type="text"].commen_num').val()+$('input[type="text"].commen_num').val();
         $('.goods_name').text($('input[type="text"].goods_name').val());
         $('.goods_url').text($('input[type="text"].goods_url').val());
         $('.goods_price').text($('input[type="text"].goods_price').val());
