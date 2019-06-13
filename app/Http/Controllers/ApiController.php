@@ -43,7 +43,7 @@ class ApiController extends Controller{
         ->select('id','name','email','tel','qq','wx','sex')
         ->first();
 
-        return response()->json(["sucess"=>"true","info"=>$info]);
+        return response()->json(["success"=>"true","info"=>$info]);
     }
 
     /**
@@ -79,7 +79,7 @@ class ApiController extends Controller{
         );
 
         if ($Getid){
-            return response()->json('scuccess');
+            return response()->json('success');
         }
     }
 
@@ -312,7 +312,7 @@ class ApiController extends Controller{
         );
 
         if ($Getid){
-            return response()->json('scuccess');
+            return response()->json('success');
         }else{
             return response()->json('系统繁忙，请重试');
         }
