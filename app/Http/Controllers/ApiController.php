@@ -331,8 +331,7 @@ class ApiController extends Controller{
 
         $builder = DB::table('buyer')
             ->select('id','name','platform')
-            ->where('user_id','=',$user_id)
-            ->where('status','=','1');
+            ->where('user_id','=',$user_id);
 
         $list = $builder->orderBy('ctime', 'desc')->get()->toArray();
 
@@ -410,5 +409,110 @@ class ApiController extends Controller{
             "data"=>$list,
         ];
         return response()->json($data);
+    }
+
+    /**
+     * 实名认证信息
+     */
+
+     public function certification_list(Request $request){
+        $user_id = $request->id;
+
+        if(empty($user_id)){
+            return response()->json('参数错误');
+        }
+
+        $builder = DB::table('certification')
+        ->where('user_id','=',$user_id);
+
+        $list = $builder->get()->toArray();
+
+        $data = [
+            "data"=>$list[0],
+        ];
+
+        return response()->json($data);
+        
+     }
+
+     /**
+      * 添加实名认证
+      */
+    public function add_certification(Request $request){
+        $user_id = $request->id;
+        $name = $request->name;
+        $card = $request->card;
+        $pic_front = $request->pic_front;
+        $pic_back = $request->pic_back;
+
+        $Getid = DB::table('certification')->insertGetId(
+            [
+                'user_id'=>$user_id,
+                'name' => $name,
+                'card' => $card,
+                'pic_front' => $pic_front,
+                'pic_back' => $pic_back,
+                'status' => '0',
+                'ctime' => date('Y-m-d H:i:s',time()),
+            ]
+        );
+
+        if ($Getid){
+            return response()->json(array('success'));
+        }else{
+            return response()->json(array('系统繁忙，请重试'));
+        }
+    }
+
+    /**
+     * 银行列表
+     */
+
+    public function bank_list(Request $request){
+        $user_id = $request->id;
+
+        if(empty($user_id)){
+            return response()->json('参数错误');
+        }
+
+        $builder = DB::table('bank')
+        ->where('user_id','=',$user_id);
+
+        $list = $builder->orderBy('ctime', 'desc')->get()->toArray();
+
+        $data = [
+            "data"=>$list,
+        ];
+
+        return response()->json($data);
+    }
+
+    /**
+     * 添加银行
+     */
+    public function add_bank(Request $request){
+        $user_id = $request->id;
+        $name = $request->name;
+        $card = $request->card;
+        $deposit = $request->deposit;
+        $pic_bank = $request->pic_bank;
+
+        $Getid = DB::table('certification')->insertGetId(
+            [
+                'user_id'=>$user_id,
+                'name' => $name,
+                'card' => $card,
+                'deposit' => $deposit,
+                'pic_bank' => $pic_bank,
+                'status' => '0',
+                'ctime' => date('Y-m-d H:i:s',time()),
+            ]
+        );
+
+        if ($Getid){
+            return response()->json(array('success'));
+        }else{
+            return response()->json(array('系统繁忙，请重试'));
+        }
     }
 }

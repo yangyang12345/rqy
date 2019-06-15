@@ -37,3 +37,12 @@ Route::post('/orderHas','ApiController@order_has');
 
 Route::post('/addBuyer','ApiController@add_buyer');
 Route::post('/getBuyerList','ApiController@buyer_list');
+
+// 个人中心
+Route::post('/getCertificationList','ApiController@certification_list');
+Route::post('/addCertification','ApiController@add_certification');
+
+Route::post('/getBankList','ApiController@bank_list');
+Route::post('/addBank','ApiController@add_bank');
+
+
