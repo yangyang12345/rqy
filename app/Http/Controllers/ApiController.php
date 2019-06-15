@@ -505,7 +505,7 @@ class ApiController extends Controller{
         $deposit = $request->deposit;
         $pic_bank = $request->pic_bank;
 
-        $Getid = DB::table('certification')->insertGetId(
+        $Getid = DB::table('bank')->insertGetId(
             [
                 'user_id'=>$user_id,
                 'name' => $name,
