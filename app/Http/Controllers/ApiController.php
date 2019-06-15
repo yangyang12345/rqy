@@ -40,7 +40,7 @@ class ApiController extends Controller{
 
         $info = DB::table('users')
         ->where('tel','=',$tel)
-        ->select('id','name','email','tel','qq','wx','sex')
+        ->select('id','name','password','email','tel','qq','wx','sex')
         ->first();
 
         return response()->json(["success"=>"true","info"=>$info]);
