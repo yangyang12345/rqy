@@ -425,11 +425,19 @@ class ApiController extends Controller{
         $builder = DB::table('certification')
         ->where('user_id','=',$user_id);
 
-        $list = $builder->get()->toArray();
+        $list = $builder->first();
 
-        $data = [
-            "data"=>$list[0],
-        ];
+        if($list){
+            $data = [
+                "data" => $list
+            ];
+        }else{
+            $data = [
+                "data"=> (object)[
+                    'status' => 0
+                ],
+            ];
+        }
 
         return response()->json($data);
         
@@ -452,7 +460,7 @@ class ApiController extends Controller{
                 'card' => $card,
                 'pic_front' => $pic_front,
                 'pic_back' => $pic_back,
-                'status' => '0',
+                'status' => '1',
                 'ctime' => date('Y-m-d H:i:s',time()),
             ]
         );
