@@ -466,9 +466,16 @@ class ApiController extends Controller{
         );
 
         if ($Getid){
-            return response()->json(array('success'));
+            $data = [
+                "status" => 'success'
+            ];
+            return response()->json($data);
         }else{
-            return response()->json(array('系统繁忙，请重试'));
+            $data = [
+                "status" => 'fail',
+                "message" => '系统繁忙，请重试'
+            ];
+            return response()->json($data);
         }
     }
 
@@ -508,19 +515,26 @@ class ApiController extends Controller{
         $Getid = DB::table('bank')->insertGetId(
             [
                 'user_id'=>$user_id,
-                'name' => $name,
-                'card' => $card,
-                'deposit' => $deposit,
-                'pic_bank' => $pic_bank,
-                'status' => '0',
-                'ctime' => date('Y-m-d H:i:s',time()),
+                // 'name' => $name,
+                // 'card' => $card,
+                // 'deposit' => $deposit,
+                // 'pic_bank' => $pic_bank,
+                // 'status' => '0',
+                // 'ctime' => date('Y-m-d H:i:s',time()),
             ]
         );
 
         if ($Getid){
-            return response()->json(array('success'));
+            $data = [
+                "status" => 'success'
+            ];
+            return response()->json($data);
         }else{
-            return response()->json(array('系统繁忙，请重试'));
+            $data = [
+                "status" => 'fail',
+                "message" => '系统繁忙，请重试'
+            ];
+            return response()->json($data);
         }
     }
 }
