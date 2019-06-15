@@ -37,6 +37,7 @@ Route::post('/orderHas','ApiController@order_has');
 
 Route::post('/addBuyer','ApiController@add_buyer');
 Route::post('/getBuyerList','ApiController@buyer_list');
+Route::post('/updateBuyer','ApiController@update_buyer');
 
 // 个人中心
 Route::post('/getCertificationList','ApiController@certification_list');

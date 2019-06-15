@@ -366,6 +366,49 @@ class ApiController extends Controller{
         return response()->json($data);
     }
 
+    /**
+     * 修改买手信息
+     */
+    public function update_buyer(Request $request){
+        $id = $request->id;
+        $name = $request->name;
+        $sex = $request->sex;
+        $Ymd = $request->Ymd;
+        $serial = $request->serial;
+        $receiver_name = $request->receiver_name;
+        $receiver_tel = $request->receiver_tel;
+        $address = $request->adress;
+        $street = $request->street;
+
+        DB::table('buyer')
+            ->where('id', '=', $id)
+            ->update([
+                'name' => $name,
+                'sex' => $sex,
+                'Ymd' => $Ymd,
+                'serial' => $serial,
+                'receiver_name' => $receiver_name,
+                'receiver_tel' => $receiver_tel,
+                'address' => $address,
+                'street' => $street
+            ]);
+
+            $data = [
+                "status" => 'success'
+            ];
+            return response()->json($data);
+        
+            // if ($result){
+                
+            // }else{
+            //     $data = [
+            //         "status" => 'fail',
+            //         "message" => '系统繁忙，请重试'
+            //     ];
+            //     return response()->json($data);
+            // }
+    }
+
 
     /**
      * 任务列表
