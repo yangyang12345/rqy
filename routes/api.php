@@ -18,6 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// 首页接口
+Route::post('/getUserInfo','ApiController@user_info');
+
 // 用于登录，注册
 Route::post('/login','ApiController@app_login');
 Route::post('/register','ApiController@app_register');
@@ -38,6 +41,7 @@ Route::post('/orderHas','ApiController@order_has');
 Route::post('/addBuyer','ApiController@add_buyer');
 Route::post('/getBuyerList','ApiController@buyer_list');
 Route::post('/updateBuyer','ApiController@update_buyer');
+Route::post('/deleteBuyer','ApiController@delete_buyer');
 
 // 个人中心
 Route::post('/getCertificationList','ApiController@certification_list');
@@ -45,5 +49,9 @@ Route::post('/addCertification','ApiController@add_certification');
 
 Route::post('/getBankList','ApiController@bank_list');
 Route::post('/addBank','ApiController@add_bank');
+
+// 提现
+Route::post('/addAdvance','ApiController@add_advance');
+Route::post('/getAdvanceList','ApiController@advance_list');
 
 

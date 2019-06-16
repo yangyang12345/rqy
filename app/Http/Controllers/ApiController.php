@@ -409,6 +409,30 @@ class ApiController extends Controller{
             // }
     }
 
+    /**
+     * 删除买手
+     */
+    public function delete_buyer(Request $request){
+        $id = $request->id;
+
+        $result = DB::table('buyer')
+            ->where('id','=',$id)
+            ->delete();
+
+        if(!empty($result)){
+            $data = [
+                "status" => 'success'
+            ];
+            return response()->json($data);
+        }else{
+            $data = [
+                "status" => 'fail',
+                "message" => '系统繁忙，请重试'
+            ];
+            return response()->json($data);
+        }
+    }
+
 
     /**
      * 任务列表
@@ -558,12 +582,12 @@ class ApiController extends Controller{
         $Getid = DB::table('bank')->insertGetId(
             [
                 'user_id'=>$user_id,
-                // 'name' => $name,
-                // 'card' => $card,
-                // 'deposit' => $deposit,
-                // 'pic_bank' => $pic_bank,
-                // 'status' => '0',
-                // 'ctime' => date('Y-m-d H:i:s',time()),
+                'name' => $name,
+                'card' => $card,
+                'deposit' => $deposit,
+                'pic_bank' => $pic_bank,
+                'status' => '0',
+                'ctime' => date('Y-m-d H:i:s',time()),
             ]
         );
 
@@ -579,5 +603,92 @@ class ApiController extends Controller{
             ];
             return response()->json($data);
         }
+    }
+
+    /**
+     * 用户详情接口
+     */
+    public function user_info(Request $request){
+        $id = $request->id;
+
+        // $sub = DB::table('brokerage_record')
+        //     ->select(['aid'])
+        //     ->selectRaw('max(id) as id')
+        //     ->grouBy('id');
+
+        // $_list = DB::table('a')->leftJoin(DB::raw('({$sub->toSql()}) as b),'a.id','=','b.aid)->get()
+
+        $result = DB::table('brokerage_record')
+            ->where('user_id','=',$id)
+            ->select('balance')
+            ->orderBy('ctime','desc')
+            ->first();
+
+        if($result){
+            $data = [
+                "data"=>$result,
+            ];
+        }else{
+            $data = [
+                "data"=>0,
+            ];
+        }
+
+        return response()->json($data);
+    }
+
+    /**
+     * 本金提现
+     */
+    public function add_advance(Request $request){
+        $user_id = $request->user_id;
+        $bank_id = $request->bank_id;
+        $balance = $request->balance;
+
+        $Getid = DB::table('advance_record')->insertGetId(
+            [
+                'user_id'=>$user_id,
+                'bank_id' => $bank_id,
+                'balance' => $balance,
+                'status' => '0',
+                'ctime' => date('Y-m-d H:i:s',time()),
+            ]
+        );
+
+        if ($Getid){
+            $data = [
+                "status" => 'success'
+            ];
+            return response()->json($data);
+        }else{
+            $data = [
+                "status" => 'fail',
+                "message" => '系统繁忙，请重试'
+            ];
+            return response()->json($data);
+        }
+    }
+
+    /**
+     * 提现记录
+     */
+    public function advance_list(Request $request){
+        $id = $request->id;
+
+        $result = DB::table('advance_record as a')
+            ->leftJoin('users as u','a.user_id','=','u.id')
+            ->leftJoin('bank as b','a.bank_id','=','b.id')
+            ->select('u.name','b.card','a.balance','a.status','a.desc','a.ctime')
+            ->where('a.user_id','=',$id)
+            ->orderBy('a.ctime','desc')
+            ->get()
+            ->toArray();
+
+        $data = [
+            "data"=>$result,
+        ];
+
+        return response()->json($data);
+
     }
 }
