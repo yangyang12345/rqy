@@ -630,7 +630,7 @@ class ApiController extends Controller{
             ];
         }else{
             $data = [
-                "data"=>0,
+                "data"=>['balance'=>'0'],
             ];
         }
 
@@ -644,12 +644,14 @@ class ApiController extends Controller{
         $user_id = $request->user_id;
         $bank_id = $request->bank_id;
         $balance = $request->balance;
+        $serial = date('YmdHis').$user_id;
 
         $Getid = DB::table('advance_record')->insertGetId(
             [
                 'user_id'=>$user_id,
                 'bank_id' => $bank_id,
                 'balance' => $balance,
+                'serial' => $serial,
                 'status' => '0',
                 'ctime' => date('Y-m-d H:i:s',time()),
             ]
@@ -678,7 +680,7 @@ class ApiController extends Controller{
         $result = DB::table('advance_record as a')
             ->leftJoin('users as u','a.user_id','=','u.id')
             ->leftJoin('bank as b','a.bank_id','=','b.id')
-            ->select('u.name','b.card','a.balance','a.status','a.desc','a.ctime')
+            ->select('u.name','b.card','a.balance','a.serial','a.status','a.desc','a.ctime')
             ->where('a.user_id','=',$id)
             ->orderBy('a.ctime','desc')
             ->get()

@@ -127,7 +127,7 @@ class ManagementController extends Controller{
         //     return redirect()->route('user.release_task')->with(['tasktype' => $tasktype,'sid' => $sid]);
         // }
         $user_id = Auth::id();
-        $serial = date('YmdHis',time()).$user_id;
+        $serial = date('YmdHis').$user_id;
         $wrap_type = $request->wrap_type;   // 任务类型,0表示垫付任务，1表示浏览任务
         
         $task_type = $request->tasktype;
