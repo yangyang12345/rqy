@@ -222,18 +222,18 @@ class CheckController extends Controller{
             $length = $request->get('length');
 
 
-            // $name = empty($request->get('name'))?'':$request->get('name');
-            // $status = $request->get('status')==99?'':$request->get('status');
+            $name = empty($request->get('name'))?'':$request->get('name');
+            $status = $request->get('status')==99?'':$request->get('status');
 
             $builder = DB::table('bank');
 
-            // if ($name){
-            //     $builder->where('name','like','%'.$name.'%');
-            // }
+            if ($name){
+                $builder->where('name','like','%'.$name.'%');
+            }
 
-            // if ($status!=''){
-            //     $builder->where('status','=',$status);
-            // }
+            if ($status!=''){
+                $builder->where('status','=',$status);
+            }
 
 
             $total = $builder->count();
@@ -252,11 +252,78 @@ class CheckController extends Controller{
 
     // 实名认证审核
     public function certification(Request $request){
+        if ($request->isMethod('post')) {
+            $draw = $request->get('draw');
+            $start = $request->get('start');
+            $length = $request->get('length');
+
+
+            $name = empty($request->get('name'))?'':$request->get('name');
+            $status = $request->get('status')==99?'':$request->get('status');
+
+            $builder = DB::table('certification as c')
+                ->leftJoin('users as u', 'c.user_id', '=', 'u.id')
+                ->select('c.id','c.name as cname','c.card','c.pic_front','c.pic_back','c.status','u.name as uname');
+
+            if ($name){
+                $builder->where('c.name','like','%'.$name.'%');
+            }
+
+            if ($status!=''){
+                $builder->where('c.status','=',$status);
+            }
+
+
+            $total = $builder->count();
+            $list = $builder->orderBy('c.ctime', 'desc')->offset($start)->take($length)->get()->toArray();
+
+            $data = [
+                "draw"=>$draw,
+                "recordsTotal"=>$total,
+                "recordsFiltered"=>$total,
+                "data"=>$list,
+            ];
+            return response()->json($data);
+        }
         return view('admin/check/certification');
     }
 
     // 提现审批
     public function advance(Request $request){
+        if ($request->isMethod('post')) {
+            $draw = $request->get('draw');
+            $start = $request->get('start');
+            $length = $request->get('length');
+
+
+            $name = empty($request->get('name'))?'':$request->get('name');
+            $status = $request->get('status')==99?'':$request->get('status');
+
+            $builder = DB::table('advance_record as c')
+                ->leftJoin('users as u', 'c.user_id', '=', 'u.id')
+                ->leftJoin('bank as b', 'c.bank_id', '=', 'b.id')
+                ->select('c.id','c.serial','c.balance','c.status','c.ctime','u.name','b.card');
+
+            if ($name){
+                $builder->where('u.name','like','%'.$name.'%');
+            }
+
+            if ($status!=''){
+                $builder->where('c.status','=',$status);
+            }
+
+
+            $total = $builder->count();
+            $list = $builder->orderBy('c.ctime', 'desc')->offset($start)->take($length)->get()->toArray();
+
+            $data = [
+                "draw"=>$draw,
+                "recordsTotal"=>$total,
+                "recordsFiltered"=>$total,
+                "data"=>$list,
+            ];
+            return response()->json($data);
+        }
         return view('admin/check/advance');
     }
 }

@@ -97,8 +97,10 @@ Route::prefix('admin')->group(function(){
     Route::post('check/bank/list','CheckController@bank')->name('check.bank.getList')->middleware('auth');
 
     Route::get('check/certification','CheckController@certification')->name('admin.certification')->middleware('auth');
+    Route::post('check/certification/list','CheckController@certification')->name('check.certification.getList')->middleware('auth');
 
     Route::get('check/advance','CheckController@advance')->name('admin.advance')->middleware('auth');
+    Route::post('check/advance/list','CheckController@advance')->name('check.advance.getList')->middleware('auth');
 });
 
 //Route::resource('users', 'UserController');

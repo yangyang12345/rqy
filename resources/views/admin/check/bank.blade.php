@@ -8,15 +8,7 @@
                     <h3 class="box-title">店铺审批</h3>
                     <div class="box-tools form-inline">
                         <div class="form-group">
-                            <input type="text" placeholder="用户名称" id="user" name="user" value="" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <select class="form-control" id="type" name="type">
-                                <option value="99">店铺类型</option>
-                                <option value="0">淘宝</option>
-                                <option value="1">京东</option>
-                                <option value="2">拼多多</option>
-                            </select>
+                            <input type="text" placeholder="用户名称" id="name" name="name" value="" class="form-control">
                         </div>
                         <div class="form-group">
                             <select class="form-control" id="status" name="status">
@@ -39,13 +31,12 @@
                                        aria-describedby="shop_table" style="width:100%">
                                     <thead>
                                     <tr role="row">
-                                        <th>用户姓名</th>
-                                        <th>店铺名称</th>
-                                        <th>店铺截图</th>
-                                        <th>发货信息</th>
-                                        <th>控制店铺接单间隔</th>
+                                        <th>持卡人姓名</th>
+                                        <th>卡号</th>
+                                        <th>开户银行</th>
+                                        <th>银行卡照片</th>
                                         <th>审核状态</th>
-                                        <th>用户名称</th>
+                                        <th>时间</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -72,51 +63,24 @@
                     "type":"post",
                     "data": function (data) {
                         data._token = "{{csrf_token()}}"
-                        data.user = $('#user').val();
-                        data.type = $('#type').val();
+                        data.name = $('#name').val();
                         data.status = $('#status').val();
                     }
                 },
                 "columns": [
-                    {'data':'type',"defaultContent": " ",'className':''},
-                    {'data':'store_name',"defaultContent": " ",'className':''},
-                    {'data':'url',"defaultContent": " ",'className':''},
-                    {'data':'province',"defaultContent": " ",'className':''},
-                    {'data':'gap_day',"defaultContent": " ",'className':''},
+                    {'data':'name',"defaultContent": " ",'className':''},
+                    {'data':'card',"defaultContent": " ",'className':''},
+                    {'data':'deposit',"defaultContent": " ",'className':''},
+                    {'data':'pic_bank',"defaultContent": " ",'className':''},
                     {'data':'status',"defaultContent": " ",'className':''},
-                    {'data':'user_id',"defaultContent": " ",'className':''},
+                    {'data':'ctime',"defaultContent": " ",'className':''},
                     {'data':'',"defaultContent": " ",'className':''},
                 ],
                 "columnDefs": [
+                   
                     {
                         "render": function (data, type, row) {
-                            if (data == 0){
-                                return '<img src="{{ asset('images/t.png') }}"><span>淘宝</span>'
-                            }else if(data == 1){
-                                return '<img src="{{ asset('images/j.png') }}"><span>京东</span>'
-                            }else if (data == 2){
-                                return '<img src="{{ asset('images/p.png') }}"><span>拼多多</span>'
-                            }
-                        },
-                        "targets": 0
-                    },
-                    {
-                        "render": function (data, type, row) {
-                            return '<p>'+row.store_name+'</p>'+
-                                '<p>'+row.wangwang+'</p>';
-                        },
-                        "targets": 1
-                    },
-                    {
-                        "render": function (data, type, row) {
-                            return '<img width="50" height="50" src="'+row.photo+'"><br>'+'<a href="'+row.url+'" target="_blank">查看店铺</a>'
-                        },
-                        "targets": 2
-                    },
-                    {
-                        "render": function (data, type, row) {
-                            return '<p>发货电话：'+row.tel+'</p>'+
-                                '<p>'+row.province+row.city+row.district+row.street+'</p>';
+                            return '<img width="50" height="50" src="'+data+'">'
                         },
                         "targets": 3
                     },
@@ -130,7 +94,7 @@
                                 return '<span><small class="label bg-red">失败</small></span>'
                             }
                         },
-                        "targets": 5
+                        "targets": 4
                     },
                     {
                         "render": function (data, type, row) {
@@ -138,7 +102,7 @@
                                 return '<a href="#" title="审核" class="fa fa-edit check"></a>'
                             }
                         },
-                        "targets": 7
+                        "targets": 6
                     },
                 ],
                 "language": {

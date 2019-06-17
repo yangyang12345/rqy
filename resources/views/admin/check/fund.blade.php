@@ -60,6 +60,7 @@
             </div>
         </div>
     </div>
+    
     @push('datatable-js')
         <script type="text/javascript">
             $dataTable = $("#fund_table");
