@@ -112,61 +112,151 @@ class CheckController extends Controller{
 
 
     // 店铺审核
-    public function shop(){
+    public function shop(Request $request){
+
+        if ($request->isMethod('post')) {
+            $draw = $request->get('draw');
+            $start = $request->get('start');
+            $length = $request->get('length');
+
+
+            $user = empty($request->get('user'))?'':$request->get('user');
+            $type = $request->get('type')==99?'':$request->get('type');
+            $status = $request->get('status')==99?'':$request->get('status');
+
+            $builder = DB::table('shop');
+
+            if ($user){
+                $builder->where('user_id','like','%'.$user.'%');
+            }
+
+            if ($type!=''){
+                $builder->where('type','=',$type);
+            }
+
+            if ($status!=''){
+                $builder->where('status','=',$status);
+            }
+
+
+            $total = $builder->count();
+            $list = $builder->orderBy('ctime', 'desc')->offset($start)->take($length)->get()->toArray();
+
+            $data = [
+                "draw"=>$draw,
+                "recordsTotal"=>$total,
+                "recordsFiltered"=>$total,
+                "data"=>$list,
+            ];
+            return response()->json($data);
+        }
+
         return view('admin/check/shop');
     }
 
-    public function shop_list(Request $request){
-        $draw = $request->get('draw');
-        $start = $request->get('start');
-        $length = $request->get('length');
+    public function shop_check(Request $request){
+        $id = $request->id;
+        if($request->isMethod('post')){
+             //审核通过
+             DB::table('shop')
+              ->where('id', '=',$id)
+              ->update([
+                  'status' => 1,
+                  ]);
 
-        $user = empty($request->get('user'))?'':$request->get('user');
-        $type = $request->get('type')==99?'':$request->get('type');
-        $status = $request->get('status')==99?'':$request->get('status');
-
-        $builder = DB::table('shop');
-
-        if ($user){
-            $builder->where('user_id','like','%'.$user.'%');
+        return redirect()->route('admin.shop')->with('success','审批成功');
         }
-
-        if ($type!=''){
-            $builder->where('type','=',$type);
-        }
-
-        if ($status!=''){
-            $builder->where('status','=',$status);
-        }
-
-
-        $total = $builder->count();
-        $list = $builder->orderBy('ctime', 'desc')->offset($start)->take($length)->get()->toArray();
-
-        $data = [
-            "draw"=>$draw,
-            "recordsTotal"=>$total,
-            "recordsFiltered"=>$total,
-            "data"=>$list,
-        ];
-        return response()->json($data);
-    }
-
-    public function shop_list_test(){
-
-        $builder = DB::table('shop');
-
-        $list = $builder->orderBy('ctime', 'desc')->get()->toArray();
-
-        $data = [
-            "data"=>$list,
-        ];
-        return response()->json($data);
+        $data = DB::table('shop as s')
+            ->leftJoin('users as u','s.user_id','=','u.id')
+            ->select('s.id','u.name','s.type','s.store_name','s.wangwang','s.url','s.province','s.city','s.district','s.street','s.tel','s.photo','s.status','s.ctime')
+            ->where('s.id','=',$id)
+            ->first();
+        return view('admin/check/shop_comfire',['data'=>$data]);
     }
 
 
     //买手审核
-    public function buyer(){
+    public function buyer(Request $request){
+
+        if ($request->isMethod('post')) {
+            $draw = $request->get('draw');
+            $start = $request->get('start');
+            $length = $request->get('length');
+
+
+            $name = empty($request->get('name'))?'':$request->get('name');
+            $status = $request->get('status')==99?'':$request->get('status');
+
+            $builder = DB::table('buyer');
+
+            if ($name){
+                $builder->where('name','like','%'.$name.'%');
+            }
+
+            if ($status!=''){
+                $builder->where('status','=',$status);
+            }
+
+
+            $total = $builder->count();
+            $list = $builder->orderBy('ctime', 'desc')->offset($start)->take($length)->get()->toArray();
+
+            $data = [
+                "draw"=>$draw,
+                "recordsTotal"=>$total,
+                "recordsFiltered"=>$total,
+                "data"=>$list,
+            ];
+            return response()->json($data);
+        }
+
         return view('admin/check/buyer');
+    }
+
+    // 银行卡审核
+    public function bank(Request $request){
+
+        if ($request->isMethod('post')) {
+            $draw = $request->get('draw');
+            $start = $request->get('start');
+            $length = $request->get('length');
+
+
+            // $name = empty($request->get('name'))?'':$request->get('name');
+            // $status = $request->get('status')==99?'':$request->get('status');
+
+            $builder = DB::table('bank');
+
+            // if ($name){
+            //     $builder->where('name','like','%'.$name.'%');
+            // }
+
+            // if ($status!=''){
+            //     $builder->where('status','=',$status);
+            // }
+
+
+            $total = $builder->count();
+            $list = $builder->orderBy('ctime', 'desc')->offset($start)->take($length)->get()->toArray();
+
+            $data = [
+                "draw"=>$draw,
+                "recordsTotal"=>$total,
+                "recordsFiltered"=>$total,
+                "data"=>$list,
+            ];
+            return response()->json($data);
+        }
+        return view('admin/check/bank');
+    }
+
+    // 实名认证审核
+    public function certification(Request $request){
+        return view('admin/check/certification');
+    }
+
+    // 提现审批
+    public function advance(Request $request){
+        return view('admin/check/advance');
     }
 }

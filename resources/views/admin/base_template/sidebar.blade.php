@@ -44,6 +44,9 @@
                     <li class="padding_l_20 {{ active_class(if_route('admin.fund')) }}"><a href="{{ route('admin.fund') }}"><i class="fa fa-circle-o"></i> <span>充值审批</span></a></li>
                     <li class="padding_l_20 {{ active_class(if_route('admin.shop')) }}"><a href="{{ route('admin.shop') }}"><i class="fa fa-circle-o"></i> <span>店铺审批</span></a></li>
                     <li class="padding_l_20 {{ active_class(if_route('admin.buyer')) }}"><a href="{{ route('admin.buyer') }}"><i class="fa fa-circle-o"></i> <span>买手审批</span></a></li>
+                    <li class="padding_l_20 {{ active_class(if_route('admin.bank')) }}"><a href="{{ route('admin.bank') }}"><i class="fa fa-circle-o"></i> <span>银行卡审批</span></a></li>
+                    <li class="padding_l_20 {{ active_class(if_route('admin.certification')) }}"><a href="{{ route('admin.certification') }}"><i class="fa fa-circle-o"></i> <span>实名认证</span></a></li>
+                    <li class="padding_l_20 {{ active_class(if_route('admin.advance')) }}"><a href="{{ route('admin.advance') }}"><i class="fa fa-circle-o"></i> <span>提现审批</span></a></li>
                 </ul>
             </li>
             {{--<li class="{{ active_class(if_uri_pattern('users')) }}"><a href="{{ url('/users') }}"><i class="fa fa-user"></i> <span>成员管理</span></a></li>--}}

@@ -16,6 +16,7 @@ class ManagementController extends Controller{
         $user_id = Auth::id();
         $shops = DB::table('shop')
             ->where('user_id','=',$user_id)
+            ->where('status','=','1')
             ->get();
             // $capital = DB::table('capital_record as c')
             //     ->leftJoin('users as u','c.user_id','=','u.id')

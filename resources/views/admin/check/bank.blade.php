@@ -1,10 +1,5 @@
 @extends('admin/base_template/dashboard')
 @section('content')
-    @if(!empty(session('success')))
-        　　<div class="alert alert-success" role="alert">
-            　　　　{{session('success')}}
-        </div>
-    @endif
     <div class="row">
         <div class="col-xs-12">
 
@@ -44,13 +39,13 @@
                                        aria-describedby="shop_table" style="width:100%">
                                     <thead>
                                     <tr role="row">
-                                        <th>店铺类型</th>
+                                        <th>用户姓名</th>
                                         <th>店铺名称</th>
                                         <th>店铺截图</th>
                                         <th>发货信息</th>
                                         <th>控制店铺接单间隔</th>
                                         <th>审核状态</th>
-                                        <!-- <th>用户名称</th> -->
+                                        <th>用户名称</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -73,7 +68,7 @@
                 "pageLength": 15,
                 "lengthMenu": [15, 20, 25, 30],
                 "ajax": {
-                    "url": "{{ route('check.shop.getList') }}",
+                    "url": "{{ route('check.bank.getList') }}",
                     "type":"post",
                     "data": function (data) {
                         data._token = "{{csrf_token()}}"
@@ -89,7 +84,7 @@
                     {'data':'province',"defaultContent": " ",'className':''},
                     {'data':'gap_day',"defaultContent": " ",'className':''},
                     {'data':'status',"defaultContent": " ",'className':''},
-                    // {'data':'user_id',"defaultContent": " ",'className':''},
+                    {'data':'user_id',"defaultContent": " ",'className':''},
                     {'data':'',"defaultContent": " ",'className':''},
                 ],
                 "columnDefs": [
@@ -140,10 +135,10 @@
                     {
                         "render": function (data, type, row) {
                             if (row.status == '0'){
-                                return '<a href="{{ route('check.shop') }}/'+row.id+'" title="审核" class="fa fa-edit check"></a>'
+                                return '<a href="#" title="审核" class="fa fa-edit check"></a>'
                             }
                         },
-                        "targets": 6
+                        "targets": 7
                     },
                 ],
                 "language": {

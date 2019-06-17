@@ -84,11 +84,21 @@ Route::prefix('admin')->group(function(){
     Route::any('fund/check/{id?}','CheckController@fund_check')->name('check.fund')->middleware('auth');
     Route::post('fund/confim','CheckController@fund_confim')->name('check.fund.confim')->middleware('auth');
 
+    // 店铺审核
     Route::get('check/shop','CheckController@shop')->name('admin.shop')->middleware('auth');
-    Route::post('shop/list','CheckController@shop_list')->name('check.shop.getList')->middleware('auth');
+    Route::post('check/shop/list','CheckController@shop')->name('check.shop.getList')->middleware('auth');
+    Route::any('check/shop/{id?}','CheckController@shop_check')->name('check.shop')->middleware('auth');
 
     // 买手审核
     Route::get('check/buyer','CheckController@buyer')->name('admin.buyer')->middleware('auth');
+    Route::post('check/buyer/list','CheckController@buyer')->name('check.buyer.getList')->middleware('auth');
+
+    Route::get('check/bank','CheckController@bank')->name('admin.bank')->middleware('auth');
+    Route::post('check/bank/list','CheckController@bank')->name('check.bank.getList')->middleware('auth');
+
+    Route::get('check/certification','CheckController@certification')->name('admin.certification')->middleware('auth');
+
+    Route::get('check/advance','CheckController@advance')->name('admin.advance')->middleware('auth');
 });
 
 //Route::resource('users', 'UserController');
