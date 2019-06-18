@@ -299,7 +299,7 @@ class ApiController extends Controller{
         $pic = $request->pic;
         $alipay_order = $request->alipay_order;
         $fee = $request->fee;
-        $Getid = DB::table('buyer')->insertGetId(
+        $Getid = DB::table('complete_record')->insertGetId(
             [
                 'user_id' => $user_id,
                 'serial'=> $serial,
