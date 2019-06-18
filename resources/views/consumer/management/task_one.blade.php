@@ -20,7 +20,7 @@
 </div>
 @endif
 
-<form method="post" onsubmit="return task_sub()" enctype="multipart/form-data" id="task" action="{{ route('user.release_task.publish') }}">
+<form method="post" onsubmit="return task_sub()" enctype="multipart/form-data" id="task" action="{{ route('user.release_task') }}">
     @csrf
     <div class="row" id="step1">
         <div class="col-sm-12">
@@ -100,7 +100,7 @@
                                                 @foreach($shops as $shop)
                                                 @if($shop->type==0)
                                                 <div class="col-sm-3">
-                                                    <input class="tasktype sid" name="sid" type="radio" value="{{ $shop->id }}" title="{{ $shop->store_name }}">
+                                                    <input class="sid" name="sid" type="radio" value="{{ $shop->id }}" title="{{ $shop->store_name }}">
                                                     <span class="label label-warning">淘宝</span> {{ $shop->store_name }}
                                                 </div>
                                                 @endif
@@ -112,7 +112,7 @@
                                                 @foreach($shops as $shop)
                                                 @if($shop->type==1)
                                                 <div class="col-sm-3">
-                                                    <input class="tasktype sid" name="sid" type="radio" value="{{ $shop->id }}" title="{{ $shop->store_name }}">
+                                                    <input class="sid" name="sid" type="radio" value="{{ $shop->id }}" title="{{ $shop->store_name }}">
                                                     <span class="label label-warning">京东</span> {{ $shop->store_name }}
                                                 </div>
                                                 @endif
@@ -124,7 +124,7 @@
                                                 @foreach($shops as $shop)
                                                 @if($shop->type==2)
                                                 <div class="col-sm-3">
-                                                    <input class="tasktype sid" name="sid" type="radio" value="{{ $shop->id }}" title="{{ $shop->store_name }}">
+                                                    <input class="sid" name="sid" type="radio" value="{{ $shop->id }}" title="{{ $shop->store_name }}">
                                                     <span class="label label-warning">拼多多</span> {{ $shop->store_name }}
                                                 </div>
                                                 @endif
