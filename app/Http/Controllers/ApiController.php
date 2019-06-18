@@ -215,9 +215,17 @@ class ApiController extends Controller{
             ->update($update);
 
         if($result){
-            return response()->json('sucess');
+            $data = [
+                "status" => 'success',
+                "msg" => '订单已取消'
+            ];
+            return response()->json($data);
         }else{
-            return response()->json('取消失败，请重试');
+            $data = [
+                "status" => 'fail',
+                "msg" => '取消失败，请重试'
+            ];
+            return response()->json($data);
         }
     }
 
@@ -268,9 +276,53 @@ class ApiController extends Controller{
             // if ($Getid){
             //     return response()->json('scuccess');
             // }
-            return response()->json('scuccess');
+            $data = [
+                "status" => 'success',
+                "msg" => '订单完成'
+            ];
+            return response()->json($data);
         }else{
-            return response()->json('系统繁忙，请重试');
+            $data = [
+                "status" => 'fail',
+                "msg" => '系统繁忙，请重试'
+            ];
+            return response()->json($data);
+        }
+    }
+
+    /**
+     * 垫付任务完成订单
+     */
+    public function order_complete_df(Request $request){
+        $serial = $request->serial;
+        $user_id = $request->id;
+        $pic = $request->pic;
+        $alipay_order = $request->alipay_order;
+        $fee = $request->fee;
+        $Getid = DB::table('buyer')->insertGetId(
+            [
+                'user_id' => $user_id,
+                'serial'=> $serial,
+                'pic' => $pic,
+                'alipay_order' => $alipay_order,
+                'fee' => $fee,
+                'status' => '0',
+                'ctime' => date('Y-m-d H:i:s',time()),
+            ]
+        );
+
+        if ($Getid){
+            $data = [
+                "status" => 'success',
+                "msg" => '已完成,请等待商家审核'
+            ];
+            return response()->json($data);
+        }else{
+            $data = [
+                "status" => 'fail',
+                "msg" => '系统繁忙，请重试'
+            ];
+            return response()->json($data);
         }
     }
 
