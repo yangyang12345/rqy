@@ -406,7 +406,7 @@ class ApiController extends Controller{
         }
 
         $builder = DB::table('buyer')
-            ->select('id','name','platform')
+            ->select('id','name','platform','status')
             ->where('user_id','=',$user_id);
 
         $list = $builder->orderBy('ctime', 'desc')->get()->toArray();

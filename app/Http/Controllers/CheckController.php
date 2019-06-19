@@ -213,6 +213,31 @@ class CheckController extends Controller{
         return view('admin/check/buyer');
     }
 
+    public function buyer_check(Request $request){
+        if (!$request->has('buyer_id')){
+            return redirect()->route('admin.buyer')->with('fail','请规范操作');
+        }
+        $id = $request->buyer_id;
+        $s = $request->submit;
+        if($s == 'nopass'){
+            $status = 2;
+        }
+        if($s == 'pass'){
+            $status = 1;
+        }
+
+        $result = DB::table('buyer')
+            ->where('id', '=',$id)
+            ->update([
+                'status' => $status,
+        ]);
+
+        if($result){
+            return redirect()->route('admin.buyer')->with('success','审核成功');
+        }
+        return redirect()->route('admin.buyer')->with('fail','审核失败，系统繁忙，请重试');
+    }
+
     // 银行卡审核
     public function bank(Request $request){
 
@@ -248,6 +273,31 @@ class CheckController extends Controller{
             return response()->json($data);
         }
         return view('admin/check/bank');
+    }
+
+    public function bank_check(Request $request){
+        if (!$request->has('bank_id')){
+            return redirect()->route('admin.bank')->with('fail','请规范操作');
+        }
+        $id = $request->bank_id;
+        $s = $request->submit;
+        if($s == 'nopass'){
+            $status = 2;
+        }
+        if($s == 'pass'){
+            $status = 1;
+        }
+
+        $result = DB::table('bank')
+            ->where('id', '=',$id)
+            ->update([
+                'status' => $status,
+        ]);
+
+        if($result){
+            return redirect()->route('admin.bank')->with('success','审核成功');
+        }
+        return redirect()->route('admin.bank')->with('fail','审核失败，系统繁忙，请重试');
     }
 
     // 实名认证审核
@@ -286,6 +336,31 @@ class CheckController extends Controller{
             return response()->json($data);
         }
         return view('admin/check/certification');
+    }
+
+    public function certification_check(Request $request){
+        if (!$request->has('certification_id')){
+            return redirect()->route('admin.certification')->with('fail','请规范操作');
+        }
+        $id = $request->certification_id;
+        $s = $request->submit;
+        if($s == 'nopass'){
+            $status = 3;
+        }
+        if($s == 'pass'){
+            $status = 2;
+        }
+
+        $result = DB::table('certification')
+            ->where('id', '=',$id)
+            ->update([
+                'status' => $status,
+        ]);
+
+        if($result){
+            return redirect()->route('admin.certification')->with('success','审核成功');
+        }
+        return redirect()->route('admin.certification')->with('fail','审核失败，系统繁忙，请重试');
     }
 
     // 提现审批

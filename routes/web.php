@@ -92,12 +92,15 @@ Route::prefix('admin')->group(function(){
     // 买手审核
     Route::get('check/buyer','CheckController@buyer')->name('admin.buyer')->middleware('auth');
     Route::post('check/buyer/list','CheckController@buyer')->name('check.buyer.getList')->middleware('auth');
+    Route::post('check/buyer/check','CheckController@buyer_check')->name('check.buyer.check')->middleware('auth');
 
     Route::get('check/bank','CheckController@bank')->name('admin.bank')->middleware('auth');
     Route::post('check/bank/list','CheckController@bank')->name('check.bank.getList')->middleware('auth');
+    Route::post('check/bank/check','CheckController@bank_check')->name('check.bank.check')->middleware('auth');
 
     Route::get('check/certification','CheckController@certification')->name('admin.certification')->middleware('auth');
     Route::post('check/certification/list','CheckController@certification')->name('check.certification.getList')->middleware('auth');
+    Route::post('check/certification/check','CheckController@certification_check')->name('check.certification.check')->middleware('auth');
 
     Route::get('check/advance','CheckController@advance')->name('admin.advance')->middleware('auth');
     Route::post('check/advance/list','CheckController@advance')->name('check.advance.getList')->middleware('auth');

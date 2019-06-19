@@ -1,11 +1,21 @@
 @extends('admin/base_template/dashboard')
 @section('content')
+@if(!empty(session('success')))
+        <div class="alert alert-success" role="alert">
+        	{{session('success')}}
+        </div>
+@endif
+@if(!empty(session('fail')))
+        <div class="alert alert-danger" role="alert">
+        	{{session('fail')}}
+        </div>
+@endif
     <div class="row">
         <div class="col-xs-12">
 
             <div class="box box-primary">
                 <div class="box-header">
-                    <h3 class="box-title">店铺审批</h3>
+                    <h3 class="box-title">银行卡审批</h3>
                     <div class="box-tools form-inline">
                         <div class="form-group">
                             <input type="text" placeholder="用户名称" id="name" name="name" value="" class="form-control">
@@ -15,7 +25,7 @@
                                 <option value="99">状态</option>
                                 <option value="0">审核中</option>
                                 <option value="1">审核通过</option>
-                                <option value="2">失败</option>
+                                <option value="2">审核未通过</option>
                             </select>
                         </div>
 
@@ -48,6 +58,53 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="model_bank" tabindex="-1" role="dialog" data-backdrop="false" data-keyboard="false" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form method="post" action="{{ route('check.bank.check') }}">
+        @csrf
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel" style="display: inline-block">
+                    银行账号审核确认
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <input name="bank_id" class="bank_id" type="hidden" value="">
+                <div class="panel">
+                    <div class="box-header with-border">
+                        <h4 class="box-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#goods_info">
+                                银行卡详情
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="goods_info" class="panel-collapse collapse in">
+                        <div class="box-body">
+                            <div class="invoice-col">
+                                <label>银行卡账号：</label><strong class="card"></strong><br>
+                                <label>所属分行：</label><span class="deposit"></span><br>
+                                <label>持卡人姓名</label><span class="name"></span><br>
+                                <label>照片：</label><br><img width="400px" src="" class="pic_bank">
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-red">请仔细审核，审核无误后审批通过</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="submit" name="submit" value="nopass" class="btn btn-danger">审批不通过</button>
+                <button type="submit" name="submit" value="pass" class="btn btn-primary">审批通过</button>
+            </div>
+        </div>
+    </div>
+    </form>
+    
+</div>
     @push('datatable-js')
         <script type="text/javascript">
             $dataTable = $("#shop_table");
@@ -80,7 +137,7 @@
                    
                     {
                         "render": function (data, type, row) {
-                            return '<img width="50" height="50" src="'+data+'">'
+                            return '<img width="50" height="50" src="data:image/jpg;base64,'+data+'">'
                         },
                         "targets": 3
                     },
@@ -91,15 +148,16 @@
                             } else if (data == 1) {
                                 return '<span><small class="label bg-green">审核通过</small></span>';
                             } else if(data == 2){
-                                return '<span><small class="label bg-red">失败</small></span>'
+                                return '<span><small class="label bg-red">审核未通过</small></span>'
                             }
                         },
                         "targets": 4
                     },
                     {
                         "render": function (data, type, row) {
+                            var value = JSON.stringify(row);
                             if (row.status == '0'){
-                                return '<a href="#" title="审核" class="fa fa-edit check"></a>'
+                                return "<a onclick='confirm(" + value + ")' title='审核' class='fa fa-edit check'></a>"
                             }
                         },
                         "targets": 6
@@ -122,6 +180,15 @@
             $('#btn_search').click(function () {
                 table.draw();
             });
+
+            function confirm(row) {
+                $(".card").text(row.card);
+                $(".deposit").text(row.deposit);
+                $(".name").text(row.name);
+                $(".pic_bank").attr("src",'data:image/jpg;base64,'+row.pic_bank);
+                $(".bank_id").val(row.id);
+                $('#model_bank').modal('toggle');
+            }
         </script>
     @endpush
 @endsection

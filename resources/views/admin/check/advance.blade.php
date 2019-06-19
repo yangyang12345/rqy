@@ -5,7 +5,7 @@
 
             <div class="box box-primary">
                 <div class="box-header">
-                    <h3 class="box-title">店铺审批</h3>
+                    <h3 class="box-title">提现审批</h3>
                     <div class="box-tools form-inline">
                         <div class="form-group">
                             <input type="text" placeholder="用户名称" id="name" name="name" value="" class="form-control">
