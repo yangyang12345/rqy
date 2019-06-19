@@ -103,7 +103,7 @@ Route::prefix('admin')->group(function(){
     Route::post('check/advance/list','CheckController@advance')->name('check.advance.getList')->middleware('auth');
 });
 
-//Route::resource('users', 'UserController');
+Route::resource('users', 'UserController');
 Route::resource('permissions', 'PermissionController');
 Route::resource('roles', 'RoleController');
 

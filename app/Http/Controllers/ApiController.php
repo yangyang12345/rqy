@@ -299,6 +299,11 @@ class ApiController extends Controller{
         $pic = $request->pic;
         $alipay_order = $request->alipay_order;
         $fee = $request->fee;
+
+        $result = DB::table('order_record')
+            ->where('serial','=',$serial)
+            ->update(['status'=>3]);
+
         $Getid = DB::table('complete_record')->insertGetId(
             [
                 'user_id' => $user_id,
@@ -506,7 +511,7 @@ class ApiController extends Controller{
     }
 
     /**
-     * 已完成订单
+     * 查询订单状态
      */
     public function order_has(Request $request){
         $user_id = $request->id;
