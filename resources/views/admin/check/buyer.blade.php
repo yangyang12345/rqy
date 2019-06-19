@@ -66,6 +66,65 @@
             </div>
           </div>
         </div>
+
+<div class="modal fade" id="model_buyer" tabindex="-1" role="dialog" data-backdrop="false" data-keyboard="false" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel" style="display: inline-block">
+                    订单确认
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="panel">
+                    <div class="box-header with-border">
+                        <h4 class="box-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#goods_info">
+                                商品基本信息
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="goods_info" class="panel-collapse collapse in">
+                        <div class="box-body">
+                            <div class="invoice-col">
+                                <label>商品名称：</label><strong class="goods_name"></strong><br>
+                                <label>商品链接：</label><span class="goods_url" style="word-wrap:break-word"></span><br>
+                                <label>商品价格：</label><span class="goods_price"></span><br>
+                                <label>商品关键字：</label><span class="goods_keyword"></span><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="box-header with-border">
+                        <h4 class="box-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#order_info">
+                                订单基本信息
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="order_info" class="panel-collapse collapse in">
+                        <div class="box-body">
+                            <div class="invoice-col">
+                                <label>搜索关键字：</label><span class="search_key"></span><br>
+                                <label>订单数目：</label><span class="order_num"></span><br>
+                                <label>订单总价格：</label><span class="order_price"></span><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="submit" name="submit" class="btn btn-primary">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
     @push('datatable-js')
         <script type="text/javascript">
             $dataTable = $("#shop_table");
@@ -135,7 +194,7 @@
                     {
                         "render": function (data, type, row) {
                             if (row.status == '0'){
-                                return '<a href="#" title="审核" class="fa fa-edit check"></a>'
+                                return '<a href="#" onclick="confirm('+row.id+')" title="审核" class="fa fa-edit check"></a>'
                             }
                         },
                         "targets": 7
@@ -158,6 +217,11 @@
             $('#btn_search').click(function () {
                 table.draw();
             });
+
+            function confirm(id){
+                $('#model_buyer').modal('toggle');
+
+            }
         </script>
     @endpush
 @endsection
