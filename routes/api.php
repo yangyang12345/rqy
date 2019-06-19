@@ -38,6 +38,8 @@ Route::post('/orderComplete','ApiController@order_complete');
 
 Route::post('/orderCompleteDF','ApiController@order_complete_df');
 
+Route::post('/orderDfCheck','ApiController@order_df_check');
+
 Route::post('/orderHas','ApiController@order_has');
 
 Route::post('/addBuyer','ApiController@add_buyer');

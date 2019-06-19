@@ -332,6 +332,25 @@ class ApiController extends Controller{
     }
 
     /**
+     * 垫付任务商家审核通过返款
+     */
+    public function order_df_check(Request $request){
+        $serial = $request->serial;
+
+        $list = DB::table('order_record as o')
+            ->leftJoin('buyer as b','o.buyer','=','b.id')
+            ->leftJoin('complete_record as c','c.serial','=','o.serial')
+            ->select('b.name','o.serial','o.ctime','o.charge','o.price','c.status','c.alipay_order')
+            ->where('o.serial','=',$serial)
+            ->first();
+
+        $data = [
+            "data"=>$list,
+        ];
+        return response()->json($data);
+    }
+
+    /**
      * 添加买手
      */
 
