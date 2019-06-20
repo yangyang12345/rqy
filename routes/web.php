@@ -24,7 +24,7 @@ Route::prefix('user')->group(function () {
     Route::post('management/release_task/pay', 'ManagementController@pay')->name('user.release_task.pay')->middleware('auth');
 
     Route::get('management/advance_duty', 'ManagementController@advance')->name('user.advance_duty')->middleware('auth');
-    Route::post('management/advance_duty', 'ManagementController@advance_list')->name('advance_duty.getList')->middleware('auth');
+    Route::post('management/advance_duty', 'ManagementController@advance')->name('advance_duty.getList')->middleware('auth');
 
     Route::get('management/browse_task', 'ManagementController@browse')->name('user.browse_task')->middleware('auth');
     Route::post('management/browse_task', 'ManagementController@browse_list')->name('browse.getList')->middleware('auth');

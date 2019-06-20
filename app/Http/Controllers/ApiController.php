@@ -365,7 +365,7 @@ class ApiController extends Controller{
         $serial = $request->serial;
         $receiver_name = $request->receiver_name;
         $receiver_tel = $request->receiver_tel;
-        $address = $request->adress;
+        $address = $request->address;
         $street = $request->street;
 
         $Getid = DB::table('buyer')->insertGetId(

@@ -5,6 +5,25 @@
             <div class="box box-primary">
                 <div class="box-header">
                     <h3 class="box-title">垫付任务管理</h3>
+                    <div class="box-tools form-inline">
+                    <div class="form-group">
+                        <input type="text" placeholder="商品名称" id="name" name="name" value="" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="流水号" id="serial" name="serial" value="" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" id="status" name="status">
+                            <option value="99">状态</option>
+                            <option value="0">审核中</option>
+                            <option value="1">审核通过</option>
+                            <option value="2">审核未通过</option>
+                        </select>
+                    </div>
+
+                    <a class="btn btn-primary btn-sm" title='搜索' id="btn_search" href="javascript:void(0)"><i class="fa fa-search"></i>搜索</a>
+
+                </div>
                 </div>
                 <div class="box-body">
                     <div id="advance" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -17,7 +36,7 @@
                                         <th>流水号</th>
                                         <th>商品名称</th>
                                         <th>商品图片</th>
-                                        <th>商家信息</th>
+                                        <th>订单数据</th>
                                         <th>订单时间</th>
                                         <th>操作</th>
                                     </tr>
