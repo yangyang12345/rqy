@@ -182,6 +182,7 @@ class ManagementController extends Controller{
     }
 
     public function pay(Request $request){
+        
         $pay = $request->pay;
         $user_id = Auth::id();
         $money = DB::table('capital_record')

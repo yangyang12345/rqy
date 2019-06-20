@@ -400,14 +400,22 @@ class ApiController extends Controller{
      */
     public function buyer_list(Request $request){
         $user_id = $request->id;
+        $status = $request->status;
 
         if(empty($user_id)){
             return response()->json('参数错误');
         }
 
-        $builder = DB::table('buyer')
+        if($request->has('status')){
+            $builder = DB::table('buyer')
+            ->select('id','name','platform','status')
+            ->where('user_id','=',$user_id)
+            ->where('status','=',$status);
+        }else{
+            $builder = DB::table('buyer')
             ->select('id','name','platform','status')
             ->where('user_id','=',$user_id);
+        }
 
         $list = $builder->orderBy('ctime', 'desc')->get()->toArray();
 
@@ -440,6 +448,23 @@ class ApiController extends Controller{
             ],
         ];
         return response()->json($data);
+    }
+
+    /**
+     * 买手详情
+     */
+    public function buyer_info(Request $request){
+        $id = $request->id;
+
+        $info = DB::table('buyer')
+            ->where('id','=',$id)
+            ->first();
+
+        $data = [
+            'data'=>$info
+        ];
+        
+        return response()->json($data);  
     }
 
     /**

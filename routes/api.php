@@ -44,6 +44,7 @@ Route::post('/orderHas','ApiController@order_has');
 
 Route::post('/addBuyer','ApiController@add_buyer');
 Route::post('/getBuyerList','ApiController@buyer_list');
+Route::post('/getBuyerInfo','ApiController@buyer_info');
 Route::post('/updateBuyer','ApiController@update_buyer');
 Route::post('/deleteBuyer','ApiController@delete_buyer');
 
