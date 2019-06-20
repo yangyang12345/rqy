@@ -15,16 +15,33 @@
             <div class="box box-primary">
                 <div class="box-header"><h5 class="box-title">任务详情</h5></div>
                 <div class="box-body">
+                {{ $task }}
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <th style="width: 10px">#</th>
-                                <th>Task</th>
+                                <th>商品详情</th>
                                 <th>Progress</th>
                                 <th style="width: 40px">Label</th>
                             </tr>
                             <tr>
-                                <td>1.</td>
+                                <td>Update software</td>
+                                <td>
+                                    <div class="progress progress-xs">
+                                        <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                     </div>
+                                    </td>
+                                    <td><span class="badge bg-red">55%</span></td>
+                            </tr>
+                            <tr>
+                                <td>Update software</td>
+                                <td>
+                                    <div class="progress progress-xs">
+                                        <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                     </div>
+                                    </td>
+                                    <td><span class="badge bg-red">55%</span></td>
+                            </tr>
+                            <tr>
                                 <td>Update software</td>
                                 <td>
                                     <div class="progress progress-xs">

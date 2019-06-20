@@ -166,6 +166,7 @@ class ManagementController extends Controller{
         $task = DB::table('task_record')
             ->where('id','=',$id)
             ->first();
+            
         return view('consumer/management/info',['task'=>$task]);
     }
 
