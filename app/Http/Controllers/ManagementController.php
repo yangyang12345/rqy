@@ -142,7 +142,7 @@ class ManagementController extends Controller{
         );
 
         if ($Getid){
-            return redirect()->route('user.release_task.info',['id'=>$Getid]);
+            return redirect()->route('user.release_task.info',['id'=>$Getid,'wrap_type'=>$wrap_type]);
         }
         }
 
@@ -162,12 +162,35 @@ class ManagementController extends Controller{
     }
 
     public function info(Request $request){
+        $user_id = Auth::id();
+        if(!$request->has('id')) return redirect()->route('user.center');
+        if(!$request->has('wrap_type')) return redirect()->route('user.center');
         $id = $request->id;
-        $task = DB::table('task_record')
-            ->where('id','=',$id)
-            ->first();
-            
-        return view('consumer/management/info',['task'=>$task]);
+        $wrap_type = $request->wrap_type;
+
+        if($wrap_type == 0){
+            $task = DB::table('task_record')
+                        ->where('id','=',$id)
+                        ->first();
+            $money = DB::table('capital_record')
+                        ->where('user_id','=',$user_id)
+                        ->select('balance')
+                        ->orderByDesc('ctime')
+                        ->first();
+            return view('consumer/management/info',['task'=>$task,'money'=>$money]);
+        } 
+    }
+
+    public function pay(Request $request){
+        $pay = $request->pay;
+        $user_id = Auth::id();
+        $money = DB::table('capital_record')
+                    ->where('user_id','=',$user_id)
+                    ->select('balance')
+                    ->orderByDesc('ctime')
+                    ->first();
+
+        // if($money > $money->)
     }
 
     public function advance(){
