@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Crypt;
 
 class ManagementController extends Controller
 {
@@ -143,7 +144,7 @@ class ManagementController extends Controller
             );
 
             if ($Getid) {
-                return redirect()->route('user.release_task.info', ['id' => $Getid, 'wrap_type' => $wrap_type]);
+                return redirect()->route('user.release_task.info', ['id' => Crypt::encrypt($Getid), 'wrap_type' => $wrap_type]);
             }
         }
 
@@ -166,7 +167,9 @@ class ManagementController extends Controller
         $user_id = Auth::id();
         if (!$request->has('id')) return redirect()->route('user.center');
         if (!$request->has('wrap_type')) return redirect()->route('user.center');
-        $id = $request->id;
+
+        $id = Crypt::decrypt($request->id);
+
         $wrap_type = $request->wrap_type;
 
         if ($wrap_type == 0) {
@@ -186,14 +189,19 @@ class ManagementController extends Controller
     {
 
         $pay = $request->pay;
+        $id = Crypt::decrypt($request->id);
+        $wrap_type = $request->wrap_type;
         $user_id = Auth::id();
         $money = DB::table('capital_record')
             ->where('user_id', '=', $user_id)
             ->select('balance')
             ->orderByDesc('ctime')
             ->first();
-
-        // if($money > $money->)
+        $pay = '1000000';
+        // dd($pay > $money->balance);
+        if($pay > $money->balance){
+            return redirect()->route('user.release_task.info', ['id' => Crypt::encrypt($id), 'wrap_type' => $wrap_type])->with('errros','您的账户余额不足，请先充值！');
+        }
     }
 
     public function advance(Request $request)

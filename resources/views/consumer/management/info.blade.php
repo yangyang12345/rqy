@@ -5,9 +5,9 @@
     {{session('success')}}
 </div>
 @endif
-@if(!empty(session('fail')))
+@if(!empty(session('errors')))
 <div class="alert alert-danger" role="alert">
-    {{session('fail')}}
+    {{session('errors')}}
 </div>
 @endif
 <div class="row">
@@ -110,7 +110,9 @@
                         <form method="post" action="{{ route('user.release_task.pay') }}">
                         @csrf
                             <input type="hidden" name="pay" value="{{ ($task->goods_price*$task->goods_num+2)*$task->commen_num }}">
-                            <button type="submit" name="submit" class="btn btn-success btn-lg"">立即付款</button>
+                            <input type="hidden" name="id" value="{{ Crypt::encrypt($task->id) }}">
+                            <input type="hidden" name="wrap_type" value="{{ $task->wrap_type }}">
+                            <button type="submit" name="money" class="btn btn-success btn-lg"">立即付款</button>
                         </form>
                         </div>
                     </div>

@@ -81,6 +81,17 @@
                         },
                         "targets": 2
                     },
+                    {
+                        "render": function(data, type, row) {
+                            // var value = JSON.stringify(row);
+                            
+                            // if (row.status == '0') {
+                                return '<a title="查看详情" onclick="basic_info('+row.id+')" class="fa fa-eye"></a>'
+        
+                            // }
+                    },
+                "targets": 5
+            },
                 ],
                 "language": {
                     processing: "数据加载中...",
@@ -99,6 +110,17 @@
             $('#btn_search').click(function () {
                 table.draw();
             });
+
+            function basic_info(id){
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('user.release_task.info') }}?_token={{csrf_token()}}",
+                    data: {id:id, wrap_type:0},
+                    success: function(data){
+                         
+                    }
+                });
+            }
         </script>
     @endpush
 @endsection
