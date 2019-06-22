@@ -1,5 +1,15 @@
 @extends('admin/base_template/dashboard')
 @section('content')
+    @if(!empty(session('success')))
+        <div class="alert alert-success" role="alert">
+        	{{session('success')}}
+        </div>
+	@endif
+	@if(!empty(session('fail')))
+        <div class="alert alert-danger" role="alert">
+        	{{session('fail')}}
+        </div>
+    @endif
     <div class="row">
         <div class="col-xs-12">
             <div class="box box-primary">
@@ -88,9 +98,9 @@
                             if (data == 0) {
                                 return '<span><small class="label bg-red">未付款</small></span>';
                             } else if (data == 1) {
-                                return '<span><small class="label bg-green">已付款</small></span>';
+                                return '<span><small class="label bg-yellow">已取消</small></span>';
                             } else if(data == 2){
-                                return '<span><small class="label bg-yellow">已取消</small></span>'
+                                return '<span><small class="label bg-green">已付款</small></span>'
                             } else if(data == 3){
                                 return '<span><small class="label bg-yellow">待审核</small></span>'
                             } else if(data == 4){
@@ -108,7 +118,7 @@
                             html += '<a title="查看详情" onclick="basic_info('+row.id+')" class="fa fa-eye"></a>&nbsp;&nbsp;';
 
                             if (row.status == 0){
-                                html += '<a title="取消任务" href="route" class="fa fa-trash"></a>'
+                                html += '<a title="取消任务" href="{{ route("user.release_task.delete") }}?id='+row.id+'" class="fa fa-trash"></a>'
                             }
                                     
                             return html;

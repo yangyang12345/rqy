@@ -427,13 +427,13 @@ class ApiController extends Controller{
      */
     public function buyer_list(Request $request){
         $user_id = $request->id;
-        $status = $request->status;
 
         if(empty($user_id)){
             return response()->json('参数错误');
         }
 
         if($request->has('status')){
+            $status = $request->status;
             $builder = DB::table('buyer')
             ->select('id','name','platform','status')
             ->where('user_id','=',$user_id)
@@ -681,13 +681,21 @@ class ApiController extends Controller{
     public function bank_list(Request $request){
         $user_id = $request->id;
 
-        if(empty($user_id)){
-            return response()->json('参数错误');
-        }
+        // if(empty($user_id)){
+        //     return response()->json('参数错误');
+        // }
 
         $builder = DB::table('bank')
         ->where('user_id','=',$user_id);
 
+        if($request->has('status')){
+            $status = $request->status;
+
+            $builder = $builder->where('status','=',$status);
+
+        }
+
+    
         $list = $builder->orderBy('ctime', 'desc')->get()->toArray();
 
         $data = [

@@ -190,9 +190,25 @@ class ManagementController extends Controller
      */
     public function change_id(Request $request){
         $id = $request->id;
-        
+
         return response()->json(['id'=>Crypt::encrypt($id)]);
     }
+
+    public function delete(Request $request){
+        $id = $request->id;
+
+        $result = DB::table('task_record')
+            ->where('id', '=', $id)
+            ->update([
+                'status' => '1',
+            ]);
+        
+        if($result){
+            return redirect()->route('user.advance_duty')->with('success','取消任务成功');
+        }else{
+            return redirect()->route('user.advance_duty')->with('fail','系统繁忙，请稍后再试');
+        }
+    } 
 
     public function pay(Request $request)
     {

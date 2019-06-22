@@ -30,6 +30,8 @@ Route::prefix('user')->group(function () {
     Route::get('management/browse_task', 'ManagementController@browse')->name('user.browse_task')->middleware('auth');
     Route::post('management/browse_task', 'ManagementController@browse_list')->name('browse.getList')->middleware('auth');
 
+    Route::get('management/release_task/delete', 'ManagementController@delete')->name('user.release_task.delete')->middleware('auth');
+
     Route::get('funds/{type}', 'FundsController@index',function (){
         echo active_class(if_route('user.funds'), 'active', '');
     })->name('user.funds')->middleware('auth');
