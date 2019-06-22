@@ -185,6 +185,15 @@ class ManagementController extends Controller
         }
     }
 
+    /**
+     * 用于换一个加密的id
+     */
+    public function change_id(Request $request){
+        $id = $request->id;
+        
+        return response()->json(['id'=>Crypt::encrypt($id)]);
+    }
+
     public function pay(Request $request)
     {
 

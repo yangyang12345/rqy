@@ -35,8 +35,9 @@
                                     <tr role="row">
                                         <th>流水号</th>
                                         <th>商品名称</th>
-                                        <th>商品图片</th>
+                                        <th>关键字</th>
                                         <th>订单数据</th>
+                                        <th>任务状态</th>
                                         <th>订单时间</th>
                                         <th>操作</th>
                                     </tr>
@@ -69,28 +70,50 @@
                 "columns": [
                     {'data':'serial',"defaultContent": " ",'className':''},
                     {'data':'goods_name',"defaultContent": " ",'className':''},
-                    {'data':'goods_pic',"defaultContent": " ",'className':''},
-                    {'data':'shop_id',"defaultContent": " ",'className':''},
+                    {'data':'goods_key',"defaultContent": " ",'className':''},
+                    {'data':'commen_num',"defaultContent": " ",'className':''},
+                    {'data':'status',"defaultContent": " ",'className':''},
                     {'data':'ctime',"defaultContent": " ",'className':''},
                     {'data':'',"defaultContent": " ",'className':''},
                 ],
                 "columnDefs": [
                     {
                         "render": function (data, type, row) {
-                            return '<img width="50" height="50" src="'+data+'">'
+                            return '<span>共'+data+'单</span>'
                         },
-                        "targets": 2
+                        "targets": 3
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            if (data == 0) {
+                                return '<span><small class="label bg-red">未付款</small></span>';
+                            } else if (data == 1) {
+                                return '<span><small class="label bg-green">已付款</small></span>';
+                            } else if(data == 2){
+                                return '<span><small class="label bg-yellow">已取消</small></span>'
+                            } else if(data == 3){
+                                return '<span><small class="label bg-yellow">待审核</small></span>'
+                            } else if(data == 4){
+                                return '<span><small class="label bg-red">审核失败</small></span>'
+                            } else if(data == 5){
+                                return '<span><small class="label bg-green">审核通过，已发布</small></span>'
+                            }
+                        },
+                        "targets": 4
                     },
                     {
                         "render": function(data, type, row) {
-                            // var value = JSON.stringify(row);
-                            
-                            // if (row.status == '0') {
-                                return '<a title="查看详情" onclick="basic_info('+row.id+')" class="fa fa-eye"></a>'
-        
-                            // }
+                            var html = ''
+
+                            html += '<a title="查看详情" onclick="basic_info('+row.id+')" class="fa fa-eye"></a>&nbsp;&nbsp;';
+
+                            if (row.status == 0){
+                                html += '<a title="取消任务" href="route" class="fa fa-trash"></a>'
+                            }
+                                    
+                            return html;
                     },
-                "targets": 5
+                "targets": 6
             },
                 ],
                 "language": {
@@ -114,10 +137,10 @@
             function basic_info(id){
                 $.ajax({
                     type: "POST",
-                    url: "{{ route('user.release_task.info') }}?_token={{csrf_token()}}",
-                    data: {id:id, wrap_type:0},
+                    url: "{{ route('user.release_task.id') }}?_token={{csrf_token()}}",
+                    data: {id:id},
                     success: function(data){
-                         
+                        window.location.href="{{ route('user.release_task.info') }}?id="+data.id+"&wrap_type=0"; 
                     }
                 });
             }

@@ -152,9 +152,23 @@ class ApiController extends Controller{
         $buyer = $request->buyer;
         $id = $request->id;
 
-        if(empty($serial) || empty($buyer) || empty($id)){
-            return response()->json('参数错误');
+        // 判断是否实名认证
+        $cer = DB::table('certification')
+            ->where('user_id','=',$id)
+            ->where('status','=','2')
+            ->first();
+        
+        if(!$cer){
+            $data = [
+                "status" => 'fail',
+                "msg" => '您的账户还未实名认证，请先实名认证在重试！'
+            ];
+            return response()->json($data);
         }
+
+        // if(empty($serial) || empty($buyer) || empty($id)){
+        //     return response()->json('参数错误');
+        // }
 
         $update = array(
             'user_id'=> $id,
@@ -168,9 +182,17 @@ class ApiController extends Controller{
             ->update($update);
 
         if($result){
-            return response()->json('sucess');
+            $data = [
+                "status" => 'sucess',
+                "msg" => '接单成功'
+            ];
+            return response()->json($data);
         }else{
-            return response()->json('此游戏已被他人选择，请重新选择');
+            $data = [
+                "status" => 'fail',
+                "msg" => '此游戏已被他人选择，请重新选择'
+            ];
+            return response()->json($data);
         }
     }
 
@@ -203,7 +225,11 @@ class ApiController extends Controller{
     public function order_off(Request $request){
         $serial = $request->serial;
         if(empty($serial)){
-            return response()->json('参数错误');
+            $data = [
+                "status" => 'fail',
+                "msg" => '参数错误'
+            ];
+            return response()->json($data);
         }
         $update = array(
             'user_id'=> '',
