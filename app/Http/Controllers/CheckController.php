@@ -157,7 +157,7 @@ class CheckController extends Controller{
 
         $now = DB::table('task_record as t')
             ->leftJoin('shop as s', 't.shop_id', '=', 's.id')
-            ->select('t.id', 't.user_id', 't.wrap_type', 't.task_type', 't.goods_key', 's.store_name', 't.goods_url', 't.total','t.commen_num')
+            ->select('t.id', 't.user_id', 't.wrap_type', 't.task_type', 't.goods_key', 's.store_name', 't.goods_url', 't.total','t.commen_num','t.platform')
             ->where('t.id', '=', $id)
             ->first();
 
@@ -205,6 +205,7 @@ class CheckController extends Controller{
                     'goods_url' => $now->goods_url,
                     'status' => 0,
                     'charge' => $now->wrap_type==0?'2':'0.5',
+                    'platform' => $now->platform,
                     'ctime' => date('Y-m-d h:i:s',time())
                 ];
                 array_push($order_list,$temp);
@@ -220,9 +221,9 @@ class CheckController extends Controller{
         ]);
 
         if($result){
-            return redirect()->route('admin.buyer')->with('success','审核成功，未通过的任务将会返款，通过的任务将会发布订单！');
+            return redirect()->route('admin.task')->with('success','审核成功，未通过的任务将会返款，通过的任务将会发布订单！');
         }
-        return redirect()->route('admin.buyer')->with('fail','审核失败，系统繁忙，请重试');
+        return redirect()->route('admin.task')->with('fail','审核失败，系统繁忙，请重试');
     }
 
 
