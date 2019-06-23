@@ -27,6 +27,7 @@
                     <li class="padding_l_20 {{ active_class(if_route('user.browse_task')) }}"><a href="{{ route('user.browse_task') }}"><i class="fa fa-circle-o"></i>浏览任务管理</a></li>
                 </ul>
             </li>
+            <li class="{{ active_class(if_route('user.funds')) }}"><a href="{{ url('/user/funds/capital') }}"><i class="fa fa-cubes"></i> <span>垫付任务订单管理</span></a></li>
             <li class="{{ active_class(if_route('user.funds')) }}"><a href="{{ url('/user/funds/capital') }}"><i class="fa fa-credit-card"></i> <span>资金明细</span></a></li>
             <li class="{{ active_class(if_route('user.bind')) }}"><a href="{{ url('/user/bind') }}"><i class="fa fa-link"></i> <span>店铺管理</span></a></li>
             <li class="{{ active_class(if_route('user.explain')) }}"><a href="{{ url('/user/explain') }}"><i class="fa fa-exclamation-circle"></i> <span>申述中心</span></a></li>

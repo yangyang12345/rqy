@@ -468,6 +468,7 @@ class ApiController extends Controller{
             $temp = [
                 'id' => $l->id,
                 'name' => $l->name,
+                'status' => $l->status,
             ];
             if($l->platform == 0){
                 array_push($tb,$temp);
@@ -793,8 +794,44 @@ class ApiController extends Controller{
     public function add_advance(Request $request){
         $user_id = $request->user_id;
         $bank_id = $request->bank_id;
-        $balance = $request->balance;
+        $money = $request->balance;
         $serial = date('YmdHis').$user_id;
+
+        $m = DB::table('brokerage_record')
+                ->where('user_id', '=', $user_id)
+                ->orderByDesc('ctime')
+                ->select('balance')
+                ->first();
+            
+            if($m){
+                $balance = $m->balance;
+            }else{
+                $balance = 0;
+            }
+
+            if($balance < $money){
+                $data = [
+                    "status" => 'fail',
+                    "message" => '提现金额大于余额，请重新再试!'
+                ];
+                return response()->json($data);
+            }
+
+            $balance = $balance - $money;
+
+            DB::table('brokerage_record')->insert(
+                [
+                    'user_id'=>$user_id,
+                    'type' => '4',
+                    'in_out' => '1',
+                    'content' => '提现',
+                    'quota' => $money,
+                    'balance' => $balance,
+                    'ctime' => date('Y-m-d H:i:s',time()),
+                ]
+            );
+
+
 
         $Getid = DB::table('advance_record')->insertGetId(
             [
