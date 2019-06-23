@@ -26,11 +26,9 @@
                                 <select class="form-control" id="type" name="type">
                                     <option value="99">筛选类型</option>
                                     <option value="0">本金充值</option>
-                                    <option value="1">管理员调节</option>
-                                    <option value="2">发布任务</option>
-                                    <option value="3">返款多退少补</option>
-                                    <option value="4">撤销任务退款</option>
-                                    <option value="5">佣金转本金</option>
+                                    <option value="1">发布任务</option>
+                                    <option value="2">撤销任务退款</option>
+                                    <option value="3">佣金转本金</option>
                                 </select>
                             </div>
 

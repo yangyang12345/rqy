@@ -110,6 +110,119 @@ class CheckController extends Controller{
 
     }
 
+    // 任务审批
+    public function task(Request $request){
+        if ($request->isMethod('post')) {
+            $draw = $request->get('draw');
+            $start = $request->get('start');
+            $length = $request->get('length');
+
+
+            $serial = empty($request->get('serial'))?'':$request->get('serial');
+            $status = $request->get('status')==99?'':$request->get('status');
+
+            $builder = DB::table('task_record')->whereNotIn('status',[0,1]);
+
+            if ($serial){
+                $builder->where('serial','like','%'.$serial.'%');
+            }
+
+            if ($status!=''){
+                $builder->where('status','=',$status);
+            }
+
+
+            $total = $builder->count();
+            $list = $builder->orderBy('ctime', 'desc')->offset($start)->take($length)->get()->toArray();
+
+            $data = [
+                "draw"=>$draw,
+                "recordsTotal"=>$total,
+                "recordsFiltered"=>$total,
+                "data"=>$list,
+            ];
+            return response()->json($data);
+        }
+        return view('admin/check/task');
+    }
+
+    public function task_check(Request $request){
+        if (!$request->has('task_id')){
+            return redirect()->route('admin.task')->with('fail','请规范操作');
+        }
+        $id = $request->task_id;
+        $user_id = Auth::id();
+        $s = $request->submit;
+
+         
+         $now = DB::table('task_record')
+         ->where('id', '=', $id)
+         ->first();
+
+        if($s == 'nopass'){
+            $status = 3;
+
+           // 如果审核没通过就退款
+
+            $pre = DB::table('capital_record')
+                ->where('user_id', '=', $user_id)
+                ->select('balance')
+                ->orderByDesc('ctime')
+                ->first();
+
+            $money = $now->total+$pre->balance;
+
+            $Getid = DB::table('capital_record')->insertGetId(
+                [
+                    'user_id' => $user_id,
+                    'type' => '2',
+                    'in_out' => '0',
+                    'content' => '撤销任务退款',
+                    'quota' => $now->total,
+                    'balance' => $money,
+                    'ctime' => date('Y-m-d h:i:s', time())
+                ]
+            );
+            
+        }
+        if($s == 'pass'){
+            $status = 4;
+
+            // 如果审核通过就发布订单
+            $order_list = [];
+
+            for ($n=0; $n<$now->commen_num; $n++) {
+                $temp = [
+                    'user_id' => $user_id,
+                    'wrap_type' => $now->wrap_type,
+                    'type' => $now->task_type,
+                    'serial' => date('YmdHis').substr(microtime(), 2, 5) . mt_rand(10000,99999).$user_id,
+                    'keywords' => $now->goods_key,
+                    'task' => $now->id,
+                    'shop' => $now->shop_id,
+                    'goods_url' => $now->goods_url,
+                    'status' => 0,
+                    'charge' => $now->wrap_type==0?'2':'0.5',
+                    'ctime' => date('Y-m-d h:i:s',time())
+                ];
+                array_push($order_list,$temp);
+            } 
+
+            $r = DB::table('order_record')->insert($order_list);
+        }
+
+        $result = DB::table('task_record')
+            ->where('id', '=',$id)
+            ->update([
+                'status' => $status,
+        ]);
+
+        if($result){
+            return redirect()->route('admin.buyer')->with('success','审核成功，未通过的任务将会返款，通过的任务将会发布订单！');
+        }
+        return redirect()->route('admin.buyer')->with('fail','审核失败，系统繁忙，请重试');
+    }
+
 
     // 店铺审核
     public function shop(Request $request){

@@ -92,6 +92,12 @@ class ManagementController extends Controller
             $ctime = date('Y-m-d H:i:s', time());
 
             $goods_pic = $request->file('goods_pic');
+            if ($wrap_type == 0){
+                $total = ($goods_price*$goods_num+2+2)*$commen_num;
+            }
+            if ($wrap_type == 1){
+                $total = $commen_num*0.5;
+            }
 
             // 文件是否上传成功
             if ($goods_pic->isValid()) {
@@ -139,6 +145,7 @@ class ManagementController extends Controller
                     'commen_keywords' => $commen_keywords,
                     'commen_num' => $commen_num,
                     'status' => 0,
+                    'total' => $total,
                     'ctime' => $ctime
                 ]
             );
@@ -183,18 +190,32 @@ class ManagementController extends Controller
                 ->first();
             return view('consumer/management/info', ['task' => $task, 'money' => $money]);
         }
+
+        if ($wrap_type == 1) {
+            $task = DB::table('task_record')
+                ->where('id', '=', $id)
+                ->first();
+            $money = DB::table('capital_record')
+                ->where('user_id', '=', $user_id)
+                ->select('balance')
+                ->orderByDesc('ctime')
+                ->first();
+            return view('consumer/management/info_browse', ['task' => $task, 'money' => $money]);
+        }
     }
 
     /**
      * 用于换一个加密的id
      */
-    public function change_id(Request $request){
+    public function change_id(Request $request)
+    {
         $id = $request->id;
 
-        return response()->json(['id'=>Crypt::encrypt($id)]);
+        return response()->json(['id' => Crypt::encrypt($id)]);
     }
 
-    public function delete(Request $request){
+    public function delete(Request $request)
+    {
         $id = $request->id;
 
         $result = DB::table('task_record')
@@ -202,13 +223,13 @@ class ManagementController extends Controller
             ->update([
                 'status' => '1',
             ]);
-        
-        if($result){
-            return redirect()->route('user.advance_duty')->with('success','取消任务成功');
-        }else{
-            return redirect()->route('user.advance_duty')->with('fail','系统繁忙，请稍后再试');
+
+        if ($result) {
+            return redirect()->route('user.advance_duty')->with('success', '取消任务成功');
+        } else {
+            return redirect()->route('user.advance_duty')->with('fail', '系统繁忙，请稍后再试');
         }
-    } 
+    }
 
     public function pay(Request $request)
     {
@@ -222,10 +243,30 @@ class ManagementController extends Controller
             ->select('balance')
             ->orderByDesc('ctime')
             ->first();
-        $pay = '1000000';
-        // dd($pay > $money->balance);
-        if($pay > $money->balance){
-            return redirect()->route('user.release_task.info', ['id' => Crypt::encrypt($id), 'wrap_type' => $wrap_type])->with('errros','您的账户余额不足，请先充值！');
+
+        if ($pay > $money->balance) {
+            return redirect()->route('user.release_task.info', ['id' => Crypt::encrypt($id), 'wrap_type' => $wrap_type])->with('errros', '您的账户余额不足，请先充值！');
+        }
+
+        $balance = $money->balance-$pay;
+
+        $Getid = DB::table('capital_record')->insertGetId(
+            [
+                'user_id' => $user_id,
+                'type' => '1',
+                'in_out' => '1',
+                'content' => '发布任务',
+                'quota' => $pay,
+                'balance' => $balance,
+                'ctime'=>date('Y-m-d h:i:s',time())
+            ]
+        );
+
+        if ($Getid){
+            $money = DB::table('task_record')
+            ->where('id', '=', $id)
+            ->update(['status'=>'2']);
+            return redirect()->route('user.release_task.info', ['id' => Crypt::encrypt($id), 'wrap_type' => $wrap_type])->with('success', '您已付款，请等待管理员审核！');
         }
     }
 
@@ -239,9 +280,25 @@ class ManagementController extends Controller
 
             $user_id = Auth::id();
 
+            $serial = empty($request->serial) ? '' : $request->serial;
+            $name = empty($request->name) ? '' : $request->name;
+            $status = $request->status == 99 ? '' : $request->status;
+
             $builder = DB::table('task_record')
                 ->where('user_id', '=', $user_id)
                 ->where('wrap_type', '=', '0');
+
+            if ($serial) {
+                $builder->where('serial', 'like', '%' . $serial . '%');
+            }
+
+            if ($name) {
+                $builder->where('goods_name', 'like', '%' . $name . '%');
+            }
+
+            if ($status != '') {
+                $builder->where('status', '=', $status);
+            }
 
 
             $total = $builder->count();
@@ -259,35 +316,48 @@ class ManagementController extends Controller
         return view('consumer/management/advance');
     }
 
-    function browse()
+    function browse(Request $request)
     {
+        if ($request->isMethod('post')) {
+            $draw = $request->get('draw');
+            $start = $request->get('start');
+            $length = $request->get('length');
+
+            $user_id = Auth::id();
+
+            $serial = empty($request->serial) ? '' : $request->serial;
+            $name = empty($request->name) ? '' : $request->name;
+            $status = $request->status == 99 ? '' : $request->status;
+
+            $builder = DB::table('task_record')
+                ->where('user_id', '=', $user_id)
+                ->where('wrap_type', '=', '1');
+
+            if ($serial) {
+                $builder->where('serial', 'like', '%' . $serial . '%');
+            }
+
+            if ($name) {
+                $builder->where('goods_name', 'like', '%' . $name . '%');
+            }
+
+            if ($status != '') {
+                $builder->where('status', '=', $status);
+            }
+
+
+            $total = $builder->count();
+            $list = $builder->orderBy('ctime', 'desc')->offset($start)->take($length)->get()->toArray();
+
+            $data = [
+                "draw" => $draw,
+                "recordsTotal" => $total,
+                "recordsFiltered" => $total,
+                "data" => $list,
+            ];
+            return response()->json($data);
+        }
         return view('consumer/management/browse');
-    }
-
-    public function browse_list(Request $request)
-    {
-        $draw = $request->get('draw');
-        $start = $request->get('start');
-        $length = $request->get('length');
-
-        $user_id = Auth::id();
-
-
-        $builder = DB::table('task_record')
-            ->where('user_id', '=', $user_id)
-            ->where('task_type', '=', '1');
-
-
-        $total = $builder->count();
-        $list = $builder->orderBy('ctime', 'desc')->offset($start)->take($length)->get()->toArray();
-
-        $data = [
-            "draw" => $draw,
-            "recordsTotal" => $total,
-            "recordsFiltered" => $total,
-            "data" => $list,
-        ];
-        return response()->json($data);
     }
 
     public function success()

@@ -42,6 +42,7 @@
                 </a>
                 <ul class="treeview-menu {{ active_class(if_uri_pattern('admin/check/*')) }}" style="display: {{ active_class(if_uri_pattern('admin/check/*'),'block') }}">
                     <li class="padding_l_20 {{ active_class(if_route('admin.fund')) }}"><a href="{{ route('admin.fund') }}"><i class="fa fa-circle-o"></i> <span>充值审批</span></a></li>
+                    <li class="padding_l_20 {{ active_class(if_route('admin.task')) }}"><a href="{{ route('admin.task') }}"><i class="fa fa-circle-o"></i> <span>任务审批</span></a></li>
                     <li class="padding_l_20 {{ active_class(if_route('admin.shop')) }}"><a href="{{ route('admin.shop') }}"><i class="fa fa-circle-o"></i> <span>店铺审批</span></a></li>
                     <li class="padding_l_20 {{ active_class(if_route('admin.buyer')) }}"><a href="{{ route('admin.buyer') }}"><i class="fa fa-circle-o"></i> <span>买手审批</span></a></li>
                     <li class="padding_l_20 {{ active_class(if_route('admin.bank')) }}"><a href="{{ route('admin.bank') }}"><i class="fa fa-circle-o"></i> <span>银行卡审批</span></a></li>

@@ -30,7 +30,7 @@
                 </div>
                 <div class="box-body">
                     <div class="col-md-12">
-                        <input type="hidden" name="wrap_type" value="0">
+                        <input type="hidden" class="wrap_type" name="wrap_type" value>
                         <ul class="timeline">
                             <li class="time-label">
                                 <span class="bg-green">第一步-选择任务类型</span>
@@ -320,9 +320,10 @@
                             <label class="col-sm-2 control-label"><span class="label label-danger">必填</span> 添加任务单数</label>
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                <input class="form-control task_required" name="commen_num" type="number" min="1" required onkeyup="value=value.replace(/[^\d]/,'')" title="一单对应一评语,设置垫付为1">
+                                <input class="form-control" name="commen_num" type="number" min="1" required onkeyup="value=value.replace(/[^\d]/,'')" title="一单对应一评语,设置垫付为1">
                                 </div>
                             </div>
+                            <span class="help-block m-b-none text-muted browse_price">垫付任务佣金一单2元，浏览任务一单0.5元</span>
                         </div>
 
                         <hr>
@@ -419,17 +420,12 @@
     $('input[type="radio"].filter:eq(0)').iCheck('check');
 
     $('.nav-tabs-custom ul li').on('click', function() {
+        $("input[type='radio'].sid").iCheck('uncheck');
+        $("input[type='radio'].tasktype").iCheck('uncheck');
+        $('.shopname-list').hide();
         if ($('.nav-tabs-custom ul li:eq(0)').is('.active')) {
-            $("input[type='radio'].sid").iCheck('uncheck');
-            $("input[type='radio'].tasktype").iCheck('uncheck');
-            $("input[type='hidden'].wrap_type").val('0');
-            $('.shopname-list').hide();
             $('#check').hide();
         } else {
-            $("input[type='radio'].sid").iCheck('uncheck');
-            $("input[type='radio'].tasktype").iCheck('uncheck');
-            $("input[type='hidden'].wrap_type").val('1');
-            $('.shopname-list').hide();
             $('#check').show();
         }
     })
@@ -464,10 +460,12 @@
             if ($('.nav-tabs-custom ul li:eq(0)').is('.active')) {
                 $("#step1").hide();
                 $('#step2').show();
+                // $('.browse_price').hide();
                 $('div').removeClass('hide');
             } else {
                 $("#step1").hide();
                 $('#step2').show();
+                // $('.browse_price').show();
                 $('.task_required').removeAttr('required');
             }
 
@@ -481,8 +479,15 @@
             }
         }
     }
-
+    
     function task_sub() {
+        if ($('.nav-tabs-custom ul li:eq(0)').is('.active')) {
+            $("input[type='hidden'].wrap_type").val('0');
+        }else{
+            $("input[type='hidden'].wrap_type").val('1');
+        }
+
+        
         // $price = ($('input[type="text"].goods_price').val()*$('input[type="text"].goods_num').val()+2)*$('input[type="text"].commen_num').val();
         // $('.goods_name').text($('input[type="text"].goods_name').val());
         // $('.goods_url').text($('input[type="text"].goods_url').val());

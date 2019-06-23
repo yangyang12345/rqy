@@ -22,8 +22,6 @@
                         <tr>
                             <th colspan="2">商品详情</th>
                             <th>
-                                <label>商品单价：</label><span>{{ $task->goods_price }}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <label>每次拍几件：</label><span>{{ $task->goods_num }}</span>
                             </th>
                         </tr>
                         <tr>
@@ -65,23 +63,19 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>商品单价</th>
-                                            <th>每次拍几件</th>
                                             <th>订单数量</th>
                                             <th>每单手续费</th>
-                                            <th>佣金</th>
+                                            <th>每单佣金</th>
                                             <th>金额计算公式</th>
                                             <th>总价格</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>{{ $task->goods_price }}元</td>
-                                            <td>{{ $task->goods_num }}个</td>
                                             <td>{{ $task->commen_num }}单</td>
-                                            <td>2元</td>
-                                            <td>2元</td>
-                                            <td>({{ $task->goods_price }}x{{ $task->goods_num }}+2+2)x{{ $task->commen_num }}</td>
+                                            <td>无</td>
+                                            <td>0.5元</td>
+                                            <td>{{ $task->commen_num }}x0.5</td>
                                             <td><b>{{ $task->total }}</b>元</td>
                                         </tr>
                                     </tbody>
@@ -103,7 +97,6 @@
                             <a class="text-danger" href="{{ route('user.center') }}" target="_blank">可马上充值</a>，充值成功后请<a href="javascript:window.location.reload()" class="text-danger">请点我刷新</a>）
                         </h4>
                     </div>
-                    
                     
                     <div class="col-sm-4 text-right">
                         <h4>支付 <span id="money" class="badge">{{ $task->total }}</span>元</h4>

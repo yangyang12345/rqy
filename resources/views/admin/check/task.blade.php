@@ -15,17 +15,17 @@
 
         <div class="box box-primary">
             <div class="box-header">
-                <h3 class="box-title">买手审批</h3>
+                <h3 class="box-title">任务审批</h3>
                 <div class="box-tools form-inline">
                     <div class="form-group">
-                        <input type="text" placeholder="用户名称" id="name" name="name" value="" class="form-control">
+                        <input type="text" placeholder="流水号" id="serial" name="serial" value="" class="form-control">
                     </div>
                     <div class="form-group">
                         <select class="form-control" id="status" name="status">
                             <option value="99">状态</option>
-                            <option value="0">审核中</option>
-                            <option value="1">审核通过</option>
-                            <option value="2">审核未通过</option>
+                            <option value="2">已付款，待审核</option>
+                            <option value="3">审核失败</option>
+                            <option value="4">审核通过，已发布</option>
                         </select>
                     </div>
 
@@ -40,14 +40,12 @@
                             <table id="shop_table" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="shop_table" style="width:100%">
                                 <thead>
                                     <tr role="row">
-                                        <th>用户名称</th>
+                                        <th>流水号</th>
+                                        <th>关键字</th>
+                                        <th>任务类型</th>
                                         <th>平台</th>
-                                        <th>性别</th>
-                                        <th>生日</th>
-                                        <th>订单编号</th>
-                                        <th>收货姓名</th>
-                                        <th>收货电话</th>
                                         <th>审核状态</th>
+                                        <th>订单时间</th>
                                         <th>操作</th>
                                     </tr>
                                 </thead>
@@ -60,36 +58,54 @@
     </div>
 </div>
 
-<div class="modal fade" id="model_buyer" tabindex="-1" role="dialog" data-backdrop="false" data-keyboard="false" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form method="post" action="{{ route('check.buyer.check') }}">
+<div class="modal fade" id="model_task" tabindex="-1" role="dialog" data-backdrop="false" data-keyboard="false" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form method="post" action="{{ route('check.task.check') }}">
         @csrf
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel" style="display: inline-block">
-                    买手账号审核确认
+                    任务审核确认
                 </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     &times;
                 </button>
             </div>
             <div class="modal-body">
-                <input name="buyer_id" class="buyer_id" type="hidden" value="">
+                <input name="task_id" class="task_id" type="hidden" value="">
                 <div class="panel">
                     <div class="box-header with-border">
                         <h4 class="box-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#goods_info">
-                                买手详情
+                                任务详情
                             </a>
                         </h4>
                     </div>
                     <div id="goods_info" class="panel-collapse collapse in">
                         <div class="box-body">
                             <div class="invoice-col">
-                                <label>账号所属平台：</label><strong class="platform"></strong><br>
-                                <label>订单编号：</label><span class="serial"></span><br>
-                                <label>收货姓名：</label><span class="receiver_name"></span><br>
-                                <label>收货电话：</label><span class="receiver_tel"></span><br>
+                                <label>任务所属平台：</label><strong class="platform"></strong><br>
+                                <label>任务编号：</label><span class="serial"></span><br>
+                                <label>任务单数：</label><span class="commen_num"></span><br>
+                                <label>任务类型：</label><span class="task_name"></span><br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-header with-border">
+                        <h4 class="box-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#goods_info">
+                                商品详情
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="goods_info" class="panel-collapse collapse in">
+                        <div class="box-body">
+                            <div class="invoice-col">
+                                <label>商品名称：</label><strong class="goods_name"></strong><br>
+                                <label>关键字：</label><span class="goods_key"></span><br>
+                                <label>搜索关键字：</label><span class="commen_keywords"></span><br>
+                                <label>商品链接：</label><a href="" class="goods_url"></a><br>
+                                <label>商品图片：</label><img width="400px" src="" class="goods_pic" /><br>
                             </div>
                         </div>
                     </div>
@@ -117,16 +133,26 @@
         "pageLength": 15,
         "lengthMenu": [15, 20, 25, 30],
         "ajax": {
-            "url": "{{ route('check.buyer.getList') }}",
+            "url": "{{ route('check.task.getList') }}",
             "type": "post",
             "data": function(data) {
                 data._token = "{{csrf_token()}}"
-                data.name = $('#name').val();
+                data.serial = $('#serial').val();
                 data.status = $('#status').val();
             }
         },
         "columns": [{
-                'data': 'name',
+                'data': 'serial',
+                "defaultContent": " ",
+                'className': ''
+            },
+            {
+                'data': 'goods_key',
+                "defaultContent": " ",
+                'className': ''
+            },
+            {
+                'data': 'task_name',
                 "defaultContent": " ",
                 'className': ''
             },
@@ -136,32 +162,12 @@
                 'className': ''
             },
             {
-                'data': 'sex',
-                "defaultContent": " ",
-                'className': ''
-            },
-            {
-                'data': 'Ymd',
-                "defaultContent": " ",
-                'className': ''
-            },
-            {
-                'data': 'serial',
-                "defaultContent": " ",
-                'className': ''
-            },
-            {
-                'data': 'receiver_name',
-                "defaultContent": " ",
-                'className': ''
-            },
-            {
-                'data': 'receiver_tel',
-                "defaultContent": " ",
-                'className': ''
-            },
-            {
                 'data': 'status',
+                "defaultContent": " ",
+                'className': ''
+            },
+            {
+                'data': 'ctime',
                 "defaultContent": " ",
                 'className': ''
             },
@@ -181,40 +187,28 @@
                         return '<img src="{{ asset('images/p.png ') }}"><span>拼多多</span>'
                     }
                 },
-                "targets": 1
-            },
-            {
-                "render": function(data, type, row) {
-                    if (data == 0) {
-                        return '保密'
-                    } else if (data == 1) {
-                        return '男士'
-                    } else if (data == 2) {
-                        return '女士'
-                    }
-                },
-                "targets": 2
+                "targets": 3
             },
             {
                 "render": function (data, type, row) {
-                    if (data == 0) {
-                        return '<span><small class="label bg-yellow">审核中</small></span>';
-                    } else if (data == 1) {
-                        return '<span><small class="label bg-green">审核通过</small></span>';
-                    } else if(data == 2){
-                        return '<span><small class="label bg-red">审核未通过</small></span>'
+                    if (data == 2) {
+                        return '<span><small class="label bg-yellow">已付款，待审核</small></span>';
+                    } else if (data == 3) {
+                        return '<span><small class="label bg-red">审核失败</small></span>';
+                    } else if(data == 4){
+                        return '<span><small class="label bg-green">审核通过，已发布</small></span>'
                     }
                 },
-                "targets": 7
+                "targets": 4
             },
             {
                 "render": function(data, type, row) {
                     var value = JSON.stringify(row);
-                    if (row.status == '0') {
+                    if (row.status == '2') {
                         return "<a onclick='confirm(" + value + ")' title='审核' class='fa fa-edit check'></a>"
                     }
                 },
-                "targets": 8
+                "targets": 6
             },
         ],
         "language": {
@@ -245,11 +239,17 @@
             $(".platform").text('拼多多');
         }
         $(".serial").text(row.serial);
-        $(".receiver_name").text(row.receiver_name);
-        $(".receiver_tel").text(row.receiver_tel);
-        $(".buyer_id").val(row.id);
+        $(".commen_num").text(row.commen_num);
+        $(".commen_keywords").text(row.commen_keywords);
+        $(".task_name").text(row.task_name);
+        $(".goods_name").text(row.goods_name);
+        $(".goods_key").text(row.goods_key);
+        $(".goods_url").text(row.goods_url);
+        $(".goods_url").attr("href",row.goods_url);
+        $(".goods_pic").attr("src",row.goods_pic);
+        $(".task_id").val(row.id);
 
-        $('#model_buyer').modal('toggle');
+        $('#model_task').modal('toggle');
 
     }
 </script>

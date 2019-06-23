@@ -28,7 +28,7 @@ Route::prefix('user')->group(function () {
     Route::post('management/advance_duty', 'ManagementController@advance')->name('advance_duty.getList')->middleware('auth');
 
     Route::get('management/browse_task', 'ManagementController@browse')->name('user.browse_task')->middleware('auth');
-    Route::post('management/browse_task', 'ManagementController@browse_list')->name('browse.getList')->middleware('auth');
+    Route::post('management/browse_task', 'ManagementController@browse')->name('browse.getList')->middleware('auth');
 
     Route::get('management/release_task/delete', 'ManagementController@delete')->name('user.release_task.delete')->middleware('auth');
 
@@ -87,6 +87,11 @@ Route::prefix('admin')->group(function(){
     Route::post('fund/list','CheckController@fund_list')->name('check.fund.getList')->middleware('auth');
     Route::any('fund/check/{id?}','CheckController@fund_check')->name('check.fund')->middleware('auth');
     Route::post('fund/confim','CheckController@fund_confim')->name('check.fund.confim')->middleware('auth');
+
+    // 任务审批
+    Route::get('check/task','CheckController@task')->name('admin.task')->middleware('auth');
+    Route::post('check/task','CheckController@task')->name('check.task.getList')->middleware('auth');
+    Route::post('check/task/check','CheckController@task_check')->name('check.task.check')->middleware('auth');
 
     // 店铺审核
     Route::get('check/shop','CheckController@shop')->name('admin.shop')->middleware('auth');

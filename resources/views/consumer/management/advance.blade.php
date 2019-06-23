@@ -17,7 +17,7 @@
                     <h3 class="box-title">垫付任务管理</h3>
                     <div class="box-tools form-inline">
                     <div class="form-group">
-                        <input type="text" placeholder="商品名称" id="name" name="name" value="" class="form-control">
+                        <input type="text" placeholder="商品名" id="name" name="name" value="" class="form-control">
                     </div>
                     <div class="form-group">
                         <input type="text" placeholder="流水号" id="serial" name="serial" value="" class="form-control">
@@ -25,9 +25,11 @@
                     <div class="form-group">
                         <select class="form-control" id="status" name="status">
                             <option value="99">状态</option>
-                            <option value="0">审核中</option>
-                            <option value="1">审核通过</option>
-                            <option value="2">审核未通过</option>
+                            <option value="0">未付款</option>
+                            <option value="1">已取消</option>
+                            <option value="2">已付款，待审核</option>
+                            <option value="3">审核失败</option>
+                            <option value="4">审核通过，已发布</option>
                         </select>
                     </div>
 
@@ -39,8 +41,8 @@
                     <div id="advance" class="dataTables_wrapper form-inline dt-bootstrap">
                         <div class="row">
                             <div class="col-sm-12">
-                                <table id="advance_table" class="table table-bordered table-striped dataTable" role="grid"
-                                       aria-describedby="advance_table" style="width:100%">
+                                <table id="advance_tab" class="table table-bordered table-striped dataTable" role="grid"
+                                       aria-describedby="advance_tab" style="width:100%">
                                     <thead>
                                     <tr role="row">
                                         <th>流水号</th>
@@ -62,7 +64,7 @@
     </div>
     @push('datatable-js')
         <script type="text/javascript">
-            $dataTable = $("#advance_table");
+            $dataTable = $("#advance_tab");
             var table = $dataTable.DataTable({
                 "ordering": false,//排序 关闭
                 "searching": false,//是否显示搜索框，
@@ -75,6 +77,9 @@
                     "type":"post",
                     "data": function (data) {
                         data._token = "{{csrf_token()}}"
+                        data.name = $('#name').val();
+                        data.status = $('#status').val();
+                        data.serial = $('#serial').val();
                     }
                 },
                 "columns": [
@@ -100,12 +105,10 @@
                             } else if (data == 1) {
                                 return '<span><small class="label bg-yellow">已取消</small></span>';
                             } else if(data == 2){
-                                return '<span><small class="label bg-green">已付款</small></span>'
+                                return '<span><small class="label bg-green">已付款，待审核</small></span>'
                             } else if(data == 3){
-                                return '<span><small class="label bg-yellow">待审核</small></span>'
-                            } else if(data == 4){
                                 return '<span><small class="label bg-red">审核失败</small></span>'
-                            } else if(data == 5){
+                            } else if(data == 4){
                                 return '<span><small class="label bg-green">审核通过，已发布</small></span>'
                             }
                         },
