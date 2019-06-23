@@ -381,7 +381,7 @@ class ManagementController extends Controller
         $balance1 = $balance+2;
         $balance2 = $balance1+$c->charge;
 
-        DB::table('brokerage_record')->insert(
+        DB::table('brokerage_record')->insert([
             [
                 'user_id' => $id,
                 'type' => '3',
@@ -400,7 +400,7 @@ class ManagementController extends Controller
                 'balance' => $balance2,
                 'ctime' => date('Y-m-d H:i:s', strtotime('+1second')),
             ]
-        );
+        ]);
 
 
         DB::table('complete_record')
