@@ -379,7 +379,7 @@ class ManagementController extends Controller
         }
 
         $balance1 = $balance+2;
-        $balance2 = $balance1+$c->charge;
+        $balance2 = $balance1+$c->price;
 
         DB::table('brokerage_record')->insert([
             [
@@ -396,7 +396,7 @@ class ManagementController extends Controller
                 'type' => '5',
                 'in_out' => '0',
                 'content' => '任务本金返现',
-                'quota' => $c->charge,
+                'quota' => $c->price,
                 'balance' => $balance2,
                 'ctime' => date('Y-m-d H:i:s', strtotime('+1second')),
             ]
