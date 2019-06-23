@@ -260,6 +260,7 @@ class ApiController extends Controller{
      * 完成订单
      */
     public function order_complete(Request $request){
+        $id = $request->id;
         $serial = $request->serial;
         $shop_name = $request->shop_name;
         $goods_url = $request->goods_url;
@@ -287,27 +288,40 @@ class ApiController extends Controller{
             ->where('serial','=',$serial)
             ->update(['status'=>2]);
 
-        if($result){
-            // $Getid = DB::table('brokerage_record')->insertGetId(
-            //     [
-            //         'user_id'=>$tel,
-            //         'type' => $name,
-            //         'in_out' => $email,
-            //         'content' => '订单提成',
-            //         'quota' => '',
-            //         'balance' => $wx,
-            //         'ctime' => date('Y-m-d H:i:s',time()),
-            //     ]
-            // );
+        if($result) {
+            $m = DB::table('brokerage_record')
+                ->where('user_id', '=', $id)
+                ->orderByDesc('ctime')
+                ->select('balance')
+                ->first();
+            
+            if($m){
+                $balance = $m->balance;
+            }else{
+                $balance = 0;
+            }
+
+            $balance += 0.5;
+
+            $Getid = DB::table('brokerage_record')->insertGetId(
+                [
+                    'user_id'=>$id,
+                    'type' => '3',
+                    'in_out' => '0',
+                    'content' => '订单提成',
+                    'quota' => 0.5,
+                    'balance' => $balance,
+                    'ctime' => date('Y-m-d H:i:s',time()),
+                ]
+            );
     
-            // if ($Getid){
-            //     return response()->json('scuccess');
-            // }
-            $data = [
-                "status" => 'success',
-                "msg" => '订单完成'
-            ];
-            return response()->json($data);
+            if ($Getid){
+                $data = [
+                    "status" => 'success',
+                    "msg" => '订单完成'
+                ];
+                return response()->json($data);
+            }
         }else{
             $data = [
                 "status" => 'fail',
