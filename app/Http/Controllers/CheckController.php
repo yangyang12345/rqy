@@ -492,9 +492,9 @@ class CheckController extends Controller{
             $status = $request->get('status')==99?'':$request->get('status');
 
             $builder = DB::table('advance_record as c')
-                ->leftJoin('users as u', 'c.user_id', '=', 'u.id')
+                // ->leftJoin('users as u', 'c.user_id', '=', 'u.id')
                 ->leftJoin('bank as b', 'c.bank_id', '=', 'b.id')
-                ->select('c.id','c.serial','c.balance','c.status','c.ctime','u.name','b.card');
+                ->select('c.id','c.serial','c.balance','c.status','c.ctime','b.name','b.card');
 
             if ($name){
                 $builder->where('u.name','like','%'.$name.'%');
@@ -556,7 +556,7 @@ class CheckController extends Controller{
                     'user_id' => $user_id,
                     'type' => '4',
                     'in_out' => '0',
-                    'content' => '提现',
+                    'content' => '提现失败返款',
                     'quota' => $m->balance,
                     'balance' => $balance,
                     'ctime' => date('Y-m-d H:i:s', time()),

@@ -847,7 +847,7 @@ class ApiController extends Controller{
             [
                 'user_id'=>$user_id,
                 'bank_id' => $bank_id,
-                'balance' => $balance,
+                'balance' => $money,
                 'serial' => $serial,
                 'status' => '0',
                 'ctime' => date('Y-m-d H:i:s',time()),
