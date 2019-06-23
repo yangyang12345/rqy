@@ -201,7 +201,7 @@ class CheckController extends Controller{
                     'serial' => date('YmdHis').substr(microtime(), 2, 5) . mt_rand(10000,99999).$user_id,
                     'keywords' => $now->goods_key,
                     'task' => $now->id,
-                    'shop' => $now->store_name,
+                    'shop_name' => $now->store_name,
                     'goods_url' => $now->goods_url,
                     'status' => 0,
                     'charge' => $now->wrap_type==0?'2':'0.5',
