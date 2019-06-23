@@ -154,10 +154,12 @@ class CheckController extends Controller{
         $user_id = Auth::id();
         $s = $request->submit;
 
-         
-         $now = DB::table('task_record')
-         ->where('id', '=', $id)
-         ->first();
+
+        $now = DB::table('task_record as t')
+            ->left_join('shop as s', 't.shop_id', '=', 's.id')
+            ->select('t.id', 't.user_id', 't.wrap_type', 't.type', 't.goods_key', 's.name', 't.goods_url', 't.total')
+            ->where('id', '=', $id)
+            ->first();
 
         if($s == 'nopass'){
             $status = 3;
@@ -199,7 +201,7 @@ class CheckController extends Controller{
                     'serial' => date('YmdHis').substr(microtime(), 2, 5) . mt_rand(10000,99999).$user_id,
                     'keywords' => $now->goods_key,
                     'task' => $now->id,
-                    'shop' => $now->shop_id,
+                    'shop' => $now->name,
                     'goods_url' => $now->goods_url,
                     'status' => 0,
                     'charge' => $now->wrap_type==0?'2':'0.5',
