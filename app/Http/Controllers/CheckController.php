@@ -156,7 +156,7 @@ class CheckController extends Controller{
 
 
         $now = DB::table('task_record as t')
-            ->left_join('shop as s', 't.shop_id', '=', 's.id')
+            ->leftJoin('shop as s', 't.shop_id', '=', 's.id')
             ->select('t.id', 't.user_id', 't.wrap_type', 't.type', 't.goods_key', 's.name', 't.goods_url', 't.total')
             ->where('id', '=', $id)
             ->first();
