@@ -265,9 +265,9 @@ class ApiController extends Controller{
         $shop_name = $request->shop_name;
         $goods_url = $request->goods_url;
         $keywords = $request->keywords;
-        if(empty($serial) || empty($shop_name) || empty($goods_url) || empty($keywords)){
-            return response()->json('参数错误');
-        }
+        // if(empty($serial) || empty($shop_name) || empty($goods_url) || empty($keywords)){
+        //     return response()->json('参数错误');
+        // }
 
         $list = DB::table('order_record')
             ->select('shop_name','goods_url','keywords')
@@ -275,13 +275,25 @@ class ApiController extends Controller{
             ->first();
 
         if($list->shop_name != $shop_name){
-            return response()->json('店铺名称错误');
+            $data = [
+                "status" => 'fail',
+                "msg" => '店铺名称错误'
+            ];
+            return response()->json($data);
         }
         if($list->goods_url != $goods_url){
-            return response()->json('商品链接错误');
+            $data = [
+                "status" => 'fail',
+                "msg" => '商品链接错误'
+            ];
+            return response()->json($data);
         }
         if($list->keywords != $keywords){
-            return response()->json('商品关键字错误');
+            $data = [
+                "status" => 'fail',
+                "msg" => '商品关键字错误'
+            ];
+            return response()->json($data);
         }
 
         $result = DB::table('order_record')

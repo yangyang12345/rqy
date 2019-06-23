@@ -367,7 +367,7 @@ class ManagementController extends Controller
 
         $c = DB::table('complete_record as c')
             ->leftJoin('order_record as o', 'o.serial', '=', 'c.serial')
-            ->select('o.price')
+            ->select('o.price','o.id','c.user_id')
             ->where('c.id', '=', $id)
             ->first();
         
@@ -383,7 +383,7 @@ class ManagementController extends Controller
 
         DB::table('brokerage_record')->insert([
             [
-                'user_id' => $id,
+                'user_id' => $c->user_id,
                 'type' => '3',
                 'in_out' => '0',
                 'content' => '订单提成',
@@ -392,7 +392,7 @@ class ManagementController extends Controller
                 'ctime' => date('Y-m-d H:i:s', time()),
             ],
             [
-                'user_id' => $id,
+                'user_id' => $c->user_id,
                 'type' => '5',
                 'in_out' => '0',
                 'content' => '任务本金返现',
@@ -407,8 +407,8 @@ class ManagementController extends Controller
             ->where('id', '=', $id)
             ->update(['status' => 1]);
 
-        DB::table('complete_record')
-            ->where('id', '=', $id)
+        DB::table('order_record')
+            ->where('id', '=', $c->id)
             ->update(['status' => 2]);
 
 
