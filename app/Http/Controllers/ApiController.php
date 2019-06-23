@@ -609,7 +609,7 @@ class ApiController extends Controller{
         }
 
         $builder = DB::table('order_record')
-            ->where('user_id','=',$user_id)
+            ->where('receiving_id','=',$user_id)
             ->where('status','=',$status)
             ->where('wrap_type','=',$wrap_type);
 
