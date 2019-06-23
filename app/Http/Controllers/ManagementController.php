@@ -407,6 +407,10 @@ class ManagementController extends Controller
             ->where('id', '=', $id)
             ->update(['status' => 1]);
 
+        DB::table('complete_record')
+            ->where('id', '=', $id)
+            ->update(['status' => 2]);
+
 
         return redirect()->route('user.task')->with('success', '确认成功，订单完成');
         
