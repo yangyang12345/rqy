@@ -17,11 +17,11 @@
                         <div class="col-md-6">
                             <div class="nav-tabs-custom">
                                 <ul class="nav nav-tabs">
-                                    <li class="active"><a href="#tab_card" data-toggle="tab" aria-expanded="true">银行卡充值</a></li>
-                                    <li class=""><a href="#tab_online" data-toggle="tab" aria-expanded="false">微信/支付宝充值</a></li>
+                                    <!-- <li class="active"><a href="#tab_card" data-toggle="tab" aria-expanded="true">银行卡充值</a></li> -->
+                                    <li class=""><a href="#tab_online" data-toggle="tab" aria-expanded="false">支付宝充值</a></li>
                                 </ul>
                                 <div class="tab-content">
-                                    <div class="tab-pane active" id="tab_card">
+                                    <!-- <div class="tab-pane active" id="tab_card">
                                         <div class="col-md-12">
                                             <ul class="timeline">
                                                 <li class="time-label">
@@ -74,8 +74,8 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                    </div>
-                                    <div class="tab-pane" id="tab_online">
+                                    </div> -->
+                                    <div class="tab-pane active" id="tab_online">
                                         <div class="col-md-12">
                                             <ul class="timeline">
                                                 <li class="time-label">
@@ -88,7 +88,7 @@
                                                         <h3 class="timeline-header">扫码启拉官方指定二维码</h3>
 
                                                         <div class="timeline-body">
-                                                            <img src="{{ asset('/images/sk1.jpg') }}" width="200/">
+                                                            <img src="{{ asset('/images/sk1.jpeg') }}" width="200/">
                                                         </div>
                                                     </div>
                                                 </li>
@@ -296,17 +296,13 @@
                 <div class="modal-body">
                     <div class="box box-default">
                         <div class="box-header">
-                            <h3 class="box-title">支付宝/微信</h3>
+                            <h3 class="box-title">支付宝</h3>
                         </div>
                         <div class="box-body">
                             <div class="row">
                                 <div class="form-group">
                                     <div class="col-xs-12">
-                                        <select id="online_type" name="online_type" class="form-control m-b" required="">
-                                            <option value="0">请选择转账类型</option>
-                                            <option value="1">支付宝</option>
-                                            <option value="2">微信</option>
-                                        </select>
+                                     <input type="hidden" name="online_type" value="1">
                                     </div>
                                 </div>
                             </div>
@@ -314,14 +310,14 @@
                             <div class="row">
                                 <div class="form-group has-success">
                                     <div class="col-xs-12">
-                                        <input id="online_code" name="online_code" type="text" class="form-control" placeholder="转出账号" maxlength="19"  required="">
+                                        <input id="online_code" name="online_code" type="text" class="form-control" placeholder="转账账号" maxlength="19"  required="">
                                     </div>
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
                             <div class="row"><div class="form-group has-success">
                                     <div class="col-xs-12">
-                                        <input id="nick_name" name="nick_name" type="text" class="form-control" placeholder="转出昵称" maxlength="20"  required="">
+                                        <input id="nick_name" name="nick_name" type="text" class="form-control" placeholder="转帐昵称" maxlength="20"  required="">
                                     </div>
                                 </div></div>
                             <div class="hr-line-dashed"></div>

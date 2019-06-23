@@ -171,7 +171,7 @@ class ApiController extends Controller{
         // }
 
         $update = array(
-            'user_id'=> $id,
+            'receiving_id'=> $id,
             'buyer'  => $buyer,
             'status' => 1
         );
@@ -232,7 +232,7 @@ class ApiController extends Controller{
             return response()->json($data);
         }
         $update = array(
-            'user_id'=> '',
+            'receiving_id'=> '',
             'buyer'  => '',
             'status' => 0
         );
@@ -795,43 +795,41 @@ class ApiController extends Controller{
         $user_id = $request->user_id;
         $bank_id = $request->bank_id;
         $money = $request->balance;
-        $serial = date('YmdHis').$user_id;
+        $serial = date('YmdHis') . $user_id;
 
         $m = DB::table('brokerage_record')
-                ->where('user_id', '=', $user_id)
-                ->orderByDesc('ctime')
-                ->select('balance')
-                ->first();
-            
-            if($m){
-                $balance = $m->balance;
-            }else{
-                $balance = 0;
-            }
+            ->where('user_id', '=', $user_id)
+            ->orderByDesc('ctime')
+            ->select('balance')
+            ->first();
 
-            if($balance < $money){
-                $data = [
-                    "status" => 'fail',
-                    "message" => '提现金额大于余额，请重新再试!'
-                ];
-                return response()->json($data);
-            }
+        if ($m) {
+            $balance = $m->balance;
+        } else {
+            $balance = 0;
+        }
 
-            $balance = $balance - $money;
+        if ($balance < $money) {
+            $data = [
+                "status" => 'fail',
+                "message" => '提现金额大于余额，请重新再试!'
+            ];
+            return response()->json($data);
+        }
 
-            DB::table('brokerage_record')->insert(
-                [
-                    'user_id'=>$user_id,
-                    'type' => '4',
-                    'in_out' => '1',
-                    'content' => '提现',
-                    'quota' => $money,
-                    'balance' => $balance,
-                    'ctime' => date('Y-m-d H:i:s',time()),
-                ]
-            );
+        $balance = $balance - $money;
 
-
+        DB::table('brokerage_record')->insert(
+            [
+                'user_id' => $user_id,
+                'type' => '4',
+                'in_out' => '1',
+                'content' => '提现',
+                'quota' => $money,
+                'balance' => $balance,
+                'ctime' => date('Y-m-d H:i:s', time()),
+            ]
+        );
 
         $Getid = DB::table('advance_record')->insertGetId(
             [

@@ -151,13 +151,13 @@ class CheckController extends Controller{
             return redirect()->route('admin.task')->with('fail','请规范操作');
         }
         $id = $request->task_id;
-        $user_id = Auth::id();
+        $user_id = $request->user_id;
         $s = $request->submit;
 
 
         $now = DB::table('task_record as t')
             ->leftJoin('shop as s', 't.shop_id', '=', 's.id')
-            ->select('t.id', 't.user_id', 't.wrap_type', 't.task_type', 't.goods_key', 's.store_name', 't.goods_url', 't.total','t.commen_num','t.platform')
+            ->select('t.id', 't.user_id', 't.wrap_type', 't.task_type', 't.goods_key', 's.store_name', 't.goods_url', 't.total','t.commen_num','t.platform','t.goods_price')
             ->where('t.id', '=', $id)
             ->first();
 
@@ -206,6 +206,7 @@ class CheckController extends Controller{
                     'status' => 0,
                     'charge' => $now->wrap_type==0?'2':'0.5',
                     'platform' => $now->platform,
+                    'price' => $now->goods_price,
                     'ctime' => date('Y-m-d h:i:s',time())
                 ];
                 array_push($order_list,$temp);
@@ -516,5 +517,67 @@ class CheckController extends Controller{
             return response()->json($data);
         }
         return view('admin/check/advance');
+    }
+
+    public function advance_check(Request $request){
+        if (!$request->has('advance_id')){
+            return redirect()->route('admin.advance')->with('fail','请规范操作');
+        }
+        $id = $request->advance_id;
+        $user_id = $request->user_id;
+        $s = $request->submit;
+        if( $s == 'nopass') {
+
+            // 审批不通过，退钱
+            $status = 2;
+
+            $m = DB::table('advance_record')
+                ->where('id', '=', $id)
+                ->select('balance')
+                ->first();
+
+            $pre = DB::table('brokerage_record')
+                ->where('user_id', '=', $user_id)
+                ->select('balance')
+                ->orderByDesc('ctime')
+                ->first();
+
+            if ($m) {
+                $balance = $m->balance;
+            } else {
+                $balance = 0;
+            }
+
+
+            $balance += $pre->balance;
+
+            DB::table('brokerage_record')->insert(
+                [
+                    'user_id' => $user_id,
+                    'type' => '4',
+                    'in_out' => '0',
+                    'content' => '提现',
+                    'quota' => $m->balance,
+                    'balance' => $balance,
+                    'ctime' => date('Y-m-d H:i:s', time()),
+                ]
+            );
+
+        }
+        if($s == 'pass'){
+            // 审批通过
+            $status = 1;
+        }
+
+        $result = DB::table('advance_record')
+            ->where('id', '=',$id)
+            ->update([
+                'status' => $status,
+        ]);
+
+        if($result){
+            return redirect()->route('admin.advance')->with('success','审核成功,审批未成功账号金额返回，审核金额请确认人工转账');
+        }
+        return redirect()->route('admin.advance')->with('fail','审核失败，系统繁忙，请重试');
     }
 }

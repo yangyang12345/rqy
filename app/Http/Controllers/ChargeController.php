@@ -67,7 +67,8 @@ class ChargeController extends Controller{
      */
     public function online(Request $request){
         $id = $request->id;
-        $online_type = $request->online_type;
+        // $online_type = $request->online_type;
+        $online_type = 1;
         $online_code = $request->online_code;
         $nick_name = $request->nick_name;
         $money = $request->online_money;

@@ -87,7 +87,7 @@
                             <div class="invoice-col">
                                 <label>银行卡账号：</label><strong class="card"></strong><br>
                                 <label>所属分行：</label><span class="deposit"></span><br>
-                                <label>持卡人姓名</label><span class="name"></span><br>
+                                <label>持卡人姓名：</label><span class="name"></span><br>
                                 <label>照片：</label><br><img width="400px" src="" class="pic_bank">
                             </div>
                         </div>

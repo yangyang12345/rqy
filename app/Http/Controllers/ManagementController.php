@@ -248,7 +248,7 @@ class ManagementController extends Controller
             return redirect()->route('user.release_task.info', ['id' => Crypt::encrypt($id), 'wrap_type' => $wrap_type])->with('errros', '您的账户余额不足，请先充值！');
         }
 
-        $balance = $money->balance-$pay;
+        $balance = $money->balance - $pay;
 
         $Getid = DB::table('capital_record')->insertGetId(
             [
@@ -258,14 +258,14 @@ class ManagementController extends Controller
                 'content' => '发布任务',
                 'quota' => $pay,
                 'balance' => $balance,
-                'ctime'=>date('Y-m-d h:i:s',time())
+                'ctime' => date('Y-m-d h:i:s', time())
             ]
         );
 
-        if ($Getid){
+        if ($Getid) {
             $money = DB::table('task_record')
-            ->where('id', '=', $id)
-            ->update(['status'=>'2']);
+                ->where('id', '=', $id)
+                ->update(['status' => '2']);
             return redirect()->route('user.release_task.info', ['id' => Crypt::encrypt($id), 'wrap_type' => $wrap_type])->with('success', '您已付款，请等待管理员审核！');
         }
     }
@@ -314,6 +314,102 @@ class ManagementController extends Controller
         }
 
         return view('consumer/management/advance');
+    }
+
+    public function advance_task(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $draw = $request->get('draw');
+            $start = $request->get('start');
+            $length = $request->get('length');
+
+            $user_id = Auth::id();
+
+            $serial = empty($request->serial) ? '' : $request->serial;
+            $alipay_order = empty($request->alipay_order) ? '' : $request->alipay_order;
+
+            $builder = DB::table('complete_record as c')
+                ->leftJoin('order_record as o', 'o.serial', '=', 'c.serial')
+                ->select('c.id', 'c.serial', 'c.pic', 'c.alipay_order', 'c.fee', 'c.status', 'c.ctime')
+                ->where('o.user_id', '=', $user_id);
+
+            if ($serial) {
+                $builder->where('serial', 'like', '%' . $serial . '%');
+            }
+
+            if ($alipay_order) {
+                $builder->where('alipay_order', 'like', '%' . $alipay_order . '%');
+            }
+
+            $total = $builder->count();
+
+            $list = $builder->orderBy('c.ctime', 'desc')->offset($start)->take($length)->get()->toArray();
+            $data = [
+                "draw" => $draw,
+                "recordsTotal" => $total,
+                "recordsFiltered" => $total,
+                "data" => $list,
+            ];
+            return response()->json($data);
+        }
+        return view('consumer/management/advance_task');
+    }
+
+    public function advance_task_check(Request $request)
+    {
+        $id = $request->complete_id;
+
+        $m = DB::table('brokerage_record')
+            ->whereRaw('user_id=(select user_id from complete_record where id = ?)', ["$id"])
+            ->orderByDesc('ctime')
+            ->select('balance')
+            ->first();
+
+        $c = DB::table('complete_record as c')
+            ->leftJoin('order_record as o', 'o.serial', '=', 'c.serial')
+            ->select('o.price')
+            ->where('c.id', '=', $id)
+            ->first();
+        
+
+        if ($m) {
+            $balance = $m->balance;
+        } else {
+            $balance = 0;
+        }
+
+        $balance1 = $balance+2;
+        $balance2 = $balance1+$c->charge;
+
+        DB::table('brokerage_record')->insert(
+            [
+                'user_id' => $id,
+                'type' => '3',
+                'in_out' => '0',
+                'content' => '订单提成',
+                'quota' => 2,
+                'balance' => $balance1,
+                'ctime' => date('Y-m-d H:i:s', time()),
+            ],
+            [
+                'user_id' => $id,
+                'type' => '5',
+                'in_out' => '0',
+                'content' => '任务本金返现',
+                'quota' => $c->charge,
+                'balance' => $balance2,
+                'ctime' => date('Y-m-d H:i:s', strtotime('+1second')),
+            ]
+        );
+
+
+        DB::table('complete_record')
+            ->where('id', '=', $id)
+            ->update(['status' => 1]);
+
+
+        return redirect()->route('user.task')->with('success', '确认成功，订单完成');
+        
     }
 
     function browse(Request $request)

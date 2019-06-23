@@ -73,6 +73,7 @@
             </div>
             <div class="modal-body">
                 <input name="task_id" class="task_id" type="hidden" value="">
+                <input name="user_id" class="user_id" type="hidden" value="">
                 <div class="panel">
                     <div class="box-header with-border">
                         <h4 class="box-title">
@@ -248,6 +249,7 @@
         $(".goods_url").attr("href",row.goods_url);
         $(".goods_pic").attr("src",row.goods_pic);
         $(".task_id").val(row.id);
+        $(".user_id").val(row.user_id);
 
         $('#model_task').modal('toggle');
 

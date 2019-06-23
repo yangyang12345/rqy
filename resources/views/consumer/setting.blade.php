@@ -63,7 +63,7 @@
             </div>
         </div>
 	</div>
-	<div class="row">
+	<!-- <div class="row">
         <div class="col-sm-12">
             <div class="box box-primary">
                 <div class="box-header"><h5 class="box-title">修改密码</h5></div>
@@ -97,5 +97,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 @endsection

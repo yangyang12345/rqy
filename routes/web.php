@@ -30,6 +30,10 @@ Route::prefix('user')->group(function () {
     Route::get('management/browse_task', 'ManagementController@browse')->name('user.browse_task')->middleware('auth');
     Route::post('management/browse_task', 'ManagementController@browse')->name('browse.getList')->middleware('auth');
 
+    Route::get('management/advance_task', 'ManagementController@advance_task')->name('user.task')->middleware('auth');
+    Route::post('management/advance_task/list','ManagementController@advance_task')->name('advance_task.getList')->middleware('auth');
+    Route::post('management/advance_task/check','ManagementController@advance_task_check')->name('check.advance_task.check')->middleware('auth');
+
     Route::get('management/release_task/delete', 'ManagementController@delete')->name('user.release_task.delete')->middleware('auth');
 
     Route::get('funds/{type}', 'FundsController@index',function (){
@@ -113,6 +117,7 @@ Route::prefix('admin')->group(function(){
 
     Route::get('check/advance','CheckController@advance')->name('admin.advance')->middleware('auth');
     Route::post('check/advance/list','CheckController@advance')->name('check.advance.getList')->middleware('auth');
+    Route::post('check/advance/check','CheckController@advance_check')->name('check.advance.check')->middleware('auth');
 });
 
 Route::resource('users', 'UserController');
