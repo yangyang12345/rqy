@@ -260,7 +260,7 @@ class ApiController extends Controller{
      * 完成订单
      */
     public function order_complete(Request $request){
-        $id = $request->id;
+        $id = $request->user_id;
         $serial = $request->serial;
         $shop_name = $request->shop_name;
         $goods_url = $request->goods_url;
