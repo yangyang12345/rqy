@@ -441,9 +441,17 @@ class ApiController extends Controller{
         );
 
         if ($Getid){
-            return response()->json('success');
+            $data = [
+                "status" => 'success',
+                "msg" => '添加买手成功'
+            ];
+            return response()->json($data);
         }else{
-            return response()->json('系统繁忙，请重试');
+            $data = [
+                "status" => 'fail',
+                "msg" => '系统繁忙，请重试'
+            ];
+            return response()->json($data);
         }
 
     }
