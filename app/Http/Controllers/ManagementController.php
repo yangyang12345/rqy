@@ -187,9 +187,7 @@ class ManagementController extends Controller
                 ->select('balance')
                 ->orderByDesc('ctime')
                 ->first();
-        if(!$money){
-            $money = 0;
-        }
+
 
         if ($wrap_type == 0) {
             return view('consumer/management/info', ['task' => $task, 'money' => $money]);
@@ -240,8 +238,8 @@ class ManagementController extends Controller
             ->orderByDesc('ctime')
             ->first();
 
-        if ($pay > $money->balance) {
-            return redirect()->route('user.release_task.info', ['id' => Crypt::encrypt($id), 'wrap_type' => $wrap_type])->with('erros', '您的账户余额不足，请先充值！');
+        if (!$money->balance || $pay > $money->balance) {
+            return redirect()->route('user.release_task.info', ['id' => Crypt::encrypt($id), 'wrap_type' => $wrap_type])->with('errors', '您的账户余额不足，请先充值！');
         }
 
         $balance = $money->balance - $pay;

@@ -99,7 +99,7 @@
                     <div class="col-sm-8">
                         <h4>
                             <input type="radio" checked="checked"> 
-                            使用账户余额支付 （可用余额 <span class="text-danger user_money">{{ $money->balance }}</span>元，<span class="text-danger">如余额不够，</span>
+                            使用账户余额支付 （可用余额 <span class="text-danger user_money">{{ $money->balance?$money->balance:0 }}</span>元，<span class="text-danger">如余额不够，</span>
                             <a class="text-danger" href="{{ route('user.center') }}" target="_blank">可马上充值</a>，充值成功后请<a href="javascript:window.location.reload()" class="text-danger">请点我刷新</a>）
                         </h4>
                     </div>
