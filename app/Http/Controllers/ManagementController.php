@@ -179,27 +179,23 @@ class ManagementController extends Controller
 
         $wrap_type = $request->wrap_type;
 
-        if ($wrap_type == 0) {
-            $task = DB::table('task_record')
+        $task = DB::table('task_record')
                 ->where('id', '=', $id)
                 ->first();
-            $money = DB::table('capital_record')
+        $money = DB::table('capital_record')
                 ->where('user_id', '=', $user_id)
                 ->select('balance')
                 ->orderByDesc('ctime')
                 ->first();
+        if(!$money){
+            $money = 0;
+        }
+
+        if ($wrap_type == 0) {
             return view('consumer/management/info', ['task' => $task, 'money' => $money]);
         }
 
         if ($wrap_type == 1) {
-            $task = DB::table('task_record')
-                ->where('id', '=', $id)
-                ->first();
-            $money = DB::table('capital_record')
-                ->where('user_id', '=', $user_id)
-                ->select('balance')
-                ->orderByDesc('ctime')
-                ->first();
             return view('consumer/management/info_browse', ['task' => $task, 'money' => $money]);
         }
     }
@@ -245,7 +241,7 @@ class ManagementController extends Controller
             ->first();
 
         if ($pay > $money->balance) {
-            return redirect()->route('user.release_task.info', ['id' => Crypt::encrypt($id), 'wrap_type' => $wrap_type])->with('errros', '您的账户余额不足，请先充值！');
+            return redirect()->route('user.release_task.info', ['id' => Crypt::encrypt($id), 'wrap_type' => $wrap_type])->with('erros', '您的账户余额不足，请先充值！');
         }
 
         $balance = $money->balance - $pay;
