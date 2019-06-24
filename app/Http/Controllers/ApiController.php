@@ -590,7 +590,7 @@ class ApiController extends Controller{
         }else{
             $data = [
                 "status" => 'fail',
-                "message" => '系统繁忙，请重试'
+                "msg" => '系统繁忙，请重试'
             ];
             return response()->json($data);
         }
@@ -703,7 +703,7 @@ class ApiController extends Controller{
         }else{
             $data = [
                 "status" => 'fail',
-                "message" => '系统繁忙，请重试'
+                "msg" => '系统繁忙，请重试'
             ];
             return response()->json($data);
         }
@@ -770,7 +770,7 @@ class ApiController extends Controller{
         }else{
             $data = [
                 "status" => 'fail',
-                "message" => '系统繁忙，请重试'
+                "msg" => '系统繁忙，请重试'
             ];
             return response()->json($data);
         }
@@ -832,7 +832,7 @@ class ApiController extends Controller{
         if ($balance < $money) {
             $data = [
                 "status" => 'fail',
-                "message" => '提现金额大于余额，请重新再试!'
+                "msg" => '提现金额大于余额，请重新再试!'
             ];
             return response()->json($data);
         }
@@ -870,7 +870,7 @@ class ApiController extends Controller{
         }else{
             $data = [
                 "status" => 'fail',
-                "message" => '系统繁忙，请重试'
+                "msg" => '系统繁忙，请重试'
             ];
             return response()->json($data);
         }
