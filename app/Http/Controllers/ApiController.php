@@ -166,6 +166,20 @@ class ApiController extends Controller{
             return response()->json($data);
         }
 
+        // 判断当前是否已经接单，同一时间段只允许接一单
+        $order = DB::table('order_record')
+            ->where('receiving_id','=',$id)
+            ->whereIn('status','=',[1,3])
+            ->first();
+        
+        if(!$order){
+            $data = [
+                "status" => 'fail',
+                "msg" => '您当前还有未完成的订单，请先完成订单！'
+            ];
+            return response()->json($data);
+        }
+
         // if(empty($serial) || empty($buyer) || empty($id)){
         //     return response()->json('参数错误');
         // }

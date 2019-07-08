@@ -130,6 +130,12 @@ Route::post('charge/bank','ChargeController@bank')->name('charge.bank')->middlew
 
 Route::get('register/consumer', 'Auth\RegisterController@register_consumer')->name('register.consumer');
 
+// 密码重置邮箱
+// Route::get('password/email','Auth\PasswordController@getEmail');
+// Route::post('password/email','Auth\PasswordController@postEmail');
+// Route::get('password/reset/','Auth\PasswordController@getReset');
+// Route::post('password/reset','Auth\PasswordController@postReset');
+
 
 Auth::routes();
 
