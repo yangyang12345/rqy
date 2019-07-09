@@ -198,7 +198,8 @@ class ApiController extends Controller{
         if($result){
             $data = [
                 "status" => 'sucess',
-                "msg" => '接单成功'
+                "msg" => '接单成功',
+                'serial' => $serial
             ];
             return response()->json($data);
         }else{
