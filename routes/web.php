@@ -136,6 +136,15 @@ Route::get('register/consumer', 'Auth\RegisterController@register_consumer')->na
 // Route::get('password/reset/','Auth\PasswordController@getReset');
 // Route::post('password/reset','Auth\PasswordController@postReset');
 
+// //填写重置密码邮箱页面
+// Route::get('/reset','AuthController@reset');
+// //发送重置密码邮件
+// Route::post('/resetemail','AuthController@ResetEmail');
+// //重置密码页
+// Route::get('/password/reset/{token}','AuthController@passwordreset');
+// //重置密码逻辑
+// Route::post('/password/reset','AuthController@reseting');
+
 
 Auth::routes();
 

@@ -7,10 +7,14 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 
+use App\Notifications\ResetPassword as ResetPasswordNotification; 
+use Illuminate\Auth\Passwords\CanResetPassword; 
+
 class User extends Authenticatable
 {
     use Notifiable;
     use HasRoles;
+    use CanResetPassword; 
 
     /**
      * The attributes that are mass assignable.
@@ -32,5 +36,10 @@ class User extends Authenticatable
 
     public function setPasswordAttribute($password) {
         $this->attributes['password'] = bcrypt($password);
+    }
+
+    public function sendPasswordResetNotification($token) 
+    { 
+     $this->notify(new ResetPasswordNotification($token)); 
     }
 }
