@@ -169,7 +169,7 @@ class ApiController extends Controller{
         // 判断当前是否已经接单，同一时间段只允许接一单
         $order = DB::table('order_record')
             ->where('receiving_id','=',$id)
-            ->whereIn('status','=',[1,3])
+            ->whereIn('status','=',array(1,3))
             ->first();
         
         if(!$order){

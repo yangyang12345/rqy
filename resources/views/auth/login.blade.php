@@ -90,6 +90,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
         </form>
         <a href="{{ route('register') }}" class="text-center">注册账号</a>
+        <a href="{{ asset('password/reset') }}" class="text-center">重置密码</a>
     </div>
 </div>
 
