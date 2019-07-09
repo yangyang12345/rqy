@@ -91,12 +91,15 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="请输入备注" id="desc" name="desc" value="" class="form-control">
+                    </div>
                     <p class="text-red">请仔细审核，审核无误后审批通过</p>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="submit" name="submit" value="nopass" class="btn btn-danger">审批不通过</button>
+                <button type="submit" onclick="return sub()" name="submit" value="nopass" class="btn btn-danger">审批不通过</button>
                 <button type="submit" name="submit" value="pass" class="btn btn-primary">审批通过</button>
             </div>
         </div>
@@ -193,6 +196,14 @@
                 $(".pic_back").attr("src",'data:image/jpg;base64,'+row.pic_back);
                 $(".certification_id").val(row.id);
                 $('#model_certification').modal('toggle');
+            }
+
+            function sub(){
+                if(!$("#desc").val()){
+                    alert('请先输入备注')
+                    return false;
+                }
+                return true;
             }
         </script>
     @endpush

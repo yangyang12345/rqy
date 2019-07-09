@@ -461,6 +461,7 @@ class CheckController extends Controller{
         }
         $id = $request->certification_id;
         $s = $request->submit;
+        $desc = $request->has('desc')?$request->desc:'';
         if($s == 'nopass'){
             $status = 3;
         }
@@ -472,6 +473,7 @@ class CheckController extends Controller{
             ->where('id', '=',$id)
             ->update([
                 'status' => $status,
+                'desc' => $desc
         ]);
 
         if($result){
