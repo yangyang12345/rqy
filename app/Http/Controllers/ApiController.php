@@ -172,7 +172,7 @@ class ApiController extends Controller{
             ->whereIn('status',array(1,3))
             ->first();
         
-        if(!$order){
+        if($order){
             $data = [
                 "status" => 'fail',
                 "msg" => '您当前还有未完成的订单，请先完成订单！'
