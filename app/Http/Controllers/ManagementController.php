@@ -458,4 +458,94 @@ class ManagementController extends Controller
     {
         return view('consumer/management/success');
     }
+
+    public function order_list(Request $request){
+        if ($request->isMethod('post')) {
+            $draw = $request->get('draw');
+            $start = $request->get('start');
+            $length = $request->get('length');
+
+            $user_id = Auth::id();
+
+            $serial = empty($request->serial) ? '' : $request->serial;
+            $name = empty($request->name) ? '' : $request->name;
+            $status = $request->status == 99 ? '' : $request->status;
+
+            $builder = DB::table('order_record')
+                ->where('user_id', '=', $user_id);
+
+            if ($serial) {
+                $builder->where('serial', 'like', '%' . $serial . '%');
+            }
+
+            if ($name) {
+                $builder->where('goods_name', 'like', '%' . $name . '%');
+            }
+
+            if ($status != '') {
+                $builder->where('status', '=', $status);
+            }
+
+
+            $total = $builder->count();
+            $list = $builder->orderBy('ctime', 'desc')->offset($start)->take($length)->get()->toArray();
+
+            $data = [
+                "draw" => $draw,
+                "recordsTotal" => $total,
+                "recordsFiltered" => $total,
+                "data" => $list,
+            ];
+            
+            return response()->json($data);
+        }
+
+        return view('consumer/management/order_list');
+    }
+
+    function order_delete(Request $request){
+        $id = $request->id;
+        $user_id = Auth::id();
+
+        $re = DB::table('order_record')
+            ->where('id', '=',$id)
+            ->update([
+                'status' => 3
+            ]);
+
+        if ($re){
+            $money = DB::table('capital_record')
+                ->where('user_id', '=', $user_id)
+                ->select('balance')
+                ->orderByDesc('ctime')
+                ->first();
+
+            $pay = DB::table('order_record')
+                ->select('charge','price')
+                ->where('id', '=', $id)
+                ->first();
+
+            $quota = $pay->charge + $pay->price;
+
+            $balance = $money->balance + $quota;
+
+            $Getid = DB::table('capital_record')->insertGetId(
+                [
+                    'user_id' => $user_id,
+                    'type' => '2',
+                    'in_out' => '0',
+                    'content' => '撤销任务退款',
+                    'quota' => $quota,
+                    'balance' => $balance,
+                    'ctime' => date('Y-m-d h:i:s', time())
+                ]   
+            );
+        }
+
+        if ($Getid){
+            return redirect()->route('user.order')->with('success','订单取消成功，金额已返回到账户中');
+        }else{
+            return redirect()->route('user.order')->with('fail','订单取消失败，请稍后重试');
+        }
+    }
 }

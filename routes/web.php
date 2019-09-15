@@ -36,6 +36,10 @@ Route::prefix('user')->group(function () {
 
     Route::get('management/release_task/delete', 'ManagementController@delete')->name('user.release_task.delete')->middleware('auth');
 
+    Route::get('management/orderList', 'ManagementController@order_list')->name('user.order')->middleware('auth');
+    Route::post('management/orderList', 'ManagementController@order_list')->name('user.order.getList')->middleware('auth');
+    Route::get('management/ordelet', 'ManagementController@order_delete')->name('user.order.delete')->middleware('auth');
+
     Route::get('funds/{type}', 'FundsController@index',function (){
         echo active_class(if_route('user.funds'), 'active', '');
     })->name('user.funds')->middleware('auth');
